@@ -8,7 +8,7 @@ Image Quality Analyzer (v1)
 - A few terms to note:
 -   Sharp Ratio: What fraction of the image is considered sharp.
 -   Standard Deviation(Std): How spread out the values of the image patches are. (Low std means all are generally blurry/uniformly texture, while High std means there are clear focus areas)
--   
+  
 
 Run:
 python main.py image.jpg[replace with own image file]
