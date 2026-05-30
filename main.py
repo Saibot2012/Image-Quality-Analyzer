@@ -88,4 +88,4 @@ def main(image_path):
 
 
 if __name__ == "__main__":
-    main("test_images/motion.jpeg   ")
+    main("test_images/yn-6.jpg")
