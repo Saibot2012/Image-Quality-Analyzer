@@ -1,4 +1,4 @@
-# Image-Quality-Analyzer-V1
+# Image-Quality-Analyzer
 
 Image Quality Analyzer (v1)
 
