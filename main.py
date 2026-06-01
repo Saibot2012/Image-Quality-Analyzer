@@ -6,6 +6,7 @@ from metrics import laplacian_sharpness
 from heatmap import compute_patch_sharpness
 from overlay import create_overlay
 from gradient_check import blur_direction_hint
+from fft_analysis import compute_fft
 
 def show_heatmap(original, heatmap, patch_size=32):
     heatmap_resized = cv2.resize(heatmap, (original.shape[1], original.shape[0]))
@@ -23,69 +24,102 @@ def show_heatmap(original, heatmap, patch_size=32):
     plt.axis("off")
 
     plt.show()
-
-def main(image_path):
-    img = cv2.imread(image_path)
-    if img is None:
-        print("Image Not Found")
-        return
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-
-    sharpness = laplacian_sharpness(gray)
-    heatmap = compute_patch_sharpness(gray)
-    heatmap_std = np.std(heatmap)
-    threshold = np.percentile(heatmap, 70)
-    blur_hint = blur_direction_hint(img)
-    sharp_ratio = np.sum(heatmap > threshold) / heatmap.size
-    "What fraction of the image is considered “sharp"
-
+def draw_report(ax, img, heatmap, title, stats):
     overlay = create_overlay(img, heatmap)
-    plt.figure(figsize=(15, 5))
 
-    # Original
-    plt.subplot(1, 3, 1)
-    plt.title("Original")
-    plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
-    plt.axis("off")
+    ax[0].imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+    ax[0].set_title(title)
+    ax[0].axis("off")
 
-    # Heatmap (if you still have it separately)
-    plt.subplot(1, 3, 2)
-    plt.title("Heatmap")
-    plt.imshow(heatmap, cmap="inferno")
-    plt.axis("off")
+    ax[1].imshow(heatmap, cmap="inferno")
+    ax[1].set_title("Heatmap")
+    ax[1].axis("off")
 
-    # Overlay
-    plt.subplot(1, 3, 3)
-    plt.title("Overlay")
-    plt.imshow(cv2.cvtColor(overlay, cv2.COLOR_BGR2RGB))
-    plt.axis("off")
+    ax[2].imshow(cv2.cvtColor(overlay, cv2.COLOR_BGR2RGB))
+    ax[2].set_title("Overlay")
+    ax[2].axis("off")
 
+    ax[3].text(
+        0.1, 0.5,
+        "\n".join([
+            f"Sharpness: {stats['sharpness']:.1f}",
+            f"Sharp Ratio: {stats['sharp_ratio']:.2f}",
+            f"Consistency: {stats['consistency']:.3f}",
+            f"Exposure: {stats['exposure']:.3f}",
+            f"Score: {stats['score']:.3f}",
+        ]),
+        fontsize=12
+    )
+    ax[3].axis("off")
+
+
+def main(image_paths):
+    results = []
+
+    for path in image_paths:
+        img = cv2.imread(path)
+        if img is None:
+            print(f"Image Not Found: {path}")
+            continue
+
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+        sharpness = laplacian_sharpness(gray)
+        norm_sharpness = sharpness / (sharpness + 1000)
+
+        heatmap = compute_patch_sharpness(gray)
+
+        sharp_ratio = np.sum(heatmap > 500) / heatmap.size
+        consistency = np.mean(heatmap) / (np.max(heatmap) + 1e-6)
+
+        brightness = np.mean(gray) / 255.0
+        exposure = max(0, 1 - (2 * (brightness - 0.5)) ** 2)
+
+        score = (
+            0.4 * norm_sharpness +
+            0.25 * sharp_ratio +
+            0.15 * consistency +
+            0.2 * exposure
+        )
+
+        results.append({
+            "path": path,
+            "img": img,
+            "heatmap": heatmap,
+            "sharpness": sharpness,
+            "sharp_ratio": sharp_ratio,
+            "consistency": consistency,
+            "exposure": exposure,
+            "score": score
+        })
+
+    best = max(results, key=lambda x: x["score"])
+
+    # --- UI LAYOUT ---
+    fig = plt.figure(figsize=(14, 4 * len(results)))
+
+    for i, r in enumerate(results):
+        ax = [
+            plt.subplot(len(results), 4, i * 4 + 1),
+            plt.subplot(len(results), 4, i * 4 + 2),
+            plt.subplot(len(results), 4, i * 4 + 3),
+            plt.subplot(len(results), 4, i * 4 + 4),
+        ]
+
+        draw_report(ax, r["img"], r["heatmap"], r["path"], r)
+
+    plt.tight_layout()
     plt.show()
 
+    print("\n=== WINNER ===")
+    print(best["path"])
+    print("Score:", best["score"])
 
-    if sharpness > 1000:
-        status = "Sharp Image"
-    elif sharpness > 500:
-        status = "Ok image"
-    else:
-        status = "Blur image"
 
-    text = f"""
-    === Image Quality Report ===
-    Sharpness: {sharpness:.2f}
-    Status: {status}
-    Sharp Ratio: {sharp_ratio:.2f}
-    Std: {heatmap_std:.3f}
-    Blur Type Hint: {blur_hint}
-    === End of Report ===
-    """
-    print(text)
 
-    # print("=== Image Quality Report ===\n"
-    #       "Sharpness score: ", sharpness)
-    # print("Status: ", status)
+
 
 
 
 if __name__ == "__main__":
-    main("test_images/yn-6.jpg")
+    main(["test_images/Lighthouse.jpg","test_images/Lighthouse_over.jpg", "test_images/Lighthouse_under.jpg"])
