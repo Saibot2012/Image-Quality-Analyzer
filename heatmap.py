@@ -11,8 +11,5 @@ def compute_patch_sharpness(img, patch_size=32):
             score = cv2.Laplacian(patch, cv2.CV_64F).var()
             heatmap[i // patch_size, j // patch_size] = score
 
-    # normalize for visualization
-    heatmap = heatmap / (heatmap.max() + 1e-6)
     heatmap_resized = cv2.resize(heatmap, (img.shape[1], img.shape[0]))
-
-    return heatmap_resized
+    return heatmap_resized  # raw values, normalise separately when visualising
