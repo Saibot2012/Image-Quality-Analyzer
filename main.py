@@ -6,7 +6,8 @@ from metrics import laplacian_sharpness
 from heatmap import compute_patch_sharpness
 from overlay import create_overlay
 from gradient_check import blur_direction_hint
-from fft_analysis import compute_fft
+from fft_analysis import (compute_fft_visualization, compute_fft_features)
+from wavelets import compute_wavelets
 
 def show_heatmap(original, heatmap, patch_size=32):
     heatmap_resized = cv2.resize(heatmap, (original.shape[1], original.shape[0]))
@@ -47,6 +48,8 @@ def draw_report(ax, img, heatmap, title, stats):
             f"Consistency: {stats['consistency']:.3f}",
             f"Exposure: {stats['exposure']:.3f}",
             f"Score: {stats['score']:.3f}",
+            f"FFT Ratio: {stats['fft_ratio']:.4f}",
+            f"Wavelet: {stats['wavelet_ratio']:.6f}",
         ]),
         fontsize=12
     )
@@ -63,7 +66,8 @@ def main(image_paths):
             continue
 
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-
+        wavelet = compute_wavelets(gray)
+        fft_features = compute_fft_features(gray)
         sharpness = laplacian_sharpness(gray)
         norm_sharpness = sharpness / (sharpness + 1000)
 
@@ -90,11 +94,17 @@ def main(image_paths):
             "sharp_ratio": sharp_ratio,
             "consistency": consistency,
             "exposure": exposure,
-            "score": score
+            "score": score,
+            "fft_ratio": fft_features["high_freq_ratio"],
+            "wavelet_ratio": wavelet["wavelet_ratio"],
         })
 
-    best = max(results, key=lambda x: x["score"])
+        print(f"{path}")
+        print(f"Laplacian : {sharpness:.2f}")
+        print(f"FFT Ratio : {fft_features['high_freq_ratio']:.6f}")
+        print(f"Wavelet   : {wavelet['wavelet_ratio']:.6f}")
 
+        print()
     # --- UI LAYOUT ---
     fig = plt.figure(figsize=(14, 4 * len(results)))
 
@@ -111,9 +121,7 @@ def main(image_paths):
     plt.tight_layout()
     plt.show()
 
-    print("\n=== WINNER ===")
-    print(best["path"])
-    print("Score:", best["score"])
+
 
 
 
@@ -122,4 +130,4 @@ def main(image_paths):
 
 
 if __name__ == "__main__":
-    main(["test_images/Lighthouse.jpg","test_images/Lighthouse_over.jpg", "test_images/Lighthouse_under.jpg"])
+    main(["test_images/test (1).jpeg","test_images/test (3).jpeg", "test_images/test (6).jpeg"])
