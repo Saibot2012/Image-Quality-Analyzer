@@ -40,4 +40,4 @@ def extract_features(img):
         "exposure": exposure,
         "fft_ratio": fft_features["high_freq_ratio"],
         "wavelet_ratio": wavelet_features["wavelet_ratio"],
-    }
+    } #dictionary
