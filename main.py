@@ -2,12 +2,10 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-from metrics import laplacian_sharpness
-from heatmap import compute_patch_sharpness
+
 from overlay import create_overlay
 from gradient_check import blur_direction_hint
-from fft_analysis import (compute_fft_visualization, compute_fft_features)
-from wavelets import compute_wavelets
+from feature_extractor import extract_features
 
 def show_heatmap(original, heatmap, patch_size=32):
     heatmap_resized = cv2.resize(heatmap, (original.shape[1], original.shape[0]))
@@ -65,44 +63,26 @@ def main(image_paths):
             print(f"Image Not Found: {path}")
             continue
 
-        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        wavelet = compute_wavelets(gray)
-        fft_features = compute_fft_features(gray)
-        sharpness = laplacian_sharpness(gray)
-        norm_sharpness = sharpness / (sharpness + 1000)
-
-        heatmap = compute_patch_sharpness(gray)
-
-        sharp_ratio = np.sum(heatmap > 500) / heatmap.size
-        consistency = np.mean(heatmap) / (np.max(heatmap) + 1e-6)
-
-        brightness = np.mean(gray) / 255.0
-        exposure = max(0, 1 - (2 * (brightness - 0.5)) ** 2)
+        features = extract_features(img)
 
         score = (
-            0.4 * norm_sharpness +
-            0.25 * sharp_ratio +
-            0.15 * consistency +
-            0.2 * exposure
+            0.4 * features["norm_sharpness"] +
+            0.25 * features["sharp_ratio"] +
+            0.15 * features["consistency"] +
+            0.2 * features["exposure"]
         )
 
         results.append({
             "path": path,
             "img": img,
-            "heatmap": heatmap,
-            "sharpness": sharpness,
-            "sharp_ratio": sharp_ratio,
-            "consistency": consistency,
-            "exposure": exposure,
             "score": score,
-            "fft_ratio": fft_features["high_freq_ratio"],
-            "wavelet_ratio": wavelet["wavelet_ratio"],
+            **features
         })
 
         print(f"{path}")
-        print(f"Laplacian : {sharpness:.2f}")
-        print(f"FFT Ratio : {fft_features['high_freq_ratio']:.6f}")
-        print(f"Wavelet   : {wavelet['wavelet_ratio']:.6f}")
+        print(features["laplacian"])
+        print(features["fft_ratio"])
+        print(features["wavelet_ratio"])
 
         print()
     # --- UI LAYOUT ---
