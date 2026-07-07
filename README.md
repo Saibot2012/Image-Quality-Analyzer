@@ -85,20 +85,24 @@ python -m ml.train_model
 - Predict image quality
 python -m ml.predict
 
-Input Image
-      │
-      ▼
-Feature Extraction
-      │
-      ├── Laplacian Variance
-      ├── FFT Ratio
-      ├── Wavelet Ratio
-      ├── Sharp Ratio
-      ├── Consistency
-      └── Exposure
-             │
-             ▼
-Random Forest Classifier
-             │
-             ▼
-Prediction + Confidence
+
+```text
+                Input Image
+                     │
+                     ▼
+          Feature Extraction
+                     │
+     ┌───────────────┼───────────────┐
+     │               │               │
+Laplacian        FFT Ratio      Wavelet Ratio
+     │               │               │
+     ├───────────────┼───────────────┤
+     │               │               │
+Sharp Ratio    Consistency      Exposure
+                     │
+                     ▼
+      Random Forest Classifier
+                     │
+                     ▼
+      Prediction + Confidence
+```
