@@ -74,16 +74,16 @@ ___________________________________________________________
 ### Running the Project
 
 - Analyze and compare images
-```python main.py```
+* ```python main.py```
 
 - Generate a labelled dataset
-```python ml/generate_dataset.py```
+* ```python ml/generate_dataset.py```
 
 - Train the Random Forest model
-```python -m ml.train_model```
+* ```python -m ml.train_model```
 
 - Predict image quality
-``` python -m ml.predict ```
+* ``` python -m ml.predict ```
 
 
 ```text
