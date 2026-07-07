@@ -2,7 +2,7 @@
 
 An image quality assessment tool that combines classical computer vision techniques with machine learning to evaluate image sharpness and classify images as Sharp or Blurry. 
 
-*Image Quality Analyzer (v1)*
+## Image Quality Analyzer (v1)
 
  Uses Laplacian variance for sharpness estimation, splits image into patches to generate heatmap, and visualizes sharpness distribution via overlay.
  
@@ -12,7 +12,7 @@ An image quality assessment tool that combines classical computer vision techniq
  
  - Standard Deviation(Std): How spread out the values of the image patches are. (Low std means all are generally blurry/uniformly texture, while High std means there are clear focus areas.)
 
-*Image Quality Analyzer (v2)*
+## Image Quality Analyzer (v2)
 
 In this upgraded version, we incorporated multi-image comparison, a consistency metric, and exposure awareness. By adding them together, we form a combined score for images which we can use to
 rank them:
@@ -37,7 +37,7 @@ Where:
  Run:
 python main.py image.jpg[replace with own image file]
 
-*Image Quality Analyzer (v3)*
+## Image Quality Analyzer (v3)
 
 Now, we added a simple Machine Learning feature, known as the Random Forest Classifier. Along it, we have also introduced an additional sharpness parameter known as wavelets.
 
@@ -53,7 +53,7 @@ So what does each parameter do?
 
 - `Exposure` : Penalizes under of overexposed images.
 
-**Machine Learning Pipeline**
+### Machine Learning Pipeline
 
 Version 3 introduces a supervised learning workflow:
 1. We first manually label images as sharp or blurry.
@@ -63,15 +63,16 @@ Version 3 introduces a supervised learning workflow:
 5. The trained model is saved as `model.pkl`.
 6. New images are then classified automatically with prediction probabilities.
 
-(Example Output)
+Example Output
 
-Prediction          : Sharp 
-Probability (Sharp) : 95% 
-Probability (Blurry): 5%
+- Prediction          : Sharp 
+- Probability (Sharp) : 95% 
+- Probability (Blurry): 5%
 
 ___________________________________________________________
 
-**Running the Project**
+### Running the Project
+
 - Analyze and compare images
 python main.py
 
@@ -83,3 +84,21 @@ python -m ml.train_model
 
 - Predict image quality
 python -m ml.predict
+
+Input Image
+      │
+      ▼
+Feature Extraction
+      │
+      ├── Laplacian Variance
+      ├── FFT Ratio
+      ├── Wavelet Ratio
+      ├── Sharp Ratio
+      ├── Consistency
+      └── Exposure
+             │
+             ▼
+Random Forest Classifier
+             │
+             ▼
+Prediction + Confidence
