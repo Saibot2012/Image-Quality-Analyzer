@@ -2,12 +2,21 @@ import os
 import csv
 import cv2
 import matplotlib.pyplot as plt
+import pandas as pd
 
 from feature_extractor import extract_features
 IMAGE_FOLDER = "dataset/images"
 CSV_FILE = "ml/dataset.csv"
 sharp_count = 0
 blurry_count = 0
+existing_labels = {}
+
+if os.path.exists(CSV_FILE):
+    old_df = pd.read_csv(CSV_FILE)
+
+    for _, row in old_df.iterrows():
+        existing_labels[row["filename"]] = row["label"]
+
 
 header = [
     "filename",
@@ -17,6 +26,8 @@ header = [
     "sharp_ratio",
     "consistency",
     "exposure",
+    "noise",
+    "detail_quality",
     "label"
 ]
 
@@ -48,14 +59,23 @@ with open(CSV_FILE, "w", newline="") as file:
         plt.show()
 
         # Ask user for label
-        while True:
-            label = input("Sharp? (1 = Sharp, 0 = Blurry): ")
+        if filename in existing_labels:
 
-            if label in ["0", "1"]:
-                break
+            label = existing_labels[filename]
+            print(f"Existing label found for image {filename}: {'Sharp' if label == 1 else 'Blurry'}")
+
+        else:
+
+            while True:
+                label = input(f"{filename}: Sharp? (1 = Sharp, 0 = Blurry): ")
+
+                if label in ["0", "1"]:
+                    break
+                else:
+                    label = 0
 
             print("Please enter either 0 or 1.")
-        if label == "1":
+        if int(label) == "1":
             sharp_count += 1
         else:
             blurry_count += 1
@@ -63,12 +83,14 @@ with open(CSV_FILE, "w", newline="") as file:
         # Write one row
         writer.writerow([
             filename,
-            features["sharpness"],
+            features["laplacian"],
             features["fft_ratio"],
             features["wavelet_ratio"],
             features["sharp_ratio"],
             features["consistency"],
             features["exposure"],
+            features["noise"],
+            features["detail_quality"],
             int(label)
         ])
 

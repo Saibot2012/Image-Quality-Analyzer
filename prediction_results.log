@@ -1,264 +1,260 @@
 
 ===== defocus_test (1).jpg =====
-Laplacian   : 18.34
-FFT Ratio   : 0.000305
-Wavelet     : 0.000098
-Sharp Ratio : 0.000
-Consistency : 0.054
-Exposure    : 0.982
-Prediction : Blurry
-Probability (Blurry): 100.00%
-Probability (Sharp) : 0.00%
-----------------------------------------
+
+===== Image Assessment =====
+Sharpness: Very Blurry
+Very little fine detail is preserved
+Noise: Very Clean
+Noise is barely visible.
+Exposure: Bright
+Image is very bright and may contain clipped highlights.
 
 ===== defocus_test (2).jpg =====
-Laplacian   : 143.72
-FFT Ratio   : 0.000457
-Wavelet     : 0.000271
-Sharp Ratio : 0.015
-Consistency : 0.198
-Exposure    : 0.972
-Prediction : Blurry
-Probability (Blurry): 85.00%
-Probability (Sharp) : 15.00%
-----------------------------------------
+
+===== Image Assessment =====
+Sharpness: Soft
+Image appears slightly blurred
+Noise: Low
+Minor grain is present.
+Exposure: Bright
+Image is very bright and may contain clipped highlights.
 
 ===== defocus_test (3).jpg =====
-Laplacian   : 9.87
-FFT Ratio   : 0.000290
-Wavelet     : 0.000033
-Sharp Ratio : 0.000
-Consistency : 0.067
-Exposure    : 0.897
-Prediction : Blurry
-Probability (Blurry): 100.00%
-Probability (Sharp) : 0.00%
-----------------------------------------
+
+===== Image Assessment =====
+Sharpness: Very Blurry
+Very little fine detail is preserved
+Noise: Very Clean
+Noise is barely visible.
+Exposure: Bright
+Image is very bright and may contain clipped highlights.
 
 ===== defocus_test (4).JPG =====
-Laplacian   : 59.67
-FFT Ratio   : 0.001678
-Wavelet     : 0.001061
-Sharp Ratio : 0.000
-Consistency : 0.168
-Exposure    : 0.495
-Prediction : Blurry
-Probability (Blurry): 77.00%
-Probability (Sharp) : 23.00%
-----------------------------------------
+
+===== Image Assessment =====
+Sharpness: Soft
+Image appears slightly blurred
+Noise: Very Clean
+Noise is barely visible.
+Exposure: Well Exposed
+Brightness is balanced.
 
 ===== defocus_test (5).jpg =====
-Laplacian   : 5.75
-FFT Ratio   : 0.000761
-Wavelet     : 0.000076
-Sharp Ratio : 0.000
-Consistency : 0.035
-Exposure    : 0.766
-Prediction : Blurry
-Probability (Blurry): 99.00%
-Probability (Sharp) : 1.00%
-----------------------------------------
+
+===== Image Assessment =====
+Sharpness: Very Blurry
+Very little fine detail is preserved
+Noise: Very Clean
+Noise is barely visible.
+Exposure: Well Exposed
+Brightness is balanced.
+
+===== fra-572.jpg =====
+
+===== Image Assessment =====
+Sharpness: Soft
+Image appears slightly blurred
+Noise: Low
+Minor grain is present.
+Exposure: Bright
+Image is very bright and may contain clipped highlights.
+
+===== fra-679.jpg =====
+
+===== Image Assessment =====
+Sharpness: Excellent
+Excellent detail and edge definition
+Noise: High
+Noise is clearly noticeable.
+Exposure: Well Exposed
+Brightness is balanced.
 
 ===== motion_test (1).jpg =====
-Laplacian   : 37.01
-FFT Ratio   : 0.000731
-Wavelet     : 0.000146
-Sharp Ratio : 0.012
-Consistency : 0.021
-Exposure    : 0.875
-Prediction : Blurry
-Probability (Blurry): 87.00%
-Probability (Sharp) : 13.00%
-----------------------------------------
+
+===== Image Assessment =====
+Sharpness: Very Blurry
+Very little fine detail is preserved
+Noise: Very Clean
+Noise is barely visible.
+Exposure: Bright
+Image is very bright and may contain clipped highlights.
 
 ===== motion_test (2).jpg =====
-Laplacian   : 17.53
-FFT Ratio   : 0.000785
-Wavelet     : 0.000096
-Sharp Ratio : 0.001
-Consistency : 0.019
-Exposure    : 0.997
-Prediction : Blurry
-Probability (Blurry): 89.00%
-Probability (Sharp) : 11.00%
-----------------------------------------
+
+===== Image Assessment =====
+Sharpness: Very Blurry
+Very little fine detail is preserved
+Noise: Very Clean
+Noise is barely visible.
+Exposure: Bright
+Image is very bright and may contain clipped highlights.
 
 ===== motion_test (3).jpg =====
-Laplacian   : 56.14
-FFT Ratio   : 0.000960
-Wavelet     : 0.000230
-Sharp Ratio : 0.030
-Consistency : 0.019
-Exposure    : 0.999
-Prediction : Blurry
-Probability (Blurry): 66.00%
-Probability (Sharp) : 34.00%
-----------------------------------------
+
+===== Image Assessment =====
+Sharpness: Soft
+Image appears slightly blurred
+Noise: Low
+Minor grain is present.
+Exposure: Bright
+Image is very bright and may contain clipped highlights.
 
 ===== motion_test (4).jpg =====
-Laplacian   : 825.02
-FFT Ratio   : 0.020293
-Wavelet     : 0.006767
-Sharp Ratio : 0.412
-Consistency : 0.070
-Exposure    : 0.930
-Prediction : Sharp
-Probability (Blurry): 0.00%
-Probability (Sharp) : 100.00%
-----------------------------------------
+
+===== Image Assessment =====
+Sharpness: Most fine details are preserved
+Sharp
+Noise: High
+Noise is clearly noticeable.
+Exposure: Bright
+Image is very bright and may contain clipped highlights.
 
 ===== motion_test (5).jpg =====
-Laplacian   : 46.45
-FFT Ratio   : 0.001096
-Wavelet     : 0.000301
-Sharp Ratio : 0.000
-Consistency : 0.069
-Exposure    : 0.980
-Prediction : Blurry
-Probability (Blurry): 80.00%
-Probability (Sharp) : 20.00%
-----------------------------------------
+
+===== Image Assessment =====
+Sharpness: Soft
+Image appears slightly blurred
+Noise: Very Clean
+Noise is barely visible.
+Exposure: Bright
+Image is very bright and may contain clipped highlights.
 
 ===== sharp_test (1).jpeg =====
-Laplacian   : 70.56
-FFT Ratio   : 0.000791
-Wavelet     : 0.000271
-Sharp Ratio : 0.017
-Consistency : 0.014
-Exposure    : 0.967
-Prediction : Blurry
-Probability (Blurry): 70.00%
-Probability (Sharp) : 30.00%
-----------------------------------------
+
+===== Image Assessment =====
+Sharpness: Soft
+Image appears slightly blurred
+Noise: Low
+Minor grain is present.
+Exposure: Bright
+Image is very bright and may contain clipped highlights.
 
 ===== sharp_test (1).JPG =====
-Laplacian   : 247.36
-FFT Ratio   : 0.004888
-Wavelet     : 0.001672
-Sharp Ratio : 0.124
-Consistency : 0.021
-Exposure    : 0.992
-Prediction : Sharp
-Probability (Blurry): 5.00%
-Probability (Sharp) : 95.00%
-----------------------------------------
+
+===== Image Assessment =====
+Sharpness: Most fine details are preserved
+Acceptable
+Noise: Moderate
+Visible grain appears in smooth areas.
+Exposure: Bright
+Image is very bright and may contain clipped highlights.
 
 ===== sharp_test (10).jpg =====
-Laplacian   : 39.45
-FFT Ratio   : 0.000945
-Wavelet     : 0.000240
-Sharp Ratio : 0.003
-Consistency : 0.036
-Exposure    : 1.000
-Prediction : Blurry
-Probability (Blurry): 74.00%
-Probability (Sharp) : 26.00%
-----------------------------------------
+
+===== Image Assessment =====
+Sharpness: Very Blurry
+Very little fine detail is preserved
+Noise: Very Clean
+Noise is barely visible.
+Exposure: Bright
+Image is very bright and may contain clipped highlights.
 
 ===== sharp_test (2).jpeg =====
-Laplacian   : 76.70
-FFT Ratio   : 0.002030
-Wavelet     : 0.000676
-Sharp Ratio : 0.004
-Consistency : 0.071
-Exposure    : 0.994
-Prediction : Sharp
-Probability (Blurry): 46.00%
-Probability (Sharp) : 54.00%
-----------------------------------------
+
+===== Image Assessment =====
+Sharpness: Soft
+Image appears slightly blurred
+Noise: Low
+Minor grain is present.
+Exposure: Bright
+Image is very bright and may contain clipped highlights.
 
 ===== sharp_test (2).jpg =====
-Laplacian   : 601.82
-FFT Ratio   : 0.006161
-Wavelet     : 0.002735
-Sharp Ratio : 0.359
-Consistency : 0.087
-Exposure    : 0.986
-Prediction : Sharp
-Probability (Blurry): 0.00%
-Probability (Sharp) : 100.00%
-----------------------------------------
+
+===== Image Assessment =====
+Sharpness: Most fine details are preserved
+Sharp
+Noise: Moderate
+Visible grain appears in smooth areas.
+Exposure: Bright
+Image is very bright and may contain clipped highlights.
 
 ===== sharp_test (3).jpg =====
-Laplacian   : 353.62
-FFT Ratio   : 0.006845
-Wavelet     : 0.002501
-Sharp Ratio : 0.229
-Consistency : 0.073
-Exposure    : 0.970
-Prediction : Sharp
-Probability (Blurry): 12.00%
-Probability (Sharp) : 88.00%
-----------------------------------------
+
+===== Image Assessment =====
+Sharpness: Most fine details are preserved
+Acceptable
+Noise: Moderate
+Visible grain appears in smooth areas.
+Exposure: Bright
+Image is very bright and may contain clipped highlights.
 
 ===== sharp_test (4).jpg =====
-Laplacian   : 162.23
-FFT Ratio   : 0.002836
-Wavelet     : 0.000870
-Sharp Ratio : 0.089
-Consistency : 0.029
-Exposure    : 0.964
-Prediction : Sharp
-Probability (Blurry): 7.00%
-Probability (Sharp) : 93.00%
-----------------------------------------
+
+===== Image Assessment =====
+Sharpness: Most fine details are preserved
+Acceptable
+Noise: Moderate
+Visible grain appears in smooth areas.
+Exposure: Bright
+Image is very bright and may contain clipped highlights.
 
 ===== sharp_test (5).jpg =====
-Laplacian   : 296.90
-FFT Ratio   : 0.004118
-Wavelet     : 0.001648
-Sharp Ratio : 0.167
-Consistency : 0.103
-Exposure    : 0.973
-Prediction : Sharp
-Probability (Blurry): 3.00%
-Probability (Sharp) : 97.00%
-----------------------------------------
+
+===== Image Assessment =====
+Sharpness: Most fine details are preserved
+Acceptable
+Noise: Moderate
+Visible grain appears in smooth areas.
+Exposure: Bright
+Image is very bright and may contain clipped highlights.
 
 ===== sharp_test (6).jpg =====
-Laplacian   : 196.09
-FFT Ratio   : 0.002258
-Wavelet     : 0.000887
-Sharp Ratio : 0.101
-Consistency : 0.064
-Exposure    : 0.973
-Prediction : Sharp
-Probability (Blurry): 7.00%
-Probability (Sharp) : 93.00%
-----------------------------------------
+
+===== Image Assessment =====
+Sharpness: Most fine details are preserved
+Acceptable
+Noise: Low
+Minor grain is present.
+Exposure: Bright
+Image is very bright and may contain clipped highlights.
 
 ===== sharp_test (7).jpg =====
-Laplacian   : 254.43
-FFT Ratio   : 0.002484
-Wavelet     : 0.000981
-Sharp Ratio : 0.123
-Consistency : 0.071
-Exposure    : 0.999
-Prediction : Sharp
-Probability (Blurry): 8.00%
-Probability (Sharp) : 92.00%
-----------------------------------------
+
+===== Image Assessment =====
+Sharpness: Most fine details are preserved
+Acceptable
+Noise: Low
+Minor grain is present.
+Exposure: Bright
+Image is very bright and may contain clipped highlights.
 
 ===== sharp_test (8).jpg =====
-Laplacian   : 148.32
-FFT Ratio   : 0.001264
-Wavelet     : 0.000566
-Sharp Ratio : 0.016
-Consistency : 0.065
-Exposure    : 0.998
-Prediction : Sharp
-Probability (Blurry): 21.00%
-Probability (Sharp) : 79.00%
-----------------------------------------
+
+===== Image Assessment =====
+Sharpness: Soft
+Image appears slightly blurred
+Noise: Low
+Minor grain is present.
+Exposure: Bright
+Image is very bright and may contain clipped highlights.
 
 ===== sharp_test (9).jpg =====
-Laplacian   : 588.64
-FFT Ratio   : 0.012120
-Wavelet     : 0.003723
-Sharp Ratio : 0.434
-Consistency : 0.211
-Exposure    : 0.996
-Prediction : Sharp
-Probability (Blurry): 1.00%
-Probability (Sharp) : 99.00%
-----------------------------------------
+
+===== Image Assessment =====
+Sharpness: Most fine details are preserved
+Sharp
+Noise: Moderate
+Visible grain appears in smooth areas.
+Exposure: Bright
+Image is very bright and may contain clipped highlights.
+
+===== test (100).jpg =====
+
+===== Image Assessment =====
+Sharpness: Very Blurry
+Very little fine detail is preserved
+Noise: Very Clean
+Noise is barely visible.
+Exposure: Bright
+Image is very bright and may contain clipped highlights.
+
+===== test.jpg =====
+
+===== Image Assessment =====
+Sharpness: Most fine details are preserved
+Sharp
+Noise: High
+Noise is clearly noticeable.
+Exposure: Bright
+Image is very bright and may contain clipped highlights.

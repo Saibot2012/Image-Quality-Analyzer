@@ -16,7 +16,10 @@ X = data[
         "wavelet_ratio",
         "sharp_ratio",
         "consistency",
-        "exposure"
+        "exposure",
+        "noise",
+        "detail_quality",
+
     ]
 ]
 
