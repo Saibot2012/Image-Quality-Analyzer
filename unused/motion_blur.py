@@ -3,7 +3,7 @@ import numpy as np
 
 def compute_motion_directionality(gray):
     """
-    Returnshow strongly edge directions are concentrated.
+    Returns how strongly edge directions are concentrated.
     0 -> edges spread in many directions
     1 -> edges mostly point in one direction
     """

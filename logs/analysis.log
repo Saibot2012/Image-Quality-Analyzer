@@ -1,0 +1,800 @@
+
+===== fra-463.jpg =====
+
+Overall Score: 77/100
+
+===== Assessment Report =====
+
+General
+• Faces detected: 1.
+• Eyes open: 1 / 1.
+• Sharpness: Poor.
+• Contrast: Good.
+• Lighting: Balanced.
+• Colours: natural.
+• White Balance: cool tone.
+
+Problems
+✓ No significant issues detected.
+
+===== Suggestions =====
+
+Suggestions
+No recommendations.
+
+========== END OF SIMPLIFIED REPORT ==========
+
+
+============= Values Analysis =============
+Laplacian   : 83.51
+FFT Ratio   : 0.000925
+Wavelet     : 0.000319
+Sharp Ratio : 0.021
+Brightness     : 0.620
+Shadow Clip    : 0.65%
+Highlight Clip : 3.91%
+Consistency : 0.014
+Noise Rms   : 2.77
+Detail Quality : 0.00033369
+Patch min : 0.00
+Patch mean: 89.37
+Patch max : 6408.34
+Confidence : 0.62
+Prediction : Blurry
+Probability (Blurry): 62.00%
+Probability (Sharp) : 38.00%
+
+----------------------------------------
+
+===== Quality Scores =====
+Sharpness: Poor (50/100)
+Noise: Good (90/100)
+Contrast: Good (90/100)
+=== RESULTS FROM THE TILE FACE DETECTOR ===
+Faces detected in tile: 1
+Faces detected in tile: 0
+Faces detected in tile: 1
+Faces detected in tile: 0
+Faces detected in tile: 0
+
+[Eye Detection]
+
+===== fra-464.jpg =====
+
+Overall Score: 85/100
+
+===== Assessment Report =====
+
+General
+• Faces detected: 1.
+• Eyes open: 1 / 1.
+• Sharpness: Good.
+• Contrast: Good.
+• Lighting: Balanced.
+• Colours: natural.
+• White Balance: cool tone.
+
+Problems
+✓ No significant issues detected.
+
+===== Suggestions =====
+
+Suggestions
+No recommendations.
+
+========== END OF SIMPLIFIED REPORT ==========
+
+
+============= Values Analysis =============
+Laplacian   : 673.96
+FFT Ratio   : 0.003045
+Wavelet     : 0.001516
+Sharp Ratio : 0.272
+Brightness     : 0.611
+Shadow Clip    : 0.79%
+Highlight Clip : 3.80%
+Consistency : 0.079
+Noise Rms   : 6.67
+Detail Quality : 0.00045633
+Patch min : 0.00
+Patch mean: 702.12
+Patch max : 8926.43
+Confidence : 0.88
+Prediction : Sharp
+Probability (Blurry): 12.00%
+Probability (Sharp) : 88.00%
+
+----------------------------------------
+
+===== Quality Scores =====
+Sharpness: Good (90/100)
+Noise: Fair (75/100)
+Contrast: Good (90/100)
+=== RESULTS FROM THE TILE FACE DETECTOR ===
+Faces detected in tile: 1
+Faces detected in tile: 1
+Faces detected in tile: 1
+Faces detected in tile: 0
+Faces detected in tile: 0
+
+[Eye Detection]
+No faces available for eye analysis
+
+===== fra-499.jpg =====
+
+Overall Score: 88/100
+
+===== Assessment Report =====
+
+General
+• Faces detected: 0.
+• Eyes open: 0 / 0.
+• Sharpness: Excellent.
+• Contrast: Fair.
+• Lighting: Balanced.
+• Colours: natural.
+• White Balance: natural.
+
+Problems
+✓ No significant issues detected.
+
+===== Suggestions =====
+
+Suggestions
+No recommendations.
+
+========== END OF SIMPLIFIED REPORT ==========
+
+
+============= Values Analysis =============
+Laplacian   : 112.04
+FFT Ratio   : 0.003445
+Wavelet     : 0.001130
+Sharp Ratio : 0.007
+Brightness     : 0.371
+Shadow Clip    : 0.54%
+Highlight Clip : 0.09%
+Consistency : 0.050
+Noise Rms   : 3.29
+Detail Quality : 0.00104697
+Patch min : 1.02
+Patch mean: 119.32
+Patch max : 2368.68
+Confidence : 0.96
+Prediction : Sharp
+Probability (Blurry): 4.00%
+Probability (Sharp) : 96.00%
+
+----------------------------------------
+
+===== Quality Scores =====
+Sharpness: Excellent (100/100)
+Noise: Good (90/100)
+Contrast: Fair (75/100)
+=== RESULTS FROM THE TILE FACE DETECTOR ===
+Faces detected in tile: 0
+Faces detected in tile: 0
+Faces detected in tile: 0
+Faces detected in tile: 0
+Faces detected in tile: 0
+
+[Eye Detection]
+
+===== fra-718.jpg =====
+
+Overall Score: 80/100
+
+===== Assessment Report =====
+
+General
+• Faces detected: 8.
+• Eyes open: 8 / 8.
+• Sharpness: Poor.
+• Contrast: Excellent.
+• Lighting: Balanced.
+• Colours: natural.
+• White Balance: natural.
+
+Problems
+✓ No significant issues detected.
+
+===== Suggestions =====
+
+Suggestions
+No recommendations.
+
+========== END OF SIMPLIFIED REPORT ==========
+
+
+============= Values Analysis =============
+Laplacian   : 240.02
+FFT Ratio   : 0.001580
+Wavelet     : 0.000703
+Sharp Ratio : 0.033
+Brightness     : 0.583
+Shadow Clip    : 1.25%
+Highlight Clip : 2.11%
+Consistency : 0.222
+Noise Rms   : 4.35
+Detail Quality : 0.00036357
+Patch min : 0.00
+Patch mean: 250.29
+Patch max : 1127.62
+Confidence : 0.54
+Prediction : Sharp
+Probability (Blurry): 46.00%
+Probability (Sharp) : 54.00%
+
+----------------------------------------
+
+===== Quality Scores =====
+Sharpness: Poor (50/100)
+Noise: Good (90/100)
+Contrast: Excellent (100/100)
+=== RESULTS FROM THE TILE FACE DETECTOR ===
+Faces detected in tile: 4
+Faces detected in tile: 2
+Faces detected in tile: 5
+Faces detected in tile: 0
+Faces detected in tile: 2
+
+[Eye Detection]
+
+===== fra-735.jpg =====
+
+Overall Score: 88/100
+
+===== Assessment Report =====
+
+General
+• Faces detected: 5.
+• Eyes open: 5 / 5.
+• Sharpness: Good.
+• Contrast: Excellent.
+• Lighting: Balanced.
+• Colours: natural.
+• White Balance: natural.
+
+Problems
+✓ No significant issues detected.
+
+===== Suggestions =====
+
+Suggestions
+No recommendations.
+
+========== END OF SIMPLIFIED REPORT ==========
+
+
+============= Values Analysis =============
+Laplacian   : 462.92
+FFT Ratio   : 0.002689
+Wavelet     : 0.001227
+Sharp Ratio : 0.271
+Brightness     : 0.535
+Shadow Clip    : 3.24%
+Highlight Clip : 9.28%
+Consistency : 0.163
+Noise Rms   : 5.51
+Detail Quality : 0.00048757
+Patch min : 0.00
+Patch mean: 480.02
+Patch max : 2938.57
+Confidence : 0.93
+Prediction : Sharp
+Probability (Blurry): 7.00%
+Probability (Sharp) : 93.00%
+
+----------------------------------------
+
+===== Quality Scores =====
+Sharpness: Good (90/100)
+Noise: Fair (75/100)
+Contrast: Excellent (100/100)
+=== RESULTS FROM THE TILE FACE DETECTOR ===
+Faces detected in tile: 5
+Faces detected in tile: 2
+Faces detected in tile: 3
+Faces detected in tile: 0
+Faces detected in tile: 1
+
+[Eye Detection]
+
+===== group.jpg =====
+
+Overall Score: 80/100
+
+===== Assessment Report =====
+
+General
+• Faces detected: 9.
+• Eyes open: 8 / 9.
+• Sharpness: Excellent.
+• Contrast: Good.
+• Lighting: Balanced.
+• Colours: natural.
+• White Balance: warm tone.
+
+Problems
+⚠ High image noise detected.
+⚠ 1 subject(s) have closed eyes.
+
+Suggestions
+• Use a lower ISO or increase available light.
+• Capture another frame with all subjects' eyes open
+
+========== END OF SIMPLIFIED REPORT ==========
+
+
+============= Values Analysis =============
+Laplacian   : 1008.43
+FFT Ratio   : 0.011228
+Wavelet     : 0.003955
+Sharp Ratio : 0.328
+Brightness     : 0.626
+Shadow Clip    : 3.40%
+Highlight Clip : 0.16%
+Consistency : 0.101
+Noise Rms   : 10.03
+Detail Quality : 0.00111932
+Patch min : 0.00
+Patch mean: 1071.38
+Patch max : 10597.05
+Confidence : 1.0
+Prediction : Sharp
+Probability (Blurry): 0.00%
+Probability (Sharp) : 100.00%
+
+----------------------------------------
+
+===== Quality Scores =====
+Sharpness: Excellent (100/100)
+Noise: Poor (50/100)
+Contrast: Good (90/100)
+=== RESULTS FROM THE TILE FACE DETECTOR ===
+Faces detected in tile: 3
+Faces detected in tile: 0
+Faces detected in tile: 0
+Faces detected in tile: 4
+Faces detected in tile: 6
+
+[Eye Detection]
+
+===== group2.jpg =====
+
+Overall Score: 75/100
+
+===== Assessment Report =====
+
+General
+• Faces detected: 13.
+• Eyes open: 10 / 13.
+• Sharpness: Excellent.
+• Contrast: Fair.
+• Lighting: Balanced.
+• Colours: vivid.
+• White Balance: warm tone.
+
+Problems
+⚠ High image noise detected.
+⚠ 3 subject(s) have closed eyes.
+
+Suggestions
+• Use a lower ISO or increase available light.
+• Capture another frame with all subjects' eyes open
+
+========== END OF SIMPLIFIED REPORT ==========
+
+
+============= Values Analysis =============
+Laplacian   : 1756.86
+FFT Ratio   : 0.045342
+Wavelet     : 0.017731
+Sharp Ratio : 0.506
+Brightness     : 0.282
+Shadow Clip    : 8.22%
+Highlight Clip : 0.15%
+Consistency : 0.156
+Noise Rms   : 11.98
+Detail Quality : 0.00378371
+Patch min : 0.00
+Patch mean: 1747.59
+Patch max : 11203.81
+Confidence : 0.98
+Prediction : Sharp
+Probability (Blurry): 2.00%
+Probability (Sharp) : 98.00%
+
+----------------------------------------
+
+===== Quality Scores =====
+Sharpness: Excellent (100/100)
+Noise: Poor (50/100)
+Contrast: Fair (75/100)
+=== RESULTS FROM THE TILE FACE DETECTOR ===
+Faces detected in tile: 6
+Faces detected in tile: 7
+Faces detected in tile: 4
+Faces detected in tile: 2
+Faces detected in tile: 3
+
+[Eye Detection]
+
+[Eye Detection]
+Face 1: Eyes open (EAR=0.235)
+
+
+===== General Report =====
+• Faces detected: 13.
+• Eyes open: 10 / 13.
+• Sharpness: Excellent.
+• Contrast: Fair.
+• Lighting: Balanced.
+• Colours: vivid.
+• White Balance: warm tone.
+
+
+[Saturation]
+Value : 127.16
+Result : Vivid
+Colours are vivid and highly saturated.
+
+[Colour Temperature]
+Value : 23.61
+Result : Warm Tone
+The image has a warmer colour tone with more yellow/orange tint.
+
+[Lighting]
+Result : Balanced
+Overall brightness looks natural.
+Recommendation: No correction needed.
+
+========= END OF COMPREHENSIVE REPORT =========
+Face 2: Eyes open (EAR=0.194)
+
+
+===== General Report =====
+• Faces detected: 13.
+• Eyes open: 10 / 13.
+• Sharpness: Excellent.
+• Contrast: Fair.
+• Lighting: Balanced.
+• Colours: vivid.
+• White Balance: warm tone.
+
+
+[Saturation]
+Value : 127.16
+Result : Vivid
+Colours are vivid and highly saturated.
+
+[Colour Temperature]
+Value : 23.61
+Result : Warm Tone
+The image has a warmer colour tone with more yellow/orange tint.
+
+[Lighting]
+Result : Balanced
+Overall brightness looks natural.
+Recommendation: No correction needed.
+
+========= END OF COMPREHENSIVE REPORT =========
+Face 3: Eyes open (EAR=0.220)
+
+
+===== General Report =====
+• Faces detected: 13.
+• Eyes open: 10 / 13.
+• Sharpness: Excellent.
+• Contrast: Fair.
+• Lighting: Balanced.
+• Colours: vivid.
+• White Balance: warm tone.
+
+
+[Saturation]
+Value : 127.16
+Result : Vivid
+Colours are vivid and highly saturated.
+
+[Colour Temperature]
+Value : 23.61
+Result : Warm Tone
+The image has a warmer colour tone with more yellow/orange tint.
+
+[Lighting]
+Result : Balanced
+Overall brightness looks natural.
+Recommendation: No correction needed.
+
+========= END OF COMPREHENSIVE REPORT =========
+Face 4: Eyes open (EAR=0.206)
+
+
+===== General Report =====
+• Faces detected: 13.
+• Eyes open: 10 / 13.
+• Sharpness: Excellent.
+• Contrast: Fair.
+• Lighting: Balanced.
+• Colours: vivid.
+• White Balance: warm tone.
+
+
+[Saturation]
+Value : 127.16
+Result : Vivid
+Colours are vivid and highly saturated.
+
+[Colour Temperature]
+Value : 23.61
+Result : Warm Tone
+The image has a warmer colour tone with more yellow/orange tint.
+
+[Lighting]
+Result : Balanced
+Overall brightness looks natural.
+Recommendation: No correction needed.
+
+========= END OF COMPREHENSIVE REPORT =========
+Face 5: Eyes open (EAR=0.272)
+
+
+===== General Report =====
+• Faces detected: 13.
+• Eyes open: 10 / 13.
+• Sharpness: Excellent.
+• Contrast: Fair.
+• Lighting: Balanced.
+• Colours: vivid.
+• White Balance: warm tone.
+
+
+[Saturation]
+Value : 127.16
+Result : Vivid
+Colours are vivid and highly saturated.
+
+[Colour Temperature]
+Value : 23.61
+Result : Warm Tone
+The image has a warmer colour tone with more yellow/orange tint.
+
+[Lighting]
+Result : Balanced
+Overall brightness looks natural.
+Recommendation: No correction needed.
+
+========= END OF COMPREHENSIVE REPORT =========
+Face 6: Eyes closed (EAR=0.172)
+
+
+===== General Report =====
+• Faces detected: 13.
+• Eyes open: 10 / 13.
+• Sharpness: Excellent.
+• Contrast: Fair.
+• Lighting: Balanced.
+• Colours: vivid.
+• White Balance: warm tone.
+
+
+[Saturation]
+Value : 127.16
+Result : Vivid
+Colours are vivid and highly saturated.
+
+[Colour Temperature]
+Value : 23.61
+Result : Warm Tone
+The image has a warmer colour tone with more yellow/orange tint.
+
+[Lighting]
+Result : Balanced
+Overall brightness looks natural.
+Recommendation: No correction needed.
+
+========= END OF COMPREHENSIVE REPORT =========
+Face 7: Eyes open (EAR=0.246)
+
+
+===== General Report =====
+• Faces detected: 13.
+• Eyes open: 10 / 13.
+• Sharpness: Excellent.
+• Contrast: Fair.
+• Lighting: Balanced.
+• Colours: vivid.
+• White Balance: warm tone.
+
+
+[Saturation]
+Value : 127.16
+Result : Vivid
+Colours are vivid and highly saturated.
+
+[Colour Temperature]
+Value : 23.61
+Result : Warm Tone
+The image has a warmer colour tone with more yellow/orange tint.
+
+[Lighting]
+Result : Balanced
+Overall brightness looks natural.
+Recommendation: No correction needed.
+
+========= END OF COMPREHENSIVE REPORT =========
+Face 8: Eyes closed (EAR=0.137)
+
+
+===== General Report =====
+• Faces detected: 13.
+• Eyes open: 10 / 13.
+• Sharpness: Excellent.
+• Contrast: Fair.
+• Lighting: Balanced.
+• Colours: vivid.
+• White Balance: warm tone.
+
+
+[Saturation]
+Value : 127.16
+Result : Vivid
+Colours are vivid and highly saturated.
+
+[Colour Temperature]
+Value : 23.61
+Result : Warm Tone
+The image has a warmer colour tone with more yellow/orange tint.
+
+[Lighting]
+Result : Balanced
+Overall brightness looks natural.
+Recommendation: No correction needed.
+
+========= END OF COMPREHENSIVE REPORT =========
+Face 9: Eyes open (EAR=0.261)
+
+
+===== General Report =====
+• Faces detected: 13.
+• Eyes open: 10 / 13.
+• Sharpness: Excellent.
+• Contrast: Fair.
+• Lighting: Balanced.
+• Colours: vivid.
+• White Balance: warm tone.
+
+
+[Saturation]
+Value : 127.16
+Result : Vivid
+Colours are vivid and highly saturated.
+
+[Colour Temperature]
+Value : 23.61
+Result : Warm Tone
+The image has a warmer colour tone with more yellow/orange tint.
+
+[Lighting]
+Result : Balanced
+Overall brightness looks natural.
+Recommendation: No correction needed.
+
+========= END OF COMPREHENSIVE REPORT =========
+Face 10: Eyes closed (EAR=0.165)
+
+
+===== General Report =====
+• Faces detected: 13.
+• Eyes open: 10 / 13.
+• Sharpness: Excellent.
+• Contrast: Fair.
+• Lighting: Balanced.
+• Colours: vivid.
+• White Balance: warm tone.
+
+
+[Saturation]
+Value : 127.16
+Result : Vivid
+Colours are vivid and highly saturated.
+
+[Colour Temperature]
+Value : 23.61
+Result : Warm Tone
+The image has a warmer colour tone with more yellow/orange tint.
+
+[Lighting]
+Result : Balanced
+Overall brightness looks natural.
+Recommendation: No correction needed.
+
+========= END OF COMPREHENSIVE REPORT =========
+Face 11: Eyes open (EAR=0.183)
+
+
+===== General Report =====
+• Faces detected: 13.
+• Eyes open: 10 / 13.
+• Sharpness: Excellent.
+• Contrast: Fair.
+• Lighting: Balanced.
+• Colours: vivid.
+• White Balance: warm tone.
+
+
+[Saturation]
+Value : 127.16
+Result : Vivid
+Colours are vivid and highly saturated.
+
+[Colour Temperature]
+Value : 23.61
+Result : Warm Tone
+The image has a warmer colour tone with more yellow/orange tint.
+
+[Lighting]
+Result : Balanced
+Overall brightness looks natural.
+Recommendation: No correction needed.
+
+========= END OF COMPREHENSIVE REPORT =========
+Face 12: Eyes open (EAR=0.266)
+
+
+===== General Report =====
+• Faces detected: 13.
+• Eyes open: 10 / 13.
+• Sharpness: Excellent.
+• Contrast: Fair.
+• Lighting: Balanced.
+• Colours: vivid.
+• White Balance: warm tone.
+
+
+[Saturation]
+Value : 127.16
+Result : Vivid
+Colours are vivid and highly saturated.
+
+[Colour Temperature]
+Value : 23.61
+Result : Warm Tone
+The image has a warmer colour tone with more yellow/orange tint.
+
+[Lighting]
+Result : Balanced
+Overall brightness looks natural.
+Recommendation: No correction needed.
+
+========= END OF COMPREHENSIVE REPORT =========
+Face 13: Eyes open (EAR=0.360)
+
+
+===== General Report =====
+• Faces detected: 13.
+• Eyes open: 10 / 13.
+• Sharpness: Excellent.
+• Contrast: Fair.
+• Lighting: Balanced.
+• Colours: vivid.
+• White Balance: warm tone.
+
+
+[Saturation]
+Value : 127.16
+Result : Vivid
+Colours are vivid and highly saturated.
+
+[Colour Temperature]
+Value : 23.61
+Result : Warm Tone
+The image has a warmer colour tone with more yellow/orange tint.
+
+[Lighting]
+Result : Balanced
+Overall brightness looks natural.
+Recommendation: No correction needed.
+
+========= END OF COMPREHENSIVE REPORT =========

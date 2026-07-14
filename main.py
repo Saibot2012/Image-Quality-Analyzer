@@ -3,9 +3,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-from overlay import create_overlay
-from gradient_check import blur_direction_hint
-from feature_extractor import extract_features
+from unused.overlay import create_overlay
+from computation.gradient_check import blur_direction_hint
+from analyzer.feature_extractor import extract_features
 
 def show_heatmap(original, heatmap, patch_size=32):
     heatmap_resized = cv2.resize(heatmap, (original.shape[1], original.shape[0]))

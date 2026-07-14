@@ -2,6 +2,24 @@
 
 An image quality assessment tool that combines classical computer vision techniques with machine learning to evaluate image sharpness and classify images as Sharp or Blurry. 
 
+# Project Vision
+
+### Build an AI-powered image quality analyzer that evaluates photographs in a way that is understandable and useful to photographers, providing objective measurements, intelligent explanations, and actionable recommendations for improving image quality.
+
+## Core Objectives
+- Evaluate image sharpness accurately.
+- Detect different causes of blur (motion, defocus, etc.).
+- Assess image noise.
+- Evaluate exposure and tonal balance.
+- Assess colour quality (white balance, saturation, contrast).
+- Analyse important subjects (faces, eyes, text).
+- Produce human-readable reports.
+- Provide practical recommendations rather than raw numbers.
+
+## Guiding Principle
+
+Every new feature must help answer one question: "Does this help a photographer better understand or improve their image?"
+
 ## Image Quality Analyzer (v1)
 
  Uses Laplacian variance for sharpness estimation, splits image into patches to generate heatmap, and visualizes sharpness distribution via overlay.
