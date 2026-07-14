@@ -4,7 +4,7 @@ import cv2
 import matplotlib.pyplot as plt
 import pandas as pd
 
-from feature_extractor import extract_features
+from analyzer.feature_extractor import extract_features
 IMAGE_FOLDER = "dataset/images"
 CSV_FILE = "ml/dataset.csv"
 sharp_count = 0

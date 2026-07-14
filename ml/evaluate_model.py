@@ -3,7 +3,7 @@ import joblib
 import os
 import pandas as pd
 
-from feature_extractor import extract_features
+from analyzer.feature_extractor import extract_features
 
 IMAGE_FOLDER = "dataset/images"
 CSV_FILE = "ml/dataset.csv"
