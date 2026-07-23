@@ -20,6 +20,14 @@ CONTRAST_THRESHOLDS = {
     "poor": 30,
 }
 
+EXPOSURE_THRESHOLDS = {
+     "brightness_min": 0.25,
+     "brightness_max": 0.75,
+
+     "shadow_warning": 0.10,
+     "highlight_warning": 0.10,
+
+}
 GRADE_INFO = {
     "excellent": {
         "grade": "Excellent",
@@ -81,6 +89,80 @@ def score_lower_better(value, thresholds):
 
     return GRADE_INFO["very_poor"]
 
-def overall_score(*scores):
-    return round(sum(scores) / len(scores))
+def score_exposure(brightness, shadow_clip, highlight_clip):
+    
+    score = 100
+    score = 100
+
+    # Brightness
+    if brightness < 0.15:
+        score -= 50
+
+    elif brightness < 0.25:
+        score -= 30
+
+    elif brightness > 0.85:
+        score -= 50
+
+    elif brightness > 0.75:
+        score -= 30
+
+
+    # Shadow clipping
+    if shadow_clip > 0.15:
+        score -= 25
+
+    elif shadow_clip > 0.08:
+        score -= 10
+
+
+    # Highlight clipping
+    if highlight_clip > 0.15:
+        score -= 25
+
+    elif highlight_clip > 0.08:
+        score -= 10
+
+
+    
+    #prevent negative score
+    score = max(score, 0)
+
+    if score >= 90:
+        grade = "Excellent"
+
+    elif score >= 75:
+        grade = "Good"
+
+    elif score >= 60:
+        grade = "Fair"
+
+    elif score >= 40:
+        grade = "Poor"
+
+    else:
+        grade = "Very Poor"
+
+
+    return {
+        "grade": grade,
+        "score": score
+    }
+    
+def overall_score(scores):
+    weights = {
+        "Sharpness": 0.40,
+        "Noise": 0.25,
+        "Contrast": 0.20,
+        "Subject": 0.15
+    }
+    total = 0
+    used_weight = 0
+
+    for metric, weight in weights.items():
+        if metric in scores:
+                    total += scores[metric]["score"] * weight
+                    used_weight += weight
+
+    return round(total / used_weight)
 

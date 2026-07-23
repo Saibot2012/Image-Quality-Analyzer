@@ -1,16 +1,20 @@
 # ----- Imports -----
 
+import csv
+import numpy as np
 import cv2
 import hashlib
 import joblib
 import os
 import pandas as pd
+import shutil
+from datetime import datetime
 
 from analyzer.feature_extractor import extract_features
-from detection.face_analysis import detect_faces
-from detection.eye_analysis import detect_eye_state
+from detection.face_analysis_SCRFD import detect_faces
+from detection.eye_analysis import detect_eye_state, detect_eye_state_ear_fallback
 from visualization.visualization import draw_face_boxes
-from analyzer.report_generator import generate_report, generate_verdict
+from analyzer.report_generator import generate_report, generate_verdict, generate_summary
 
 from analyzer.score import (
     score_higher_better,
@@ -18,7 +22,8 @@ from analyzer.score import (
     SHARPNESS_THRESHOLDS,
     NOISE_THRESHOLDS,
     CONTRAST_THRESHOLDS,
-    overall_score
+    score_exposure,
+    overall_score,
 )
 
 from analyzer.quality_report import (
@@ -26,11 +31,16 @@ from analyzer.quality_report import (
     interpret_saturation,
     interpret_temperature,
 )
+from visualization.display_utils import (
+    resize_for_display,
+    scale_face_result
+)
 
+ranking_results = []
 # ----- Setup -----
+
 IMAGE_FOLDER = "testimages4"
 
-os.makedirs("results", exist_ok=True)
 
 model = joblib.load("ml/model.pkl")
 
@@ -38,7 +48,30 @@ os.makedirs("logs", exist_ok=True)
 report_log = open("logs/simplified.log", "w", encoding="utf-8")
 analysis_log = open("logs/analysis.log", "w", encoding="utf-8") 
 
+CURRENT_OUTPUT = "sorted_images"
+CACHE_OUTPUT = "image_cache"
+MIN_FACE_WIDTH = 50
+MIN_FACE_HEIGHT = 60
 
+VERDICTS = [
+    "Excellent",
+    "Good",
+    "Fair",
+    "Poor"
+]
+
+if os.path.exists(CURRENT_OUTPUT):
+    shutil.rmtree(CURRENT_OUTPUT)
+
+for verdict in VERDICTS:
+    os.makedirs(
+        os.path.join(CURRENT_OUTPUT, verdict),
+        exist_ok=True
+    )
+    os.makedirs(
+        os.path.join(CACHE_OUTPUT, verdict),
+        exist_ok=True
+    )
 
 # ----- Loggers -----
 def report_print(*args, **kwargs):
@@ -78,18 +111,64 @@ def score_ml_sharpness(prediction, confidence):
             return {"grade": "Poor", "score": 50}
 
 # ----- Start loop -----
+MAX_WIDTH = 4000
+MAX_HEIGHT = 6000
+
+eye_dataset = open(
+    "ml/eye_analysis_dataset.csv",
+    "w",
+    newline="",
+    encoding="utf-8"
+)
+
+eye_writer = csv.writer(eye_dataset)
+
+eye_writer.writerow([
+    "filename",
+    "left_ear",
+    "right_ear",
+    "average_ear",
+    "difference",
+    "ratio",
+    "predicted_status"
+])
+
+
+
 for filename in os.listdir(IMAGE_FOLDER):
 
-    if not filename.lower().endswith((".jpg", ".jpeg", ".png", ".webp")):
+    if not filename.lower().endswith((".jpg", ".jpeg", ".png", ".webp", ".avif")):
         continue
 
     image_path = os.path.join(IMAGE_FOLDER, filename)
 
-    img = cv2.imread(image_path)
+    img = cv2.imread(image_path)    
 
     if img is None:
         common_print(f"Could not read {filename}")
-        continue
+        continue   
+
+    h, w = img.shape[:2]
+
+    scale = min(
+        MAX_WIDTH / w,
+        MAX_HEIGHT / h
+    )
+
+    if scale < 1:
+        new_width = int(w * scale)
+        new_height = int(h * scale)
+
+        img = cv2.resize(
+            img,
+            (new_width, new_height),
+            interpolation=cv2.INTER_AREA
+        )
+
+
+
+
+
 
 
 # ----- Extract features -----
@@ -121,55 +200,99 @@ for filename in os.listdir(IMAGE_FOLDER):
     eye_visual_results = []
 
     if face_result["face_count"] == 0:
-
-        common_print(
-            "No faces available for eye analysis"
-        )
+        common_print()
     else:
-        for i, box in enumerate(face_result["face_boxes"]):
+
+        for face_idx, box in enumerate(face_result["face_boxes"]):
 
             x, y, w, h = box
 
-            padding = 0.25
 
-            x1 = max(0, int(x - w*padding))
-            y1 = max(0, int(y - h*padding))
+            min_dimension = min(w, h)
 
-            x2 = min(img.shape[1], int(x+w+w*padding))
-            y2 = min(img.shape[0], int(y+h+h*padding))
+            padding = 0.50
 
-            face_crop = img[y1:y2, x1:x2]
-            base_name = os.path.splitext(filename)[0]
-
-            # Debug save
-            
-
-            eye_result = detect_eye_state(face_crop)
+            landmarks = face_result["face_landmarks"][face_idx]
 
 
-            if "eye_results" in eye_result:
-
-                eye = eye_result["eye_results"][0]
-
-                eye_visual_results.append(eye)
+            if landmarks is None:
+                continue
 
 
+            dev_print( "[DEBUG]"
+                "FACE INDEX:",
+                face_idx,
+                "LANDMARK 0:",
+                landmarks[0]
+            )
+            dev_print("[DEBUG]"
+                        "RAW BOX:",
+                        box
+                    )
+            dev_print( "[DEBUG]"
+                        f"FACE {face_idx}: width={w}, height={h}"
+                    )
+            dev_print( "[DEBUG]"
+                        f"FACE {face_idx} DIMENSIONS: dimensions={min_dimension}"
+                    )
+
+            if min_dimension >= 160:
+
+                dev_print(
+                    f"FACE {face_idx}: using ML"
+                )
+
+                eye_result = detect_eye_state(
+                    landmarks
+                )
+
+                confidence = eye_result["eye_results"][0]["confidence"]
+
+                if confidence < 70:
+                    dev_print(
+                        f"FACE {face_idx}: Low ML confidence ({confidence:.1f}%), switching to EAR"
+                    )
+
+                    eye_result = detect_eye_state_ear_fallback(
+                        landmarks
+                    )
 
             else:
-                eye_visual_results.append(
-                    {
-                        "status": eye_result["eye_status"]
-                    }
+
+                dev_print(
+                    f"FACE {face_idx}: using EAR fallback"
                 )
-                common_print(f"Face {i+1}: {eye_result     ['eye_status']}"
-                        )
+
+                eye_result = detect_eye_state_ear_fallback(
+                    landmarks
+                )
+
+
+            if "eye_results" not in eye_result:
+                continue
+
+
+            eye = eye_result["eye_results"][0]
+
+            eye_visual_results.append({
+                "face_index": face_idx,
+                **eye
+            })
+
+            dev_print(
+                "FINAL EYE RESULT:",
+                eye_visual_results[-1]
+            )
+
+
+
 
 
 # ----- Quality Scores -----
     scores = {
         "Sharpness": score_ml_sharpness(
         prediction,
-        confidence
+        confidence,
         ),
 
 
@@ -183,13 +306,15 @@ for filename in os.listdir(IMAGE_FOLDER):
             CONTRAST_THRESHOLDS
         ),
 
+        "Exposure": score_exposure(
+            features["brightness"],
+            features["shadow_clip"],
+            features["highlight_clip"]
+        )
+
     }
-    overall = overall_score(
-        *[
-        metric["score"]
-        for metric in scores.values()
-        ]
-    )
+    overall = overall_score(scores)
+    
 
 
 # ----- Report Generation -----
@@ -213,28 +338,54 @@ for filename in os.listdir(IMAGE_FOLDER):
     sat_title,
     temp_title
     )
+    summary = generate_summary(
+        scores,
+        face_result,
+        eye_visual_results,
+        lighting,
+        sat_title,
+        temp_title
+    )
     verdict = generate_verdict(
     overall,
     report["problems"]
     )
 
+    ranking_results.append({
+    "filename": filename,
+    "image_path": image_path,
+    "verdict": verdict,
+    "score": overall
+    })
+
+    timestamp = datetime.now().strftime(
+    "%Y%m%d_%H%M%S"
+    )
+
 #----- Visualization -----
+    display_img, scale = resize_for_display(img)
+
+    display_face_result = scale_face_result(
+        face_result,
+        scale
+    )
+
     annotated = draw_face_boxes(
-    img,
-    face_result,
+    display_img,
+    display_face_result,
     eye_visual_results,
     overall,
     scores,
     verdict
 )
     cv2.imwrite(
-    f"results/visual_{filename}",
+    f"e/visual_{filename}",
     annotated
     )
 
 #----- Logging -----
     common_print(f"\n===== {filename} =====")
-
+    common_print(f"Image dimensions: {img.shape[:2]}")
     common_print(
         f"\nOverall Score: {overall}/100"
     )
@@ -243,6 +394,13 @@ for filename in os.listdir(IMAGE_FOLDER):
     common_print("General")
     for line in report["general"]:
         common_print(f"• {line}")
+
+    common_print()
+    common_print("\nStrengths")
+
+    if report["strengths"]:
+        for line in report["strengths"]:
+            common_print(f"✓ {line}")
 
     common_print()
     common_print("Problems")
@@ -262,7 +420,12 @@ for filename in os.listdir(IMAGE_FOLDER):
             common_print(f"• {line}")
     else:
         common_print("No recommendations.")
-    dev_print()
+    common_print()
+    common_print()
+
+    common_print(f"Sorted into {verdict}")
+    common_print()
+    common_print()
     common_print("========== END OF SIMPLIFIED REPORT ==========")
     dev_print()
     dev_print()
@@ -299,26 +462,37 @@ for filename in os.listdir(IMAGE_FOLDER):
             f"{metric}: {result['grade']} ({result['score']}/100)"
         )
 
-
+    dev_print()
 
     for msg in face_result["log_messages"]:
         dev_print(msg)
 
     dev_print("\n[Eye Detection]")
 
-dev_print("\n[Eye Detection]")
-
-for i, eye in enumerate(eye_visual_results):
-
-    if "ear" in eye:
-        dev_print(
-            f"Face {i+1}: {eye['status']} (EAR={eye['ear']:.3f})"
-        )
+    if not eye_visual_results:
+        dev_print("No faces detected. Continuing.....")
     else:
-        dev_print(
-            f"Face {i+1}: {eye['status']}"
-        )
+        for i, eye in enumerate(eye_visual_results):
+            
+
+            if "ear" in eye:
+                dev_print(
+                            f"""
+                            FACE {i+1}
+                            Method: {eye['method']}
+                            Status: {eye['status']}
+                            Confidence: {eye['confidence']}
+
+                            Probabilities:
+                            {eye['probabilities']}
+                            """
+                        )
     
+            else:
+                dev_print(
+                    f"Face {i+1}: {eye['status']}"
+                )
+        
     dev_print()
     dev_print("\n===== General Report =====")
 
@@ -340,10 +514,58 @@ for i, eye in enumerate(eye_visual_results):
     dev_print(f"Result : {lighting}")
     dev_print(f"{lighting_desc}")
     dev_print(f"Recommendation: {lighting_tip}")
-    dev_print()
-    dev_print("========= END OF COMPREHENSIVE REPORT =========")
+    dev_print(f"\n")
 
-    
+    common_print(f"======== SUMMARY ===========")
+
+    for line in summary:
+        common_print(f"• {line}")
+    dev_print(f"\n")
+
+    dev_print("================================ END OF COMPREHENSIVE REPORT =====================================")
+
+report_log.close()
+analysis_log.close()
+eye_dataset.close()
+
+for verdict in VERDICTS:
+
+    images = [
+        img for img in ranking_results
+        if img["verdict"] == verdict
+    ]
+
+    images.sort(
+        key=lambda x: x["score"],
+        reverse=True
+    )
+
+    for rank, img_info in enumerate(images, start=1):
+
+        filename = f"{rank:03d}_{img_info['score']}_{img_info['filename']}"
+
+        shutil.copy2(
+            img_info["image_path"],
+            os.path.join(
+                CURRENT_OUTPUT,
+                verdict,
+                filename
+            )
+        )
+
+        shutil.copy2(
+            img_info["image_path"],
+            os.path.join(
+                CACHE_OUTPUT,
+                verdict,
+                filename
+            )
+        )
+
+
+
+
+        
 
     
     

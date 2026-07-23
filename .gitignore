@@ -3,7 +3,18 @@ testimages4/
 results/
 test_images/
 testimages2/
-testimages3/
+e/
+dataset/
+test5/
+image_cache/
+temp/
+sorted_images/
+test_images/
+temp_results/
+temporary/
+logs/
+
+
 
 
 

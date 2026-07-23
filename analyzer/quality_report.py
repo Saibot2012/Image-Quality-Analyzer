@@ -141,14 +141,14 @@ def interpret_temperature(temperature):
 
     if temperature > 20:
         return (
-            "Warm Tone",
-            "The image has a warmer colour tone with more yellow/orange tint."
+            "Warm",
+            "The image has a warmer colour balance with a yellow/orange cast."
         )
 
     elif temperature < -20:
         return (
-            "Cool Tone",
-            "The image has a cooler colour tone with more blue tint."
+            "Cool",
+            "The image has a cool colour balance with a noticeable blue cast."
         )
 
     else:
