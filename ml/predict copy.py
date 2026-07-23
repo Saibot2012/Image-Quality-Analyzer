@@ -8,7 +8,7 @@ import hashlib
 IMAGE_FOLDER = "testimages4"
 
 from analyzer.feature_extractor import extract_features
-from detection.face_analysis import detect_faces
+from detection.face_analysis_mediapipe import detect_faces
 from analyzer.quality_report import (brightness_report, interpret_noise, interpret_sharpness, interpret_contrast, interpret_saturation, interpret_temperature)
 from detection.eye_analysis import detect_eye_state
 from visualization.visualization import draw_face_boxes
