@@ -1,3 +1,5 @@
+from datetime import datetime
+
 VERDICT_LEVELS = {
     "Excellent": 4,
     "Good": 3,
@@ -6,23 +8,102 @@ VERDICT_LEVELS = {
 }
 
 
-def generate_report(
+def generate_report_data(
+    filename,
+    img_path,
+    image_shape,
+    features,
     scores,
+    overall_score,
     face_result,
     eye_results,
-    lighting,
+    brightness_info,
     saturation,
     temperature
 ):
 
     report = {
-        "general": [],
-        "problems": [],
-        "strengths": [],
-        "suggestions": []
+        "metadata":{
+            "version": "2.0",
+            "generated_at": datetime.now().isoformat()
+        },
+
+        "image_info": {},
+
+        "quality":{
+        "overall_score": overall_score,
+        "verdict": None,
+        "quality_grades": {},
+        "quality_scores": {},
+        },
+
+        "technical_details": {},
+        "face_analysis": {},
+        "colour_analysis": {},
+        "lighting_analysis": {},
+
+        "report": {
+            "general": [],
+            "problems": [],
+            "strengths": [],
+            "suggestions": [],
+            "summary": []
+        },
+
+        "model_info": {
+            "face_detector": "SCRFD",
+            "eye_model": "RandomForest 5-class",
+            "eye_method": "ML + EAR fallback"
+        }
     }
-    
-    report["general"].append(
+
+    report["quality"]["quality_scores"] = {
+        "sharpness": scores["Sharpness"]["score"],
+        "noise": scores["Noise"]["score"],
+        "contrast": scores["Contrast"]["score"],
+        "exposure": scores["Exposure"]["score"]
+    }
+    report["quality"]["quality_grades"] = {
+        "sharpness": scores["Sharpness"]["grade"],
+        "noise": scores["Noise"]["grade"],
+        "contrast": scores["Contrast"]["grade"],
+        "exposure": scores["Exposure"]["grade"]
+    }
+    report["technical_details"] = {
+        "laplacian": float(features["laplacian"]),
+        "fft_ratio": float(features["fft_ratio"]),
+        "wavelet": float(features["wavelet_ratio"]),
+        "noise_rms": float(features["noise"]),
+        "brightness": float(features["brightness"]),
+        "shadow_clip": float(features["shadow_clip"]),
+        "highlight_clip": float(features["highlight_clip"]),
+        "consistency": float(features["consistency"]),
+        "detail_quality": float(features["detail_quality"])
+    }
+    report["lighting_analysis"] = {
+        "result": brightness_info["status"],
+        "description": brightness_info["description"],
+        "recommendation": brightness_info["tip"]
+    }
+    report["colour_analysis"] = {
+        "saturation": {
+            "result": saturation
+        },
+
+        "white_balance": {
+            "result": temperature
+        }
+    }
+    report["image_info"] = {
+        "filename": filename,
+        "annotated_filename": f"visual_{filename}",
+        "path": img_path,
+        "width": int(image_shape[1]),
+        "height": int(image_shape[0]),
+        "faces_detected":face_result["face_count"]
+    }
+
+    report["report"]["general"].append(
         f"Faces detected: {face_result['face_count']}."
     )
     both_open_count = sum(
@@ -43,36 +124,36 @@ def generate_report(
         if eye["status"] == "Eyes closed"
     )
 
-    report["general"].append(
+    report["report"]["general"].append(
         f"Both eyes open: {both_open_count} / {len(eye_results)}."
     )
     if one_closed_count > 0:
-        report["general"].append(
+        report["report"]["general"].append(
             f"One eye closed: {one_closed_count}/{len(eye_results)}."
         )
 
     if both_closed_count > 0:
-        report["general"].append(
+        report["report"]["general"].append(
             f"Both eyes closed: {both_closed_count}/{len(eye_results)}."
         )
 
-    report["general"].append(
+    report["report"]["general"].append(
         f"Sharpness: {scores['Sharpness']['grade']}."
     )
 
-    report["general"].append(
+    report["report"]["general"].append(
         f"Contrast: {scores['Contrast']['grade']}."
     )
 
-    report["general"].append(
-        f"Lighting: {lighting}."
+    report["report"]["general"].append(
+        f"Lighting: {brightness_info['status']}."
     )
 
-    report["general"].append(
+    report["report"]["general"].append(
         f"Colours: {saturation.lower()}."
     )
 
-    report["general"].append(
+    report["report"]["general"].append(
         f"White Balance: {temperature.lower()}."
         
     )
@@ -81,42 +162,74 @@ def generate_report(
 # PROBLEMS AND SUGGESTIONS
     if scores["Noise"]["grade"] in ["Poor", "Very Poor"]:
 
-        report["problems"].append(
+        report["report"]["problems"].append(
             "High image noise detected."
         )
-        report["suggestions"].append(
+        report["report"]["suggestions"].append(
         "Use a lower ISO or increase available light."
+        )
+    if scores["Exposure"]["grade"] in ["Fair", "Poor", "Very Poor"]:
+        report["report"]["problems"].append(
+            "Low brightness detected."
+        )
+        report["report"]["suggestions"].append(
+        "Use a higher aperture or increase available light."
         )
     if both_closed_count > 0:
 
-        report["problems"].append(
+        report["report"]["problems"].append(
             f"{both_closed_count} subject(s) have both closed eyes."
         )
-        report["suggestions"].append(
+        report["report"]["suggestions"].append(
         "Capture another frame with all subjects' eyes open"
         )
     if one_closed_count > 0:
-        report["problems"].append(
+        report["report"]["problems"].append(
             f"{one_closed_count}/{len(eye_results)} subjects have 1 eye closed."
         )
-        report["suggestions"].append(
+        report["report"]["suggestions"].append(
         "Capture another frame with all subjects' eyes open"
         )
+    report["face_analysis"] = {
+        "total_faces": face_result["face_count"],
+        "eyes_open": both_open_count,
+        "one_eye_closed": one_closed_count,
+        "eyes_closed": both_closed_count,
+        "subjects": eye_results
+        }
+
+    verdict = generate_verdict(
+        overall_score,
+        report["report"]["problems"]
+        )
+
+    report["quality"]["verdict"] = verdict
+        
 
 #STRENGTHS
 
     if scores["Sharpness"]["grade"] == "Excellent":
-        report["strengths"].append("Excellent sharpness.")
+        report["report"]["strengths"].append("Excellent sharpness.")
     if scores["Contrast"]["grade"] == "Excellent":
-        report["strengths"].append("Excellent contrast.")
+        report["report"]["strengths"].append("Excellent contrast.")
     elif scores["Contrast"]["grade"] == "Good":
-        report["strengths"].append("Good contrast.")
-    if lighting == "Balanced":
-        report["strengths"].append("Balanced lighting.")
+        report["report"]["strengths"].append("Good contrast.")
+    if brightness_info["status"] == "Balanced":
+        report["report"]["strengths"].append("Balanced lighting.")
     if saturation == "Natural":
-        report["strengths"].append("Natural colours.")
+        report["report"]["strengths"].append("Natural colours.")
     if face_result["face_count"] > 0 and both_closed_count == 0 and one_closed_count == 0:
-        report["strengths"].append("All subjects have eyes open.")
+        report["report"]["strengths"].append("All subjects have eyes open.")
+
+    report["report"]["summary"] = generate_summary(
+    scores,
+    face_result,
+    eye_results,
+    brightness_info,
+    saturation,
+    temperature
+)
+
     return report
     
 
@@ -138,7 +251,7 @@ def generate_verdict(score, problems):
 
         if "noise" in problem.lower():
             severity += 1
-        if "closed_eyes" in problem.lower():
+        if "closed eye" in problem.lower():
             severity += 1
         if "blur" in problem.lower():
             severity += 2
@@ -149,6 +262,7 @@ def generate_verdict(score, problems):
         "Good",
         "Excellent"
     ]
+
     
     index = levels.index(verdict)
 
@@ -163,7 +277,7 @@ def generate_summary(
         scores,
         face_result,
         eye_results,
-        lighting,
+        brightness_info,
         saturation,
         temperature
 ):
@@ -282,7 +396,47 @@ def generate_summary(
     else:
 
         summary.append(
-            f"{closed_count} subject(s) have closed eyes/ eyes' cannot be detected. "
+            f"{closed_count} subject(s) have closed eyes/eyes that cannot be detected/eye analysis skipped."
         )
 
+
+
     return summary
+
+def print_report(report):
+
+    text = ""
+
+    text += "\n===== Assessment Report =====\n\n"
+
+    text += "General\n"
+    for item in report["report"]["general"]:
+        text += f"• {item}\n"
+
+    text += "\nStrengths\n"
+    if len(report["report"]["strengths"]) == 0:
+        text += "No major strengths detected. \n"
+    else:
+        for item in report["report"]["strengths"]:
+            text += f"✓ {item}\n"
+
+
+    text += "\nProblems\n"
+    if len(report["report"]["problems"]) == 0:
+        text += "No major problems detected.\n"
+    else:
+        for item in report["report"]["problems"]:
+            text += f"⚠ {item}\n"
+
+
+    text += "\nSuggestions\n"
+    if len(report["report"]["suggestions"]) == 0:
+        text += "No recommendations.\n"
+    else:
+        for item in report["report"]["suggestions"]:
+            text += f"• {item}\n"
+
+
+    text += f"\nVerdict: {report['quality']['verdict']}\n"
+
+    return text

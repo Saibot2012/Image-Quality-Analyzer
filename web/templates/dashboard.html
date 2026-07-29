@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Quality Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+</head>
+<body>
+        {% include "navbar.html" %}
+        <h1>
+            Dashboard
+        </h1>
+        <div class="search-container">
+            <input type="text" id="searchBar" placeholder="🔍 Search images...">
+        </div>
+        {% macro section(title, reports) %}
+        {% if reports %}
+        <div class="gallery">
+            {% for report in reports %}
+            <a class="gallery-card"
+            data-name="{{report.image_info.filename|lower }}"
+            href="/report/{{ report.image_info.filename.replace('.jpg','').replace('.webp','') }}">
+
+                <img src="/uploads/{{ report.image_info.filename }}">
+
+                <h3>
+                {{ report.image_info.filename }}
+                </h3>
+
+                <div class="badge {{report.quality.verdict|lower }}">
+                    {{report.quality.verdict}}
+                </div>
+                <p>
+                    ⭐ Rating: {{ report.quality.overall_score }}/100
+                </p>
+
+            </a>
+            {% endfor %}
+            </div>
+            {% endif %}
+        {% endmacro %}
+        <details open><summary>Excellent</summary>{{ section("Excellent", excellent) }}</details>
+        <details><summary>Good</summary>{{ section("Good", good) }}</details>
+        <details><summary>Fair</summary>{{ section("Fair", fair) }}</details>
+        <details><summary>Poor</summary>{{ section("Poor", poor) }}</details>
+        </div>
+        <div class="clear">
+            <form
+                action="/clear-dashboard"
+                method="POST"
+                onsubmit="return confirm('Clear all reports and uploaded images? This action cannot be undone!');">
+
+                <button class="danger-button">
+                    🗑 Clear Dashboard
+                </button>
+
+            </form>
+        </div>
+        <div>
+            <button id="backToTop" title="back-to-top">↑</button>
+        </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+
+        const searchBar = document.getElementById("searchBar");
+
+        searchBar.addEventListener("input", function () {
+
+            const query = this.value.toLowerCase();
+
+            const cards = document.querySelectorAll(".gallery-card");
+
+            cards.forEach(card => {
+
+                const filename = card.dataset.name;
+
+                if (filename.includes(query)) {
+                    card.style.display = "";
+                } else {
+                    card.style.display = "none";
+                }
+
+            });
+
+            const sections = document.querySelectorAll("details");  //finds all details elements. returns nodelist for all sections: Excellent, fair, good, poor
+
+            sections.forEach(section => { //loops through each item in list
+
+                const cards = section.querySelectorAll(".gallery-card"); //only searches in indepedent section
+
+                const hasVisibleCard = [...cards].some( //converts cards nodelist to javascript array
+                    card => card.style.display !== "none"
+                );
+
+                section.open = hasVisibleCard;
+
+            });
+
+        });
+        const backToTop = document.getElementById("backToTop");
+
+        window.addEventListener("scroll", () => {
+
+            if(window.scrollY > 300){
+                backToTop.style.display = "block";
+            }
+            else{
+                backToTop.style.display = "none";
+            }
+
+        });
+
+        backToTop.addEventListener("click", () => {
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        });
+
+    });
+    </script>
+</body>
+</html>

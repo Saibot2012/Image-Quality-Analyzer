@@ -14,7 +14,8 @@ from analyzer.feature_extractor import extract_features
 from detection.face_analysis_SCRFD import detect_faces
 from detection.eye_analysis import detect_eye_state, detect_eye_state_ear_fallback
 from visualization.visualization import draw_face_boxes
-from analyzer.report_generator import generate_report, generate_verdict, generate_summary
+from analyzer.report_generator import generate_report_data, generate_verdict, generate_summary, print_report
+from analyzer.json_exporter import save_json_report
 
 from analyzer.score import (
     score_higher_better,
@@ -133,20 +134,25 @@ eye_writer.writerow([
     "predicted_status"
 ])
 
+def analyze_image(image_path):
+    """
+    Analyze a single image.
+
+    Parameters
+    ----------
+    image_path : str
+
+    Returns
+    -------
+    report : dict
+    """
 
 
-for filename in os.listdir(IMAGE_FOLDER):
-
-    if not filename.lower().endswith((".jpg", ".jpeg", ".png", ".webp", ".avif")):
-        continue
-
-    image_path = os.path.join(IMAGE_FOLDER, filename)
-
+    filename = os.path.basename(image_path)
     img = cv2.imread(image_path)    
-
     if img is None:
         common_print(f"Could not read {filename}")
-        continue   
+        return None
 
     h, w = img.shape[:2]
 
@@ -318,7 +324,7 @@ for filename in os.listdir(IMAGE_FOLDER):
 
 
 # ----- Report Generation -----
-    lighting, lighting_desc, lighting_tip = brightness_report(
+    brightness_info = brightness_report(
     features["brightness"],
     features["shadow_clip"],
     features["highlight_clip"]
@@ -330,26 +336,36 @@ for filename in os.listdir(IMAGE_FOLDER):
     temp_title, temp_msg = interpret_temperature(
     features["temperature"]
     )
-    report = generate_report(
+    report = generate_report_data(
+    filename,
+    image_path,
+    img.shape,
+    features,
     scores,
+    overall,
     face_result,
     eye_visual_results,
-    lighting,
+    brightness_info,
     sat_title,
     temp_title
     )
+
+    save_json_report(
+        report,
+        filename
+    )
+
     summary = generate_summary(
         scores,
         face_result,
         eye_visual_results,
-        lighting,
+        brightness_info,
         sat_title,
         temp_title
     )
-    verdict = generate_verdict(
-    overall,
-    report["problems"]
-    )
+    report["summary"] = summary
+
+    verdict = report["quality"]["verdict"]
 
     ranking_results.append({
     "filename": filename,
@@ -379,7 +395,7 @@ for filename in os.listdir(IMAGE_FOLDER):
     verdict
 )
     cv2.imwrite(
-    f"e/visual_{filename}",
+    f"annotated/visual_{filename}",
     annotated
     )
 
@@ -389,46 +405,13 @@ for filename in os.listdir(IMAGE_FOLDER):
     common_print(
         f"\nOverall Score: {overall}/100"
     )
-    common_print("\n===== Assessment Report =====\n")
-
-    common_print("General")
-    for line in report["general"]:
-        common_print(f"• {line}")
-
-    common_print()
-    common_print("\nStrengths")
-
-    if report["strengths"]:
-        for line in report["strengths"]:
-            common_print(f"✓ {line}")
-
-    common_print()
-    common_print("Problems")
-
-    if report["problems"]:
-        for line in report["problems"]:
-            common_print(f"⚠ {line}")
-    else:
-        common_print("✓ No significant issues detected.")
-        common_print("\n===== Suggestions =====")
-
-    common_print()
-    common_print("Suggestions")
-
-    if report["suggestions"]:
-        for line in report["suggestions"]:
-            common_print(f"• {line}")
-    else:
-        common_print("No recommendations.")
-    common_print()
-    common_print()
-
-    common_print(f"Sorted into {verdict}")
-    common_print()
+    common_print(
+                print_report(report)
+                )
     common_print()
     common_print("========== END OF SIMPLIFIED REPORT ==========")
-    dev_print()
-    dev_print()
+    common_print()
+    common_print()
 
     dev_print("============= Values Analysis =============")
 
@@ -496,7 +479,7 @@ for filename in os.listdir(IMAGE_FOLDER):
     dev_print()
     dev_print("\n===== General Report =====")
 
-    for line in report["general"]:
+    for line in report["report"]["general"]:
         dev_print(f"• {line}")
     dev_print()
     dev_print()
@@ -511,9 +494,9 @@ for filename in os.listdir(IMAGE_FOLDER):
     dev_print(f"{temp_msg}\n")
 
     dev_print(f"[Lighting]")
-    dev_print(f"Result : {lighting}")
-    dev_print(f"{lighting_desc}")
-    dev_print(f"Recommendation: {lighting_tip}")
+    dev_print(f"Result : {brightness_info['status']}")
+    dev_print(f"{brightness_info['description']}")
+    dev_print(f"Recommendation: {brightness_info['tip']}")
     dev_print(f"\n")
 
     common_print(f"======== SUMMARY ===========")
@@ -524,43 +507,73 @@ for filename in os.listdir(IMAGE_FOLDER):
 
     dev_print("================================ END OF COMPREHENSIVE REPORT =====================================")
 
-report_log.close()
-analysis_log.close()
-eye_dataset.close()
+    return report
 
-for verdict in VERDICTS:
 
-    images = [
-        img for img in ranking_results
-        if img["verdict"] == verdict
-    ]
 
-    images.sort(
-        key=lambda x: x["score"],
-        reverse=True
-    )
 
-    for rank, img_info in enumerate(images, start=1):
 
-        filename = f"{rank:03d}_{img_info['score']}_{img_info['filename']}"
 
-        shutil.copy2(
-            img_info["image_path"],
-            os.path.join(
-                CURRENT_OUTPUT,
-                verdict,
-                filename
-            )
+if __name__ == "__main__":
+
+    for filename in os.listdir(IMAGE_FOLDER):
+
+        if not filename.lower().endswith(
+            (".jpg", ".jpeg", ".png", ".webp", ".avif")
+        ):
+            continue
+
+        image_path = os.path.join(
+            IMAGE_FOLDER,
+            filename
         )
 
-        shutil.copy2(
-            img_info["image_path"],
-            os.path.join(
-                CACHE_OUTPUT,
-                verdict,
-                filename
-            )
-        )
+        analyze_image(image_path)
+        report_log.close()
+        analysis_log.close()
+        eye_dataset.close()
+        for verdict in VERDICTS:
+        
+                images = [
+                    img for img in ranking_results
+                    if img["verdict"] == verdict
+                ]
+        
+                images.sort(
+                    key=lambda x: x["score"],
+                    reverse=True
+                )
+        
+                for rank, img_info in enumerate(images, start=1):
+        
+                    filename = f"{rank:03d}_{img_info['score']}_{img_info['filename']}"
+        
+                    shutil.copy2(
+                        img_info["image_path"],
+                        os.path.join(
+                            CURRENT_OUTPUT,
+                            verdict,
+                            filename
+                        )
+                    )
+        
+                    shutil.copy2(
+                        img_info["image_path"],
+                        os.path.join(
+                            CACHE_OUTPUT,
+                            verdict,
+                            filename
+                        )
+                )
+
+
+
+
+
+
+
+
+
 
 
 

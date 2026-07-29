@@ -85,6 +85,8 @@ def extract_eye_features(landmarks):  #ML approach
     }
 def detect_eye_state(landmarks):
 
+
+
     landmarks = np.asarray(landmarks)
 
     if landmarks.shape != (106,2):
@@ -139,12 +141,13 @@ def detect_eye_state(landmarks):
             "status": status,
             "confidence": confidence,
             "method": "ML",
-            "probabilities": dict(
-                zip(
+            "probabilities": {
+                labels[class_id]: float(prob)
+                for class_id, prob in zip(
                     eye_model.classes_,
                     probabilities
                 )
-            )
+            }
         }]
     }
 
