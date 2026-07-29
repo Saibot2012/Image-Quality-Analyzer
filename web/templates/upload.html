@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+    <title>Upload</title>
+</head>
+<body>
+    {% include "navbar.html" %}
+    <h1>
+        Upload Image
+    </h1>
+    <div class="upload-section">
+        <h2>Single Image</h2>
+        <form
+        method = "POST"
+        id="singleForm"
+        action="/analyze-single"
+        enctype="multipart/form-data">
+            <input
+            type="file"
+            name="image"
+            accept=".jpg, .jpeg, .png, .webp">
+            <br><br>
+            <button type="submit" id="singleButton">
+                Analyze
+            </button>
+        </form>
+    </div>
+    <hr>
+    <div class="upload-section">
+        <h2>Batch Images</h2>
+        <form action="/analyze-batch" method="POST" enctype="multipart/form-data" id="batchForm">
+
+            <input
+                type="file"
+                name="images"
+                multiple
+                accept=".jpg, .jpeg, .png, .webp"
+                required
+            >
+            <br><br>
+            <button type="submit" id="batchButton">
+                Analyze All Images
+            </button>
+
+        </form>
+    </div>
+    <script>
+        const singleForm = document.getElementById("singleForm");
+        const singleButton = document.getElementById("singleButton");
+
+        if (singleForm) {
+            singleForm.addEventListener("submit", () => {
+                singleButton.disabled = true;
+                singleButton.textContent = "⏳ Processing...";
+            });
+        }
+
+        const batchForm = document.getElementById("batchForm");
+        const batchButton = document.getElementById("batchButton");
+
+        if (batchForm) {
+            batchForm.addEventListener("submit", () => {
+                batchButton.disabled = true;
+                batchButton.textContent = "⏳ Processing...";
+            });
+        }
+    </script>
+</body>
+</html>

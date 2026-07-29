@@ -65,38 +65,45 @@ def interpret_noise(noise):
 def brightness_report(brightness, shadow_clip, highlight_clip):
 
     if highlight_clip > 0.15:
-        return (
-            "Too Bright",
-            "Some bright areas have lost detail.",
-            "Reduce exposure slightly when taking similar photos."
-        )
+        return {
+            "status": "Too Bright",
+            "description": "Some bright areas have lost detail.",
+            "tip": "Reduce exposure slightly when taking similar photos."
+        }
 
     if shadow_clip > 0.15 and brightness < 0.35:
-        return (
-            "Too Dark",
-            "Dark areas contain little visible detail.",
-            "Increase exposure or brighten the image."
-        )
+        return {
+            "status": "Too Dark",
+            "description": "Dark areas contain little visible detail.",
+            "tip": "Increase exposure or brighten the image."
+        }
 
     if highlight_clip > 0.05:
-        return (
-            "Balanced",
-            "Overall brightness looks natural, but some highlights are clipped.",
-            "No major correction needed."
-        )
+        return {
+            "status": "Balanced",
+            "description": "Overall brightness looks natural, but some highlights are clipped.",
+            "tip": "No major correction needed."
+        }
 
     if shadow_clip > 0.10 and brightness < 0.40:
-        return (
-            "Balanced",
-            "Overall brightness is good, but some shadows are very dark.",
-            "Consider lifting the shadows slightly."
-        )
+        return {
+            "status": "Balanced",
+            "description": "Overall brightness is good, but some shadows are very dark.",
+            "tip": "Consider lifting the shadows slightly."
+        }
 
-    return (
-        "Balanced",
-        "Overall brightness looks natural.",
-        "No correction needed."
-    )
+    if brightness < 0.40:
+        return {
+            "status": "Too Dark",
+            "description": "Overall brightness is slightly low.",
+            "tip": "Consider increasing brightness."
+        }
+    else:
+        return {
+            "status": "Balanced",
+            "description": "Overall brightness looks natural.",
+            "tip": "No correction needed."
+        }
 def interpret_contrast(contrast):
 
     if contrast < 30:

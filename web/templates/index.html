@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Quality Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    {% include "navbar.html" %}
+    <br><br>
+    <div class="hero">
+        <span class="badge {{report.quality.verdict.lower()}}">
+            {{ report.quality.verdict }}
+        </span>
+        <h3>{{report.image_info.filename}} has an overall score of:</h3>
+        <div class="score-number">
+            {{report.quality.overall_score}}
+        </div>
+
+        <div class="score-text">
+            /100
+        </div>
+
+    </div>
+    <div class="image-grid">
+        <div class="image-card">
+            <h2>
+                Original
+            </h2>
+            <img src="/uploads/{{report.image_info.filename}}" alt="">
+        </div>
+        <div class="image-card">
+            <h2>
+                Annotated
+            </h2>
+            <img src="/annotated/{{report.image_info.annotated_filename}}" alt="">
+
+        </div>
+    </div>
+    <div class="hero-info">
+        <h1 class="filename">
+            {{ report.image_info.filename}}
+        </h1>
+        <div class="meta">
+            <div>
+                📐
+                {{ report.image_info.width }}
+                ×
+                {{ report.image_info.height }}
+            </div>
+            <div>
+                👤
+                {{ report.face_analysis.total_faces }}
+                Face{% if report.face_analysis.total_faces != 1 %}s{% endif %}
+            </div>
+            <div>
+                🕒
+                {{ report.metadata.generated_at }}
+            </div>
+        </div>
+    </div>
+
+    <h2>
+        Quality Scores
+    </h2>
+
+    <div class="grid">
+
+        {% for key,value in report.quality.quality_scores.items() %}
+
+            <div class="card">
+
+                <h3>
+                    {{ key.capitalize() }}
+                </h3>
+
+                <div class="bar">
+                    <div 
+                        class="fill"
+                        style="width: {{value}}%">
+                    </div>
+                </div>
+
+                <p>
+                    {{value}} / 100
+                </p>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+    <h2>
+        Faces
+    </h2>
+    <div class="card">
+        <p>
+            Faces detected:
+            {{report.face_analysis.total_faces}}
+        </p>
+        <details>
+            <summary>Face Analysis</summary>
+            {% for face in report.face_analysis.subjects %}
+
+            <div class="face">
+                <b>
+                    Face {{face.face_index + 1}}
+                </b>
+                <br>
+
+                Status:
+                {{face.status}}
+
+                <br>
+
+                Confidence:
+                {{face.confidence}}%
+
+                <br>
+
+                Method:
+                {{face.method}}
+            </div>
+            {% endfor %}
+        </details>
+    </div>
+    <h2>
+        Assessment
+    </h2>
+    <div class="grid">
+        <div class="card">
+            <h3>
+                Strengths
+            </h3>
+            {% for item in report.report.strengths %}
+            <p>
+                ✓ {{item}}
+            </p>
+            {% endfor %}
+        </div>
+        <div class="card">
+
+            <h3>
+                Problems
+            </h3>
+
+            {% for item in report.report.problems %}
+                <p>
+                    ⚠ {{item}}
+                </p>
+            {% endfor %}
+        </div>
+            <div class="card">
+
+            <h3>
+                Suggestions
+            </h3>
+
+            {% for item in report.report.suggestions %}
+                <p>
+                    • {{item}}
+                </p>
+            {% endfor %}
+        </div>
+    </div>
+    <div>
+        <details class="technical-card">
+            <summary>
+                Technical Metrics
+            </summary>
+            <table class="metric-table">
+                {% for key, value in report.technical_details.items() %}
+                <tr>
+                    <td>
+                        {{ key.replace("_"," ").title() }}
+                    </td>
+                    <td>
+                        {% if value is number %}
+                            {{ "%.4f"|format(value) }}
+                    {% else %}
+                        {{ value }}
+                    {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </details>
+    </div>
+    <div class="reanalyze">
+        <form action="/reanalyze/{{ report.image_info.filename }}" method ="POST">
+            <button type="submit">
+                Reanalyze
+            </button>
+        </form>
+    </div>
+    <div>
+        <button id="backToTop" title="back-to-top">↑</button>
+    </div>
+    <script>
+        const backToTop = document.getElementById("backToTop");
+
+        window.addEventListener("scroll", () => {
+
+            if(window.scrollY > 300){
+                backToTop.style.display = "block";
+            }
+            else{
+                backToTop.style.display = "none";
+            }
+
+        });
+
+        backToTop.addEventListener("click", () => {
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        });
+
+    
+    </script>
+</body>
+</html>

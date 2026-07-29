@@ -92,13 +92,12 @@ def score_lower_better(value, thresholds):
 def score_exposure(brightness, shadow_clip, highlight_clip):
     
     score = 100
-    score = 100
 
     # Brightness
     if brightness < 0.15:
         score -= 50
 
-    elif brightness < 0.25:
+    elif brightness <= 0.40:
         score -= 30
 
     elif brightness > 0.85:
