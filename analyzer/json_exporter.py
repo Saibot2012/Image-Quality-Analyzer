@@ -22,7 +22,6 @@ def save_json_report(
         "results",
         exist_ok=True
     )
-
     name = os.path.splitext(filename)[0]
 
     path = os.path.join(

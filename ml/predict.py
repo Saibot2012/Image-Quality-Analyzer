@@ -3,6 +3,7 @@
 import csv
 import numpy as np
 import cv2
+import math
 import hashlib
 import joblib
 import os
@@ -41,7 +42,7 @@ ranking_results = []
 # ----- Setup -----
 
 IMAGE_FOLDER = "testimages4"
-
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 model = joblib.load("ml/model.pkl")
 
@@ -149,6 +150,16 @@ def analyze_image(image_path):
 
 
     filename = os.path.basename(image_path)
+    stem = os.path.splitext(filename)[0]
+
+    FACES_DIR = os.path.join(
+        BASE_DIR,
+        "web",
+        "static",
+        "faces"
+    )
+
+    os.makedirs(FACES_DIR, exist_ok=True)
     img = cv2.imread(image_path)    
     if img is None:
         common_print(f"Could not read {filename}")
@@ -273,6 +284,15 @@ def analyze_image(image_path):
                     landmarks
                 )
 
+            face_crop = img[y:y+h, x:x+w]
+            face_filename = f"{stem}_face_{face_idx}.jpg"
+
+            face_path = os.path.join(
+                FACES_DIR,
+                face_filename
+            )
+            print(face_path)
+            cv2.imwrite(face_path, face_crop)
 
             if "eye_results" not in eye_result:
                 continue
@@ -282,6 +302,8 @@ def analyze_image(image_path):
 
             eye_visual_results.append({
                 "face_index": face_idx,
+                "thumbnail": face_filename,
+                "decision":"undecided",
                 **eye
             })
 
@@ -319,8 +341,30 @@ def analyze_image(image_path):
         )
 
     }
-    overall = overall_score(scores)
-    
+    base_score = overall_score(scores)
+    overall = int(base_score + 0.5)
+
+
+    weights = {
+    "sharpness": 0.40,
+    "noise": 0.25,
+    "contrast": 0.20,
+    "exposure": 0.15
+    }
+
+    contributions = {
+        "sharpness": round(scores["Sharpness"]["score"] * weights["sharpness"], 1),
+        "noise": round(scores["Noise"]["score"] * weights["noise"], 1),
+        "contrast": round(scores["Contrast"]["score"] * weights["contrast"], 1),
+        "exposure": round(scores["Exposure"]["score"] * weights["exposure"], 1)
+    }
+
+    print(scores)
+    print("Base score:", base_score)
+    print("Overall:", overall)
+    print("Contributions:", contributions)
+    print("Contribution total:", sum(contributions.values()))
+
 
 
 # ----- Report Generation -----
@@ -342,12 +386,14 @@ def analyze_image(image_path):
     img.shape,
     features,
     scores,
+    base_score,
     overall,
     face_result,
     eye_visual_results,
     brightness_info,
     sat_title,
-    temp_title
+    temp_title,
+    contributions
     )
 
     save_json_report(

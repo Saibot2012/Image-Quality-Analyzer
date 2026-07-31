@@ -1,1439 +1,54 @@
-[DEBUG]FACE INDEX: 0 LANDMARK 0: [1915.8875 1051.2505]
-[DEBUG]RAW BOX: (1860, 874, 136, 176)
-[DEBUG]FACE 0: width=136, height=176
-[DEBUG]FACE 0 DIMENSIONS: dimensions=136
-FACE 0: using EAR fallback
-FINAL EYE RESULT: {'face_index': 0, 'status': 'Eyes open', 'confidence': 100, 'method': 'EAR', 'probabilities': {}, 'left_ear': 0.5670607436265594, 'right_ear': 0.5789608950886799, 'ear': 0.5730108193576197, 'eye_difference': -0.011900151462120423, 'ratio': 0.9794456731653739}
-[DEBUG]FACE INDEX: 1 LANDMARK 0: [2588.8054 1091.6136]
-[DEBUG]RAW BOX: (2504, 899, 161, 191)
-[DEBUG]FACE 1: width=161, height=191
-[DEBUG]FACE 1 DIMENSIONS: dimensions=161
-FACE 1: using ML
-FACE 1: Low ML confidence (63.0%), switching to EAR
-FINAL EYE RESULT: {'face_index': 1, 'status': 'Eyes open', 'confidence': 100, 'method': 'EAR', 'probabilities': {}, 'left_ear': 0.5655849405062934, 'right_ear': 0.5669706656529838, 'ear': 0.5662778030796386, 'eye_difference': -0.0013857251466904419, 'ratio': 0.997555913858269}
-[DEBUG]FACE INDEX: 2 LANDMARK 0: [1046.9945 1009.7453]
-[DEBUG]RAW BOX: (973, 822, 155, 182)
-[DEBUG]FACE 2: width=155, height=182
-[DEBUG]FACE 2 DIMENSIONS: dimensions=155
-FACE 2: using EAR fallback
-FINAL EYE RESULT: {'face_index': 2, 'status': 'Eyes open', 'confidence': 100, 'method': 'EAR', 'probabilities': {}, 'left_ear': 0.5634005460516387, 'right_ear': 0.5718492527317367, 'ear': 0.5676248993916877, 'eye_difference': -0.008448706680098006, 'ratio': 0.9852256400795518}
-[DEBUG]FACE INDEX: 3 LANDMARK 0: [2313.674  1106.0131]
-[DEBUG]RAW BOX: (2250, 933, 129, 169)
-[DEBUG]FACE 3: width=129, height=169
-[DEBUG]FACE 3 DIMENSIONS: dimensions=129
-FACE 3: using EAR fallback
-FINAL EYE RESULT: {'face_index': 3, 'status': 'Eyes open', 'confidence': 100, 'method': 'EAR', 'probabilities': {}, 'left_ear': 0.6023621390252437, 'right_ear': 0.6057174187268162, 'ear': 0.6040397788760299, 'eye_difference': -0.0033552797015724556, 'ratio': 0.994460651786067}
-[DEBUG]FACE INDEX: 4 LANDMARK 0: [3006.9907  943.2534]
-[DEBUG]RAW BOX: (2933, 735, 166, 202)
-[DEBUG]FACE 4: width=166, height=202
-[DEBUG]FACE 4 DIMENSIONS: dimensions=166
-FACE 4: using ML
-FINAL EYE RESULT: {'face_index': 4, 'status': 'Eyes open', 'confidence': 100.0, 'method': 'ML', 'probabilities': {'Eyes open': 1.0, 'Eyes closed': 0.0, 'Right eye closed': 0.0, 'Left eye closed': 0.0}}
-[DEBUG]FACE INDEX: 5 LANDMARK 0: [578.7742 936.1958]
-[DEBUG]RAW BOX: (504, 733, 167, 202)
-[DEBUG]FACE 5: width=167, height=202
-[DEBUG]FACE 5 DIMENSIONS: dimensions=167
-FACE 5: using ML
-FINAL EYE RESULT: {'face_index': 5, 'status': 'Eyes open', 'confidence': 79.0, 'method': 'ML', 'probabilities': {'Eyes open': 0.79, 'Eyes closed': 0.1, 'Right eye closed': 0.06, 'Left eye closed': 0.05}}
-[DEBUG]FACE INDEX: 6 LANDMARK 0: [1490.4066 1051.2233]
-[DEBUG]RAW BOX: (1415, 865, 146, 182)
-[DEBUG]FACE 6: width=146, height=182
-[DEBUG]FACE 6 DIMENSIONS: dimensions=146
-FACE 6: using EAR fallback
-FINAL EYE RESULT: {'face_index': 6, 'status': 'Eyes open', 'confidence': 100, 'method': 'EAR', 'probabilities': {}, 'left_ear': 0.5802825976437227, 'right_ear': 0.5931167381046717, 'ear': 0.5866996678741971, 'eye_difference': -0.012834140460948995, 'ratio': 0.9783615271051682}
-[DEBUG]FACE INDEX: 7 LANDMARK 0: [3501.838    950.37994]
-[DEBUG]RAW BOX: (3421, 720, 191, 224)
-[DEBUG]FACE 7: width=191, height=224
-[DEBUG]FACE 7 DIMENSIONS: dimensions=191
-FACE 7: using ML
-FACE 7: Low ML confidence (61.0%), switching to EAR
-FINAL EYE RESULT: {'face_index': 7, 'status': 'Eyes open', 'confidence': 100, 'method': 'EAR', 'probabilities': {}, 'left_ear': 0.5980291912833758, 'right_ear': 0.5864710843260128, 'ear': 0.5922501378046943, 'eye_difference': 0.011558106957363035, 'ratio': 0.9806730053886513}
 
-===== fra-718.jpg =====
-Image dimensions: (2499, 4000)
 
-Overall Score: 59/100
+===== IMG-20260503-WA0011.jpg =====
+Image dimensions: (2048, 1365)
 
-===== Assessment Report =====
-
-General
-• Faces detected: 8.
-• Both eyes open: 8 / 8.
-• Sharpness: Very Poor.
-• Contrast: Excellent.
-• Lighting: Balanced.
-• Colours: natural.
-• White Balance: natural.
-
-Strengths
-✓ Excellent contrast.
-✓ Balanced lighting.
-✓ Natural colours.
-✓ All subjects have eyes open.
-
-Problems
-No major problems detected.
-
-Suggestions
-No recommendations.
-
-Verdict: Poor
-
-
-========== END OF SIMPLIFIED REPORT ==========
-
-
-============= Values Analysis =============
-Laplacian   : 223.59
-FFT Ratio   : 0.001418
-Wavelet     : 0.000579
-Sharp Ratio : 0.011
-Brightness     : 0.583
-Shadow Clip    : 1.06%
-Highlight Clip : 2.11%
-Consistency : 0.239
-Noise Rms   : 3.72
-Detail Quality : 0.00038167
-Patch min : 0.00
-Patch mean: 232.44
-Patch max : 971.87
-Confidence : 61.0
-Prediction : Blurry
-Probability (Blurry): 52.00%
-Probability (Sharp) : 48.00%
-
-----------------------------------------
-
-===== Quality Scores =====
-Sharpness: Very Poor (20/100)
-Noise: Good (90/100)
-Contrast: Excellent (100/100)
-Exposure: Excellent (100/100)
-
-SCRFD detected 8 faces.
-
-[Eye Detection]
-
-                            FACE 1
-                            Method: EAR
-                            Status: Eyes open
-                            Confidence: 100
-
-                            Probabilities:
-                            {}
-                            
-
-                            FACE 2
-                            Method: EAR
-                            Status: Eyes open
-                            Confidence: 100
-
-                            Probabilities:
-                            {}
-                            
-
-                            FACE 3
-                            Method: EAR
-                            Status: Eyes open
-                            Confidence: 100
-
-                            Probabilities:
-                            {}
-                            
-
-                            FACE 4
-                            Method: EAR
-                            Status: Eyes open
-                            Confidence: 100
-
-                            Probabilities:
-                            {}
-                            
-Face 5: Eyes open
-Face 6: Eyes open
-
-                            FACE 7
-                            Method: EAR
-                            Status: Eyes open
-                            Confidence: 100
-
-                            Probabilities:
-                            {}
-                            
-
-                            FACE 8
-                            Method: EAR
-                            Status: Eyes open
-                            Confidence: 100
-
-                            Probabilities:
-                            {}
-                            
-
-
-===== General Report =====
-• Faces detected: 8.
-• Both eyes open: 8 / 8.
-• Sharpness: Very Poor.
-• Contrast: Excellent.
-• Lighting: Balanced.
-• Colours: natural.
-• White Balance: natural.
-
-
-[Saturation]
-Value : 79.20
-Result : Natural
-Colours appear natural.
-
-[Colour Temperature]
-Value : 10.91
-Result : Natural
-The colour balance appears natural.
-
-[Lighting]
-Result : Balanced
-Overall brightness looks natural.
-Recommendation: No correction needed.
-
-
-======== SUMMARY ===========
-• The image has good overall technical quality.
-• The image lacks sufficient sharpness.
-• Exposure is well balanced.
-• Noise is well controlled.
-• All detected subjects have their eyes open.
-
-
-================================ END OF COMPREHENSIVE REPORT =====================================
-[DEBUG]FACE INDEX: 0 LANDMARK 0: [ 846.0038 1205.6467]
-[DEBUG]RAW BOX: (735, 901, 244, 303)
-[DEBUG]FACE 0: width=244, height=303
-[DEBUG]FACE 0 DIMENSIONS: dimensions=244
-FACE 0: using ML
-FACE 0: Low ML confidence (55.0%), switching to EAR
-FINAL EYE RESULT: {'face_index': 0, 'status': 'Eyes open', 'confidence': 100, 'method': 'EAR', 'probabilities': {}, 'left_ear': 0.5885071682509623, 'right_ear': 0.5990806447220957, 'ear': 0.593793906486529, 'eye_difference': -0.01057347647113338, 'ratio': 0.9823504956064166}
-[DEBUG]FACE INDEX: 1 LANDMARK 0: [2901.8623 1382.484 ]
-[DEBUG]RAW BOX: (2767, 1096, 236, 287)
-[DEBUG]FACE 1: width=236, height=287
-[DEBUG]FACE 1 DIMENSIONS: dimensions=236
-FACE 1: using ML
-FACE 1: Low ML confidence (65.0%), switching to EAR
-FINAL EYE RESULT: {'face_index': 1, 'status': 'Eyes open', 'confidence': 100, 'method': 'EAR', 'probabilities': {}, 'left_ear': 0.583102062041319, 'right_ear': 0.5788196161364765, 'ear': 0.5809608390888977, 'eye_difference': 0.004282445904842502, 'ratio': 0.9926557524254835}
-
-===== fra-719.jpg =====
-Image dimensions: (2499, 4000)
-
-Overall Score: 57/100
-
-===== Assessment Report =====
-
-General
-• Faces detected: 2.
-• Both eyes open: 2 / 2.
-• Sharpness: Very Poor.
-• Contrast: Good.
-• Lighting: Balanced.
-• Colours: natural.
-• White Balance: natural.
-
-Strengths
-✓ Good contrast.
-✓ Balanced lighting.
-✓ Natural colours.
-✓ All subjects have eyes open.
-
-Problems
-No major problems detected.
-
-Suggestions
-No recommendations.
-
-Verdict: Poor
-
-
-========== END OF SIMPLIFIED REPORT ==========
-
-
-============= Values Analysis =============
-Laplacian   : 185.93
-FFT Ratio   : 0.001111
-Wavelet     : 0.000416
-Sharp Ratio : 0.012
-Brightness     : 0.683
-Shadow Clip    : 0.88%
-Highlight Clip : 9.35%
-Consistency : 0.141
-Noise Rms   : 3.52
-Detail Quality : 0.00031549
-Patch min : 0.00
-Patch mean: 193.15
-Patch max : 1370.88
-Confidence : 65.0
-Prediction : Blurry
-Probability (Blurry): 60.00%
-Probability (Sharp) : 40.00%
-
-----------------------------------------
-
-===== Quality Scores =====
-Sharpness: Very Poor (20/100)
-Noise: Good (90/100)
-Contrast: Good (90/100)
-Exposure: Excellent (90/100)
-
-SCRFD detected 2 faces.
-
-[Eye Detection]
-
-                            FACE 1
-                            Method: EAR
-                            Status: Eyes open
-                            Confidence: 100
-
-                            Probabilities:
-                            {}
-                            
-
-                            FACE 2
-                            Method: EAR
-                            Status: Eyes open
-                            Confidence: 100
-
-                            Probabilities:
-                            {}
-                            
-
-
-===== General Report =====
-• Faces detected: 2.
-• Both eyes open: 2 / 2.
-• Sharpness: Very Poor.
-• Contrast: Good.
-• Lighting: Balanced.
-• Colours: natural.
-• White Balance: natural.
-
-
-[Saturation]
-Value : 52.63
-Result : Natural
-Colours appear natural.
-
-[Colour Temperature]
-Value : 7.33
-Result : Natural
-The colour balance appears natural.
-
-[Lighting]
-Result : Balanced
-Overall brightness looks natural, but some highlights are clipped.
-Recommendation: No major correction needed.
-
-
-======== SUMMARY ===========
-• The image has good overall technical quality.
-• The image lacks sufficient sharpness.
-• Exposure is well balanced.
-• Noise is well controlled.
-• All detected subjects have their eyes open.
-
-
-================================ END OF COMPREHENSIVE REPORT =====================================
-[DEBUG]FACE INDEX: 0 LANDMARK 0: [ 594.31335 1101.6433 ]
-[DEBUG]RAW BOX: (467, 766, 273, 329)
-[DEBUG]FACE 0: width=273, height=329
-[DEBUG]FACE 0 DIMENSIONS: dimensions=273
-FACE 0: using ML
-FINAL EYE RESULT: {'face_index': 0, 'status': 'Eyes open', 'confidence': 79.0, 'method': 'ML', 'probabilities': {'Eyes open': 0.79, 'Eyes closed': 0.08, 'Right eye closed': 0.08, 'Left eye closed': 0.05}}
-[DEBUG]FACE INDEX: 1 LANDMARK 0: [1818.2114 1276.8009]
-[DEBUG]RAW BOX: (1697, 962, 244, 316)
-[DEBUG]FACE 1: width=244, height=316
-[DEBUG]FACE 1 DIMENSIONS: dimensions=244
-FACE 1: using ML
-FACE 1: Low ML confidence (62.0%), switching to EAR
-FINAL EYE RESULT: {'face_index': 1, 'status': 'Eyes open', 'confidence': 100, 'method': 'EAR', 'probabilities': {}, 'left_ear': 0.5774236548007341, 'right_ear': 0.5823156057488962, 'ear': 0.5798696302748152, 'eye_difference': -0.004891950948162083, 'ratio': 0.9915991415997332}
-[DEBUG]FACE INDEX: 2 LANDMARK 0: [2782.86   1073.5914]
-[DEBUG]RAW BOX: (2695, 750, 242, 321)
-[DEBUG]FACE 2: width=242, height=321
-[DEBUG]FACE 2 DIMENSIONS: dimensions=242
-FACE 2: using ML
-FINAL EYE RESULT: {'face_index': 2, 'status': 'Eyes open', 'confidence': 91.0, 'method': 'ML', 'probabilities': {'Eyes open': 0.91, 'Eyes closed': 0.0, 'Right eye closed': 0.06, 'Left eye closed': 0.03}}
-
-===== fra-720.jpg =====
-Image dimensions: (2499, 4000)
-
-Overall Score: 90/100
-
-===== Assessment Report =====
-
-General
-• Faces detected: 3.
-• Both eyes open: 3 / 3.
-• Sharpness: Excellent.
-• Contrast: Good.
-• Lighting: Balanced.
-• Colours: natural.
-• White Balance: natural.
-
-Strengths
-✓ Excellent sharpness.
-✓ Good contrast.
-✓ Balanced lighting.
-✓ Natural colours.
-✓ All subjects have eyes open.
-
-Problems
-No major problems detected.
-
-Suggestions
-No recommendations.
-
-Verdict: Excellent
-
-
-========== END OF SIMPLIFIED REPORT ==========
-
-
-============= Values Analysis =============
-Laplacian   : 782.11
-FFT Ratio   : 0.003175
-Wavelet     : 0.001627
-Sharp Ratio : 0.434
-Brightness     : 0.589
-Shadow Clip    : 1.74%
-Highlight Clip : 4.35%
-Consistency : 0.326
-Noise Rms   : 6.64
-Detail Quality : 0.00047785
-Patch min : 0.00
-Patch mean: 795.84
-Patch max : 2439.24
-Confidence : 91.0
-Prediction : Sharp
-Probability (Blurry): 14.00%
-Probability (Sharp) : 86.00%
-
-----------------------------------------
-
-===== Quality Scores =====
-Sharpness: Excellent (100/100)
-Noise: Fair (75/100)
-Contrast: Good (90/100)
-Exposure: Excellent (100/100)
-
-SCRFD detected 3 faces.
-
-[Eye Detection]
-Face 1: Eyes open
-
-                            FACE 2
-                            Method: EAR
-                            Status: Eyes open
-                            Confidence: 100
-
-                            Probabilities:
-                            {}
-                            
-Face 3: Eyes open
-
-
-===== General Report =====
-• Faces detected: 3.
-• Both eyes open: 3 / 3.
-• Sharpness: Excellent.
-• Contrast: Good.
-• Lighting: Balanced.
-• Colours: natural.
-• White Balance: natural.
-
-
-[Saturation]
-Value : 55.68
-Result : Natural
-Colours appear natural.
-
-[Colour Temperature]
-Value : -5.18
-Result : Natural
-The colour balance appears natural.
-
-[Lighting]
-Result : Balanced
-Overall brightness looks natural.
-Recommendation: No correction needed.
-
-
-======== SUMMARY ===========
-• The image has good overall technical quality.
-• Details are crisp and well defined.
-• Exposure is well balanced.
-• Some visible image noise is present.
-• All detected subjects have their eyes open.
-
-
-================================ END OF COMPREHENSIVE REPORT =====================================
-[DEBUG]FACE INDEX: 0 LANDMARK 0: [ 996.5242 1180.5771]
-[DEBUG]RAW BOX: (764, 310, 725, 862)
-[DEBUG]FACE 0: width=725, height=862
-[DEBUG]FACE 0 DIMENSIONS: dimensions=725
-FACE 0: using ML
-FACE 0: Low ML confidence (47.0%), switching to EAR
-FINAL EYE RESULT: {'face_index': 0, 'status': 'Eyes open', 'confidence': 100, 'method': 'EAR', 'probabilities': {}, 'left_ear': 0.5839519505598418, 'right_ear': 0.5953767033931792, 'ear': 0.5896643269765105, 'eye_difference': -0.011424752833337326, 'ratio': 0.9808108836502584}
-[DEBUG]FACE INDEX: 1 LANDMARK 0: [2272.086  1607.3291]
-[DEBUG]RAW BOX: (1970, 901, 542, 701)
-[DEBUG]FACE 1: width=542, height=701
-[DEBUG]FACE 1 DIMENSIONS: dimensions=542
-FACE 1: using ML
-FACE 1: Low ML confidence (56.0%), switching to EAR
-FINAL EYE RESULT: {'face_index': 1, 'status': 'Eyes open', 'confidence': 100, 'method': 'EAR', 'probabilities': {}, 'left_ear': 0.5906063256425028, 'right_ear': 0.581762767767491, 'ear': 0.5861845467049969, 'eye_difference': 0.008843557875011787, 'ratio': 0.9850263068798135}
-
-===== fra-728.jpg =====
-Image dimensions: (2500, 4000)
-
-Overall Score: 97/100
-
-===== Assessment Report =====
-
-General
-• Faces detected: 2.
-• Both eyes open: 2 / 2.
-• Sharpness: Excellent.
-• Contrast: Excellent.
-• Lighting: Balanced.
-• Colours: natural.
-• White Balance: warm.
-
-Strengths
-✓ Excellent sharpness.
-✓ Excellent contrast.
-✓ Balanced lighting.
-✓ Natural colours.
-✓ All subjects have eyes open.
-
-Problems
-No major problems detected.
-
-Suggestions
-No recommendations.
-
-Verdict: Excellent
-
-
-========== END OF SIMPLIFIED REPORT ==========
-
-
-============= Values Analysis =============
-Laplacian   : 328.93
-FFT Ratio   : 0.002727
-Wavelet     : 0.000921
-Sharp Ratio : 0.104
-Brightness     : 0.519
-Shadow Clip    : 1.16%
-Highlight Clip : 0.55%
-Consistency : 0.032
-Noise Rms   : 4.66
-Detail Quality : 0.00058503
-Patch min : 0.00
-Patch mean: 336.90
-Patch max : 10690.73
-Confidence : 56.00000000000001
-Prediction : Sharp
-Probability (Blurry): 5.00%
-Probability (Sharp) : 95.00%
-
-----------------------------------------
-
-===== Quality Scores =====
-Sharpness: Excellent (100/100)
-Noise: Good (90/100)
-Contrast: Excellent (100/100)
-Exposure: Excellent (100/100)
-
-SCRFD detected 2 faces.
-
-[Eye Detection]
-
-                            FACE 1
-                            Method: EAR
-                            Status: Eyes open
-                            Confidence: 100
-
-                            Probabilities:
-                            {}
-                            
-
-                            FACE 2
-                            Method: EAR
-                            Status: Eyes open
-                            Confidence: 100
-
-                            Probabilities:
-                            {}
-                            
-
-
-===== General Report =====
-• Faces detected: 2.
-• Both eyes open: 2 / 2.
-• Sharpness: Excellent.
-• Contrast: Excellent.
-• Lighting: Balanced.
-• Colours: natural.
-• White Balance: warm.
-
-
-[Saturation]
-Value : 119.19
-Result : Natural
-Colours appear natural.
-
-[Colour Temperature]
-Value : 30.93
-Result : Warm
-The image has a warmer colour balance with a yellow/orange cast.
-
-[Lighting]
-Result : Balanced
-Overall brightness looks natural.
-Recommendation: No correction needed.
-
-
-======== SUMMARY ===========
-• The image is technically strong.
-• Details are crisp and well defined.
-• Exposure is well balanced.
-• Noise is well controlled.
-• All detected subjects have their eyes open.
-
-
-================================ END OF COMPREHENSIVE REPORT =====================================
-[DEBUG]FACE INDEX: 0 LANDMARK 0: [2560.7908 2021.8977]
-[DEBUG]RAW BOX: (2209, 1184, 664, 820)
-[DEBUG]FACE 0: width=664, height=820
-[DEBUG]FACE 0 DIMENSIONS: dimensions=664
-FACE 0: using ML
-FACE 0: Low ML confidence (45.0%), switching to EAR
-FINAL EYE RESULT: {'face_index': 0, 'status': 'Eyes open', 'confidence': 100, 'method': 'EAR', 'probabilities': {}, 'left_ear': 0.5645703304832536, 'right_ear': 0.5627608678780108, 'ear': 0.5636655991806322, 'eye_difference': 0.0018094626052427287, 'ratio': 0.9967949739695072}
-[DEBUG]FACE INDEX: 1 LANDMARK 0: [1426.7648 2401.4653]
-[DEBUG]RAW BOX: (1099, 1604, 610, 799)
-[DEBUG]FACE 1: width=610, height=799
-[DEBUG]FACE 1 DIMENSIONS: dimensions=610
-FACE 1: using ML
-FACE 1: Low ML confidence (65.0%), switching to EAR
-FINAL EYE RESULT: {'face_index': 1, 'status': 'Eyes open', 'confidence': 100, 'method': 'EAR', 'probabilities': {}, 'left_ear': 0.589817830108033, 'right_ear': 0.5962184252455479, 'ear': 0.5930181276767905, 'eye_difference': -0.006400595137514897, 'ratio': 0.989264680750383}
-[DEBUG]FACE INDEX: 2 LANDMARK 0: [1139.9924   251.61594]
-[DEBUG]RAW BOX: (1056, 29, 159, 220)
-[DEBUG]FACE 2: width=159, height=220
-[DEBUG]FACE 2 DIMENSIONS: dimensions=159
-FACE 2: using EAR fallback
-FINAL EYE RESULT: {'face_index': 2, 'status': 'Eyes open', 'confidence': 100, 'method': 'EAR', 'probabilities': {}, 'left_ear': 0.5736388521278182, 'right_ear': 0.5746483027048729, 'ear': 0.5741435774163455, 'eye_difference': -0.0010094505770547046, 'ratio': 0.9982433593342167}
-[DEBUG]FACE INDEX: 3 LANDMARK 0: [1301.3945   114.88031]
-[DEBUG]RAW BOX: (1255, -15, 97, 122)
-[DEBUG]FACE 3: width=97, height=122
-[DEBUG]FACE 3 DIMENSIONS: dimensions=97
-FACE 3: using EAR fallback
-FINAL EYE RESULT: {'face_index': 3, 'status': 'Eyes open', 'confidence': 100, 'method': 'EAR', 'probabilities': {}, 'left_ear': 0.6100227073950446, 'right_ear': 0.6163469048023311, 'ear': 0.6131848060986879, 'eye_difference': -0.006324197407286514, 'ratio': 0.9897392241966158}
-
-===== fra-734.jpg =====
-Image dimensions: (5763, 3842)
-
-Overall Score: 97/100
-
-===== Assessment Report =====
-
-General
-• Faces detected: 4.
-• Both eyes open: 4 / 4.
-• Sharpness: Excellent.
-• Contrast: Excellent.
-• Lighting: Balanced.
-• Colours: natural.
-• White Balance: natural.
-
-Strengths
-✓ Excellent sharpness.
-✓ Excellent contrast.
-✓ Balanced lighting.
-✓ Natural colours.
-✓ All subjects have eyes open.
-
-Problems
-No major problems detected.
-
-Suggestions
-No recommendations.
-
-Verdict: Excellent
-
-
-========== END OF SIMPLIFIED REPORT ==========
-
-
-============= Values Analysis =============
-Laplacian   : 210.45
-FFT Ratio   : 0.001975
-Wavelet     : 0.000678
-Sharp Ratio : 0.015
-Brightness     : 0.595
-Shadow Clip    : 1.29%
-Highlight Clip : 6.86%
-Consistency : 0.074
-Noise Rms   : 4.07
-Detail Quality : 0.00048496
-Patch min : 0.00
-Patch mean: 221.57
-Patch max : 2998.76
-Confidence : 65.0
-Prediction : Sharp
-Probability (Blurry): 4.00%
-Probability (Sharp) : 96.00%
-
-----------------------------------------
-
-===== Quality Scores =====
-Sharpness: Excellent (100/100)
-Noise: Good (90/100)
-Contrast: Excellent (100/100)
-Exposure: Excellent (100/100)
-
-SCRFD detected 4 faces.
-
-[Eye Detection]
-
-                            FACE 1
-                            Method: EAR
-                            Status: Eyes open
-                            Confidence: 100
-
-                            Probabilities:
-                            {}
-                            
-
-                            FACE 2
-                            Method: EAR
-                            Status: Eyes open
-                            Confidence: 100
-
-                            Probabilities:
-                            {}
-                            
-
-                            FACE 3
-                            Method: EAR
-                            Status: Eyes open
-                            Confidence: 100
-
-                            Probabilities:
-                            {}
-                            
-
-                            FACE 4
-                            Method: EAR
-                            Status: Eyes open
-                            Confidence: 100
-
-                            Probabilities:
-                            {}
-                            
-
-
-===== General Report =====
-• Faces detected: 4.
-• Both eyes open: 4 / 4.
-• Sharpness: Excellent.
-• Contrast: Excellent.
-• Lighting: Balanced.
-• Colours: natural.
-• White Balance: natural.
-
-
-[Saturation]
-Value : 67.41
-Result : Natural
-Colours appear natural.
-
-[Colour Temperature]
-Value : -6.18
-Result : Natural
-The colour balance appears natural.
-
-[Lighting]
-Result : Balanced
-Overall brightness looks natural, but some highlights are clipped.
-Recommendation: No major correction needed.
-
-
-======== SUMMARY ===========
-• The image is technically strong.
-• Details are crisp and well defined.
-• Exposure is well balanced.
-• Noise is well controlled.
-• All detected subjects have their eyes open.
-
-
-================================ END OF COMPREHENSIVE REPORT =====================================
-[DEBUG]FACE INDEX: 0 LANDMARK 0: [2015.9724 1528.7963]
-[DEBUG]RAW BOX: (1839, 1112, 337, 414)
-[DEBUG]FACE 0: width=337, height=414
-[DEBUG]FACE 0 DIMENSIONS: dimensions=337
-FACE 0: using ML
-FINAL EYE RESULT: {'face_index': 0, 'status': 'Eyes open', 'confidence': 81.0, 'method': 'ML', 'probabilities': {'Eyes open': 0.81, 'Eyes closed': 0.02, 'Right eye closed': 0.16, 'Left eye closed': 0.01}}
-[DEBUG]FACE INDEX: 1 LANDMARK 0: [2401.5999 1052.0369]
-[DEBUG]RAW BOX: (2258, 747, 233, 304)
-[DEBUG]FACE 1: width=233, height=304
-[DEBUG]FACE 1 DIMENSIONS: dimensions=233
-FACE 1: using ML
-FACE 1: Low ML confidence (66.0%), switching to EAR
-FINAL EYE RESULT: {'face_index': 1, 'status': 'Eyes open', 'confidence': 100, 'method': 'EAR', 'probabilities': {}, 'left_ear': 0.5938486733646151, 'right_ear': 0.592785150079783, 'ear': 0.593316911722199, 'eye_difference': 0.0010635232848320575, 'ratio': 0.9982091005124144}
-[DEBUG]FACE INDEX: 2 LANDMARK 0: [1639.3672  972.6452]
-[DEBUG]RAW BOX: (1504, 625, 264, 337)
-[DEBUG]FACE 2: width=264, height=337
-[DEBUG]FACE 2 DIMENSIONS: dimensions=264
-FACE 2: using ML
-FACE 2: Low ML confidence (69.0%), switching to EAR
-FINAL EYE RESULT: {'face_index': 2, 'status': 'Eyes open', 'confidence': 100, 'method': 'EAR', 'probabilities': {}, 'left_ear': 0.5850576518937803, 'right_ear': 0.5852274686038603, 'ear': 0.5851425602488203, 'eye_difference': -0.0001698167100799841, 'ratio': 0.9997098278546543}
-[DEBUG]FACE INDEX: 3 LANDMARK 0: [ 842.9044 1181.4028]
-[DEBUG]RAW BOX: (688, 835, 268, 332)
-[DEBUG]FACE 3: width=268, height=332
-[DEBUG]FACE 3 DIMENSIONS: dimensions=268
-FACE 3: using ML
-FINAL EYE RESULT: {'face_index': 3, 'status': 'Eyes open', 'confidence': 98.0, 'method': 'ML', 'probabilities': {'Eyes open': 0.98, 'Eyes closed': 0.0, 'Right eye closed': 0.02, 'Left eye closed': 0.0}}
-[DEBUG]FACE INDEX: 4 LANDMARK 0: [3026.0854  1005.85004]
-[DEBUG]RAW BOX: (2893, 697, 255, 304)
-[DEBUG]FACE 4: width=255, height=304
-[DEBUG]FACE 4 DIMENSIONS: dimensions=255
-FACE 4: using ML
-FACE 4: Low ML confidence (56.0%), switching to EAR
-FINAL EYE RESULT: {'face_index': 4, 'status': 'Eyes closed', 'confidence': 100, 'method': 'EAR', 'probabilities': {}, 'left_ear': 0.5593178151947062, 'right_ear': 0.5560749384376802, 'ear': 0.5576963768161932, 'eye_difference': 0.0032428767570260586, 'ratio': 0.9942020857034615}
-
-===== fra-735.jpg =====
-Image dimensions: (2500, 4000)
-
-Overall Score: 97/100
-
-===== Assessment Report =====
-
-General
-• Faces detected: 5.
-• Both eyes open: 4 / 5.
-• Both eyes closed: 1/5.
-• Sharpness: Excellent.
-• Contrast: Excellent.
-• Lighting: Balanced.
-• Colours: natural.
-• White Balance: natural.
-
-Strengths
-✓ Excellent sharpness.
-✓ Excellent contrast.
-✓ Balanced lighting.
-✓ Natural colours.
-
-Problems
-⚠ 1 subject(s) have both closed eyes.
-
-Suggestions
-• Capture another frame with all subjects' eyes open
-
-Verdict: Good
-
-
-========== END OF SIMPLIFIED REPORT ==========
-
-
-============= Values Analysis =============
-Laplacian   : 373.41
-FFT Ratio   : 0.002674
-Wavelet     : 0.000884
-Sharp Ratio : 0.128
-Brightness     : 0.535
-Shadow Clip    : 2.78%
-Highlight Clip : 9.24%
-Consistency : 0.136
-Noise Rms   : 4.63
-Detail Quality : 0.00057759
-Patch min : 0.00
-Patch mean: 378.47
-Patch max : 2777.50
-Confidence : 56.00000000000001
-Prediction : Sharp
-Probability (Blurry): 10.00%
-Probability (Sharp) : 90.00%
-
-----------------------------------------
-
-===== Quality Scores =====
-Sharpness: Excellent (100/100)
-Noise: Good (90/100)
-Contrast: Excellent (100/100)
-Exposure: Excellent (90/100)
-
-SCRFD detected 5 faces.
-
-[Eye Detection]
-Face 1: Eyes open
-
-                            FACE 2
-                            Method: EAR
-                            Status: Eyes open
-                            Confidence: 100
-
-                            Probabilities:
-                            {}
-                            
-
-                            FACE 3
-                            Method: EAR
-                            Status: Eyes open
-                            Confidence: 100
-
-                            Probabilities:
-                            {}
-                            
-Face 4: Eyes open
-
-                            FACE 5
-                            Method: EAR
-                            Status: Eyes closed
-                            Confidence: 100
-
-                            Probabilities:
-                            {}
-                            
-
-
-===== General Report =====
-• Faces detected: 5.
-• Both eyes open: 4 / 5.
-• Both eyes closed: 1/5.
-• Sharpness: Excellent.
-• Contrast: Excellent.
-• Lighting: Balanced.
-• Colours: natural.
-• White Balance: natural.
-
-
-[Saturation]
-Value : 71.07
-Result : Natural
-Colours appear natural.
-
-[Colour Temperature]
-Value : 1.63
-Result : Natural
-The colour balance appears natural.
-
-[Lighting]
-Result : Balanced
-Overall brightness looks natural, but some highlights are clipped.
-Recommendation: No major correction needed.
-
-
-======== SUMMARY ===========
-• The image is technically strong.
-• Details are crisp and well defined.
-• Exposure is well balanced.
-• Noise is well controlled.
-• 1 subject(s) have closed eyes/eyes that cannot be detected/eye analysis skipped.
-
-
-================================ END OF COMPREHENSIVE REPORT =====================================
-[DEBUG]FACE INDEX: 0 LANDMARK 0: [1010.8014 1323.2916]
-[DEBUG]RAW BOX: (954, 1031, 245, 292)
-[DEBUG]FACE 0: width=245, height=292
-[DEBUG]FACE 0 DIMENSIONS: dimensions=245
-FACE 0: using ML
-FINAL EYE RESULT: {'face_index': 0, 'status': 'Left eye closed', 'confidence': 100.0, 'method': 'ML', 'probabilities': {'Eyes open': 0.0, 'Eyes closed': 0.0, 'Right eye closed': 0.0, 'Left eye closed': 1.0}}
-[DEBUG]FACE INDEX: 1 LANDMARK 0: [ 448.2723 1109.4453]
-[DEBUG]RAW BOX: (404, 822, 214, 356)
-[DEBUG]FACE 1: width=214, height=356
-[DEBUG]FACE 1 DIMENSIONS: dimensions=214
-FACE 1: using ML
-FINAL EYE RESULT: {'face_index': 1, 'status': 'Eyes open', 'confidence': 99.0, 'method': 'ML', 'probabilities': {'Eyes open': 0.99, 'Eyes closed': 0.0, 'Right eye closed': 0.01, 'Left eye closed': 0.0}}
-[DEBUG]FACE INDEX: 2 LANDMARK 0: [1671.1676 1100.3351]
-[DEBUG]RAW BOX: (1640, 819, 177, 305)
-[DEBUG]FACE 2: width=177, height=305
-[DEBUG]FACE 2 DIMENSIONS: dimensions=177
-FACE 2: using ML
-FINAL EYE RESULT: {'face_index': 2, 'status': 'Eyes open', 'confidence': 92.0, 'method': 'ML', 'probabilities': {'Eyes open': 0.92, 'Eyes closed': 0.0, 'Right eye closed': 0.02, 'Left eye closed': 0.06}}
-[DEBUG]FACE INDEX: 3 LANDMARK 0: [1988.2324 1227.8221]
-[DEBUG]RAW BOX: (1921, 984, 197, 285)
-[DEBUG]FACE 3: width=197, height=285
-[DEBUG]FACE 3 DIMENSIONS: dimensions=197
-FACE 3: using ML
-FINAL EYE RESULT: {'face_index': 3, 'status': 'Eyes open', 'confidence': 72.0, 'method': 'ML', 'probabilities': {'Eyes open': 0.72, 'Eyes closed': 0.0, 'Right eye closed': 0.04, 'Left eye closed': 0.24}}
-[DEBUG]FACE INDEX: 4 LANDMARK 0: [1794.1636 1555.087 ]
-[DEBUG]RAW BOX: (1719, 1264, 181, 293)
-[DEBUG]FACE 4: width=181, height=293
-[DEBUG]FACE 4 DIMENSIONS: dimensions=181
-FACE 4: using ML
-FINAL EYE RESULT: {'face_index': 4, 'status': 'Eyes open', 'confidence': 99.0, 'method': 'ML', 'probabilities': {'Eyes open': 0.99, 'Eyes closed': 0.0, 'Right eye closed': 0.01, 'Left eye closed': 0.0}}
-[DEBUG]FACE INDEX: 5 LANDMARK 0: [1342.0106 1523.6074]
-[DEBUG]RAW BOX: (1303, 1257, 156, 293)
-[DEBUG]FACE 5: width=156, height=293
-[DEBUG]FACE 5 DIMENSIONS: dimensions=156
-FACE 5: using EAR fallback
-FINAL EYE RESULT: {'face_index': 5, 'status': 'Eyes open', 'confidence': 100, 'method': 'EAR', 'probabilities': {}, 'left_ear': 0.6087713046347771, 'right_ear': 0.5712064512108953, 'ear': 0.5899888779228362, 'eye_difference': 0.03756485342388183, 'ratio': 0.9382939814378762}
-[DEBUG]FACE INDEX: 6 LANDMARK 0: [1258.9614 1346.0416]
-[DEBUG]RAW BOX: (1219, 1074, 180, 291)
-[DEBUG]FACE 6: width=180, height=291
-[DEBUG]FACE 6 DIMENSIONS: dimensions=180
-FACE 6: using ML
-FACE 6: Low ML confidence (65.0%), switching to EAR
-FINAL EYE RESULT: {'face_index': 6, 'status': 'Eyes open', 'confidence': 100, 'method': 'EAR', 'probabilities': {}, 'left_ear': 0.6344023942886654, 'right_ear': 0.588245469064424, 'ear': 0.6113239316765446, 'eye_difference': 0.04615692522424142, 'ratio': 0.9272434567716352}
-
-===== fra-761.jpg =====
-Image dimensions: (3211, 2141)
-
-Overall Score: 95/100
-
-===== Assessment Report =====
-
-General
-• Faces detected: 7.
-• Both eyes open: 6 / 7.
-• Sharpness: Excellent.
-• Contrast: Good.
-• Lighting: Too Dark.
-• Colours: natural.
-• White Balance: cool.
-
-Strengths
-✓ Excellent sharpness.
-✓ Good contrast.
-✓ Natural colours.
-✓ All subjects have eyes open.
-
-Problems
-⚠ Low brightness detected.
-
-Suggestions
-• Use a higher aperture or increase available light.
-
-Verdict: Excellent
-
-
-========== END OF SIMPLIFIED REPORT ==========
-
-
-============= Values Analysis =============
-Laplacian   : 69.54
-FFT Ratio   : 0.002639
-Wavelet     : 0.000796
-Sharp Ratio : 0.017
-Brightness     : 0.366
-Shadow Clip    : 4.10%
-Highlight Clip : 0.29%
-Consistency : 0.027
-Noise Rms   : 2.63
-Detail Quality : 0.00100177
-Patch min : 0.00
-Patch mean: 77.32
-Patch max : 2853.01
-Confidence : 65.0
-Prediction : Sharp
-Probability (Blurry): 39.00%
-Probability (Sharp) : 61.00%
-
-----------------------------------------
-
-===== Quality Scores =====
-Sharpness: Excellent (100/100)
-Noise: Good (90/100)
-Contrast: Good (90/100)
-Exposure: Fair (70/100)
-
-SCRFD detected 7 faces.
-
-[Eye Detection]
-Face 1: Left eye closed
-Face 2: Eyes open
-Face 3: Eyes open
-Face 4: Eyes open
-Face 5: Eyes open
-
-                            FACE 6
-                            Method: EAR
-                            Status: Eyes open
-                            Confidence: 100
-
-                            Probabilities:
-                            {}
-                            
-
-                            FACE 7
-                            Method: EAR
-                            Status: Eyes open
-                            Confidence: 100
-
-                            Probabilities:
-                            {}
-                            
-
-
-===== General Report =====
-• Faces detected: 7.
-• Both eyes open: 6 / 7.
-• Sharpness: Excellent.
-• Contrast: Good.
-• Lighting: Too Dark.
-• Colours: natural.
-• White Balance: cool.
-
-
-[Saturation]
-Value : 101.77
-Result : Natural
-Colours appear natural.
-
-[Colour Temperature]
-Value : -22.80
-Result : Cool
-The image has a cool colour balance with a noticeable blue cast.
-
-[Lighting]
-Result : Too Dark
-Overall brightness is slightly low.
-Recommendation: Consider increasing brightness.
-
-
-======== SUMMARY ===========
-• The image has good overall technical quality.
-• Details are crisp and well defined.
-• Exposure is usable but could be improved.
-• Noise is well controlled.
-• 1 subject(s) have closed eyes/eyes that cannot be detected/eye analysis skipped.
-
-
-================================ END OF COMPREHENSIVE REPORT =====================================
-[DEBUG]FACE INDEX: 0 LANDMARK 0: [1790.6212  784.7831]
-[DEBUG]RAW BOX: (1716, 582, 152, 198)
-[DEBUG]FACE 0: width=152, height=198
-[DEBUG]FACE 0 DIMENSIONS: dimensions=152
-FACE 0: using EAR fallback
-FINAL EYE RESULT: {'face_index': 0, 'status': 'Eyes closed', 'confidence': 100, 'method': 'EAR', 'probabilities': {}, 'left_ear': 0.5569994837778458, 'right_ear': 0.5592196915040577, 'ear': 0.5581095876409518, 'eye_difference': -0.002220207726211898, 'ratio': 0.9960298112531758}
-
-===== fra-781.jpg =====
-Image dimensions: (2500, 4000)
-
-Overall Score: 86/100
-
-===== Assessment Report =====
-
-General
-• Faces detected: 1.
-• Both eyes open: 0 / 1.
-• Both eyes closed: 1/1.
-• Sharpness: Good.
-• Contrast: Good.
-• Lighting: Balanced.
-• Colours: natural.
-• White Balance: cool.
-
-Strengths
-✓ Good contrast.
-✓ Balanced lighting.
-✓ Natural colours.
-
-Problems
-⚠ 1 subject(s) have both closed eyes.
-
-Suggestions
-• Capture another frame with all subjects' eyes open
-
-Verdict: Fair
-
-
-========== END OF SIMPLIFIED REPORT ==========
-
-
-============= Values Analysis =============
-Laplacian   : 436.55
-FFT Ratio   : 0.004540
-Wavelet     : 0.001418
-Sharp Ratio : 0.157
-Brightness     : 0.596
-Shadow Clip    : 0.45%
-Highlight Clip : 0.14%
-Consistency : 0.032
-Noise Rms   : 6.34
-Detail Quality : 0.00071601
-Patch min : 0.00
-Patch mean: 452.79
-Patch max : 14366.66
-Confidence : 0.92
-Prediction : Sharp
-Probability (Blurry): 8.00%
-Probability (Sharp) : 92.00%
-
-----------------------------------------
-
-===== Quality Scores =====
-Sharpness: Good (90/100)
-Noise: Fair (75/100)
-Contrast: Good (90/100)
-Exposure: Excellent (100/100)
-
-SCRFD detected 1 faces.
-
-[Eye Detection]
-
-                            FACE 1
-                            Method: EAR
-                            Status: Eyes closed
-                            Confidence: 100
-
-                            Probabilities:
-                            {}
-                            
-
-
-===== General Report =====
-• Faces detected: 1.
-• Both eyes open: 0 / 1.
-• Both eyes closed: 1/1.
-• Sharpness: Good.
-• Contrast: Good.
-• Lighting: Balanced.
-• Colours: natural.
-• White Balance: cool.
-
-
-[Saturation]
-Value : 93.62
-Result : Natural
-Colours appear natural.
-
-[Colour Temperature]
-Value : -42.28
-Result : Cool
-The image has a cool colour balance with a noticeable blue cast.
-
-[Lighting]
-Result : Balanced
-Overall brightness looks natural.
-Recommendation: No correction needed.
-
-
-======== SUMMARY ===========
-• The image has good overall technical quality.
-• The image appears sharp.
-• Exposure is well balanced.
-• Some visible image noise is present.
-• 1 subject(s) have closed eyes/eyes that cannot be detected/eye analysis skipped.
-
-
-================================ END OF COMPREHENSIVE REPORT =====================================
-
-
-===== fra-790.jpg =====
-Image dimensions: (6000, 4000)
-
-Overall Score: 86/100
+Overall Score: 78/100
 
 ===== Assessment Report =====
 
 General
 • Faces detected: 0.
 • Both eyes open: 0 / 0.
-• Sharpness: Good.
-• Contrast: Good.
-• Lighting: Balanced.
-• Colours: natural.
-• White Balance: natural.
-
-Strengths
-✓ Good contrast.
-✓ Balanced lighting.
-✓ Natural colours.
-
-Problems
-No major problems detected.
-
-Suggestions
-No recommendations.
-
-Verdict: Good
-
-
-========== END OF SIMPLIFIED REPORT ==========
-
-
-============= Values Analysis =============
-Laplacian   : 359.47
-FFT Ratio   : 0.007703
-Wavelet     : 0.002022
-Sharp Ratio : 0.130
-Brightness     : 0.600
-Shadow Clip    : 0.82%
-Highlight Clip : 0.03%
-Consistency : 0.044
-Noise Rms   : 6.54
-Detail Quality : 0.00117860
-Patch min : 0.00
-Patch mean: 396.90
-Patch max : 9009.65
-Confidence : 0.93
-Prediction : Sharp
-Probability (Blurry): 7.00%
-Probability (Sharp) : 93.00%
-
-----------------------------------------
-
-===== Quality Scores =====
-Sharpness: Good (90/100)
-Noise: Fair (75/100)
-Contrast: Good (90/100)
-Exposure: Excellent (100/100)
-
-No faces detected.
-
-[Eye Detection]
-No faces detected. Continuing.....
-
-
-===== General Report =====
-• Faces detected: 0.
-• Both eyes open: 0 / 0.
-• Sharpness: Good.
-• Contrast: Good.
-• Lighting: Balanced.
-• Colours: natural.
-• White Balance: natural.
-
-
-[Saturation]
-Value : 70.33
-Result : Natural
-Colours appear natural.
-
-[Colour Temperature]
-Value : -8.91
-Result : Natural
-The colour balance appears natural.
-
-[Lighting]
-Result : Balanced
-Overall brightness looks natural.
-Recommendation: No correction needed.
-
-
-======== SUMMARY ===========
-• The image has good overall technical quality.
-• The image appears sharp.
-• Exposure is well balanced.
-• Some visible image noise is present.
-• No people were detected in the scene.
-
-
-================================ END OF COMPREHENSIVE REPORT =====================================
-[DEBUG]FACE INDEX: 0 LANDMARK 0: [983.436  928.2921]
-[DEBUG]RAW BOX: (950, 835, 74, 93)
-[DEBUG]FACE 0: width=74, height=93
-[DEBUG]FACE 0 DIMENSIONS: dimensions=74
-FACE 0: using EAR fallback
-FINAL EYE RESULT: {'face_index': 0, 'status': 'Eyes open', 'confidence': 100, 'method': 'EAR', 'probabilities': {}, 'left_ear': 0.6215606423383686, 'right_ear': 0.5942359350070398, 'ear': 0.6078982886727042, 'eye_difference': 0.027324707331328857, 'ratio': 0.9560385496280286}
-[DEBUG]FACE INDEX: 1 LANDMARK 0: [867.3182 898.985 ]
-[DEBUG]RAW BOX: (847, 812, 66, 87)
-[DEBUG]FACE 1: width=66, height=87
-[DEBUG]FACE 1 DIMENSIONS: dimensions=66
-FACE 1: using EAR fallback
-FINAL EYE RESULT: {'face_index': 1, 'status': 'Eyes open', 'confidence': 100, 'method': 'EAR', 'probabilities': {}, 'left_ear': 0.6131648824851669, 'right_ear': 0.584515663179713, 'ear': 0.59884027283244, 'eye_difference': 0.028649219305453832, 'ratio': 0.953276483823832}
-[DEBUG]FACE INDEX: 2 LANDMARK 0: [387.3652 898.9908]
-[DEBUG]RAW BOX: (354, 818, 69, 81)
-[DEBUG]FACE 2: width=69, height=81
-[DEBUG]FACE 2 DIMENSIONS: dimensions=69
-FACE 2: using EAR fallback
-FINAL EYE RESULT: {'face_index': 2, 'status': 'Eyes open', 'confidence': 100, 'method': 'EAR', 'probabilities': {}, 'left_ear': 0.5842860409604297, 'right_ear': 0.5908712406790931, 'ear': 0.5875786408197614, 'eye_difference': -0.006585199718663448, 'ratio': 0.9888551019828025}
-[DEBUG]FACE INDEX: 3 LANDMARK 0: [928.06305 836.54156]
-[DEBUG]RAW BOX: (916, 766, 54, 71)
-[DEBUG]FACE 3: width=54, height=71
-[DEBUG]FACE 3 DIMENSIONS: dimensions=54
-FACE 3: using EAR fallback
-FINAL EYE RESULT: {'face_index': 3, 'status': 'Eyes open', 'confidence': 100, 'method': 'EAR', 'probabilities': {}, 'left_ear': 0.6067343835947283, 'right_ear': 0.5986617746074623, 'ear': 0.6026980791010953, 'eye_difference': 0.008072608987266028, 'ratio': 0.9866949867923455}
-[DEBUG]FACE INDEX: 4 LANDMARK 0: [472.12598 902.2976 ]
-[DEBUG]RAW BOX: (438, 825, 59, 77)
-[DEBUG]FACE 4: width=59, height=77
-[DEBUG]FACE 4 DIMENSIONS: dimensions=59
-FACE 4: using EAR fallback
-FINAL EYE RESULT: {'face_index': 4, 'status': 'Eyes open', 'confidence': 100, 'method': 'EAR', 'probabilities': {}, 'left_ear': 0.5949738251303538, 'right_ear': 0.613715117678943, 'ear': 0.6043444714046484, 'eye_difference': -0.01874129254858925, 'ratio': 0.9694625535387357}
-[DEBUG]FACE INDEX: 5 LANDMARK 0: [517.37115 855.22205]
-[DEBUG]RAW BOX: (494, 781, 53, 71)
-[DEBUG]FACE 5: width=53, height=71
-[DEBUG]FACE 5 DIMENSIONS: dimensions=53
-FACE 5: using EAR fallback
-FINAL EYE RESULT: {'face_index': 5, 'status': 'Eyes open', 'confidence': 100, 'method': 'EAR', 'probabilities': {}, 'left_ear': 0.5705658127202068, 'right_ear': 0.604457545865459, 'ear': 0.5875116792928329, 'eye_difference': -0.03389173314525218, 'ratio': 0.9439303332763822}
-[DEBUG]FACE INDEX: 6 LANDMARK 0: [233.37419 941.96924]
-[DEBUG]RAW BOX: (196, 846, 82, 93)
-[DEBUG]FACE 6: width=82, height=93
-[DEBUG]FACE 6 DIMENSIONS: dimensions=82
-FACE 6: using EAR fallback
-FINAL EYE RESULT: {'face_index': 6, 'status': 'Eyes closed', 'confidence': 100, 'method': 'EAR', 'probabilities': {}, 'left_ear': 0.5426827374425621, 'right_ear': 0.5444175473561302, 'ear': 0.5435501423993462, 'eye_difference': -0.0017348099135681139, 'ratio': 0.9968134570202726}
-[DEBUG]FACE INDEX: 7 LANDMARK 0: [585.71655 870.167  ]
-[DEBUG]RAW BOX: (570, 811, 48, 58)
-[DEBUG]FACE 7: width=48, height=58
-[DEBUG]FACE 7 DIMENSIONS: dimensions=48
-FACE 7: using EAR fallback
-FINAL EYE RESULT: {'face_index': 7, 'status': 'Eyes open', 'confidence': 100, 'method': 'EAR', 'probabilities': {}, 'left_ear': 0.5718947706717876, 'right_ear': 0.6099221153733645, 'ear': 0.5909084430225761, 'eye_difference': -0.03802734470157687, 'ratio': 0.9376521300948427}
-[DEBUG]FACE INDEX: 8 LANDMARK 0: [735.4666  886.89044]
-[DEBUG]RAW BOX: (696, 832, 50, 56)
-[DEBUG]FACE 8: width=50, height=56
-[DEBUG]FACE 8 DIMENSIONS: dimensions=50
-FACE 8: using EAR fallback
-FINAL EYE RESULT: {'face_index': 8, 'status': 'Eyes open', 'confidence': 100, 'method': 'EAR', 'probabilities': {}, 'left_ear': 0.6136328632042873, 'right_ear': 0.6134719081756466, 'ear': 0.613552385689967, 'eye_difference': 0.0001609550286407746, 'ratio': 0.999737701420031}
-
-===== group.jpg =====
-Image dimensions: (1600, 1200)
-
-Overall Score: 83/100
-
-===== Assessment Report =====
-
-General
-• Faces detected: 9.
-• Both eyes open: 8 / 9.
-• Both eyes closed: 1/9.
 • Sharpness: Excellent.
-• Contrast: Good.
-• Lighting: Balanced.
-• Colours: natural.
-• White Balance: warm.
+• Contrast: Fair.
+• Lighting: Too Dark.
+• Colours: vivid.
+• White Balance: cool.
 
 Strengths
 ✓ Excellent sharpness.
-✓ Good contrast.
-✓ Balanced lighting.
-✓ Natural colours.
 
 Problems
 ⚠ High image noise detected.
-⚠ 1 subject(s) have both closed eyes.
+⚠ Low brightness detected.
+⚠ Low contrast detected.
 
 Suggestions
 • Use a lower ISO or increase available light.
-• Capture another frame with all subjects' eyes open
+• Use a higher aperture or increase available light.
+• Increase scene lighting or photograph under better lighting conditions.
 
-Verdict: Poor
+Verdict: Good
 
 
 ========== END OF SIMPLIFIED REPORT ==========
 
 
 ============= Values Analysis =============
-Laplacian   : 1008.43
-FFT Ratio   : 0.011228
-Wavelet     : 0.003955
-Sharp Ratio : 0.328
-Brightness     : 0.626
-Shadow Clip    : 3.40%
-Highlight Clip : 0.16%
-Consistency : 0.101
-Noise Rms   : 10.03
-Detail Quality : 0.00111932
+Laplacian   : 750.84
+FFT Ratio   : 0.046584
+Wavelet     : 0.015029
+Sharp Ratio : 0.262
+Brightness     : 0.241
+Shadow Clip    : 1.61%
+Highlight Clip : 0.68%
+Consistency : 0.063
+Noise Rms   : 8.89
+Detail Quality : 0.00523953
 Patch min : 0.00
-Patch mean: 1071.38
-Patch max : 10597.05
+Patch mean: 761.00
+Patch max : 12016.83
 Confidence : 1.0
 Prediction : Sharp
 Probability (Blurry): 0.00%
@@ -1444,10 +59,415 @@ Probability (Sharp) : 100.00%
 ===== Quality Scores =====
 Sharpness: Excellent (100/100)
 Noise: Poor (50/100)
+Contrast: Fair (75/100)
+Exposure: Fair (70/100)
+
+No faces detected.
+
+[Eye Detection]
+No faces detected. Continuing.....
+
+
+===== General Report =====
+• Faces detected: 0.
+• Both eyes open: 0 / 0.
+• Sharpness: Excellent.
+• Contrast: Fair.
+• Lighting: Too Dark.
+• Colours: vivid.
+• White Balance: cool.
+
+
+[Saturation]
+Value : 138.96
+Result : Vivid
+Colours are vivid and highly saturated.
+
+[Colour Temperature]
+Value : -27.72
+Result : Cool
+The image has a cool colour balance with a noticeable blue cast.
+
+[Lighting]
+Result : Too Dark
+Overall brightness is slightly low.
+Recommendation: Consider increasing brightness.
+
+
+======== SUMMARY ===========
+• The image has several technical quality issues.
+• Details are crisp and well defined.
+• Exposure is usable but could be improved.
+• Noticeable image noise reduces image quality.
+• No people were detected in the scene.
+
+
+================================ END OF COMPREHENSIVE REPORT =====================================
+[DEBUG]FACE INDEX: 0 LANDMARK 0: [118.44927 308.29214]
+[DEBUG]RAW BOX: (107, 280, 22, 27)
+[DEBUG]FACE 0: width=22, height=27
+[DEBUG]FACE 0 DIMENSIONS: dimensions=22
+FACE 0: using EAR fallback
+FINAL EYE RESULT: {'face_index': 0, 'thumbnail': 'IMG-20260627-WA0023_face_0.jpg', 'decision': 'undecided', 'status': 'Eyes closed', 'confidence': 100, 'method': 'EAR', 'probabilities': {}, 'left_ear': 0.5288920959636528, 'right_ear': 0.5314771505827157, 'ear': 0.5301846232731843, 'eye_difference': -0.0025850546190628876, 'ratio': 0.9951360945315737}
+[DEBUG]FACE INDEX: 1 LANDMARK 0: [ 15.226576 314.24933 ]
+[DEBUG]RAW BOX: (7, 277, 28, 34)
+[DEBUG]FACE 1: width=28, height=34
+[DEBUG]FACE 1 DIMENSIONS: dimensions=28
+FACE 1: using EAR fallback
+FINAL EYE RESULT: {'face_index': 1, 'thumbnail': 'IMG-20260627-WA0023_face_1.jpg', 'decision': 'undecided', 'status': 'Eyes closed', 'confidence': 100, 'method': 'EAR', 'probabilities': {}, 'left_ear': 0.545578166917726, 'right_ear': 0.5341847439217284, 'ear': 0.5398814554197272, 'eye_difference': 0.011393422995997549, 'ratio': 0.9791167907976133}
+
+===== IMG-20260627-WA0023.jpg =====
+Image dimensions: (1066, 1600)
+
+Overall Score: 78/100
+
+===== Assessment Report =====
+
+General
+• Faces detected: 2.
+• Both eyes open: 0 / 2.
+• Both eyes closed: 2/2.
+• Sharpness: Excellent.
+• Contrast: Fair.
+• Lighting: Too Dark.
+• Colours: natural.
+• White Balance: natural.
+
+Strengths
+✓ Excellent sharpness.
+✓ Natural colours.
+
+Problems
+⚠ High image noise detected.
+⚠ Low brightness detected.
+⚠ Low contrast detected.
+⚠ 2 subject(s) have both closed eyes.
+
+Suggestions
+• Use a lower ISO or increase available light.
+• Use a higher aperture or increase available light.
+• Increase scene lighting or photograph under better lighting conditions.
+• Capture another frame with all subjects' eyes open
+
+Verdict: Good
+
+
+========== END OF SIMPLIFIED REPORT ==========
+
+
+============= Values Analysis =============
+Laplacian   : 1227.79
+FFT Ratio   : 0.043895
+Wavelet     : 0.015478
+Sharp Ratio : 0.429
+Brightness     : 0.282
+Shadow Clip    : 0.72%
+Highlight Clip : 1.71%
+Consistency : 0.084
+Noise Rms   : 10.37
+Detail Quality : 0.00423302
+Patch min : 0.00
+Patch mean: 1293.18
+Patch max : 15368.26
+Confidence : 1.0
+Prediction : Sharp
+Probability (Blurry): 0.00%
+Probability (Sharp) : 100.00%
+
+----------------------------------------
+
+===== Quality Scores =====
+Sharpness: Excellent (100/100)
+Noise: Poor (50/100)
+Contrast: Fair (75/100)
+Exposure: Fair (70/100)
+
+SCRFD detected 2 faces.
+
+[Eye Detection]
+
+                            FACE 1
+                            Method: EAR
+                            Status: Eyes closed
+                            Confidence: 100
+
+                            Probabilities:
+                            {}
+                            
+
+                            FACE 2
+                            Method: EAR
+                            Status: Eyes closed
+                            Confidence: 100
+
+                            Probabilities:
+                            {}
+                            
+
+
+===== General Report =====
+• Faces detected: 2.
+• Both eyes open: 0 / 2.
+• Both eyes closed: 2/2.
+• Sharpness: Excellent.
+• Contrast: Fair.
+• Lighting: Too Dark.
+• Colours: natural.
+• White Balance: natural.
+
+
+[Saturation]
+Value : 50.07
+Result : Natural
+Colours appear natural.
+
+[Colour Temperature]
+Value : 8.80
+Result : Natural
+The colour balance appears natural.
+
+[Lighting]
+Result : Too Dark
+Overall brightness is slightly low.
+Recommendation: Consider increasing brightness.
+
+
+======== SUMMARY ===========
+• The image has several technical quality issues.
+• Details are crisp and well defined.
+• Exposure is usable but could be improved.
+• Noticeable image noise reduces image quality.
+• 2 subject(s) have closed eyes/eyes that cannot be detected/eye analysis skipped.
+
+
+================================ END OF COMPREHENSIVE REPORT =====================================
+
+
+===== IMG-20260503-WA0019.jpg =====
+Image dimensions: (1365, 2048)
+
+Overall Score: 74/100
+
+===== Assessment Report =====
+
+General
+• Faces detected: 0.
+• Both eyes open: 0 / 0.
+• Sharpness: Excellent.
+• Contrast: Good.
+• Lighting: Too Dark.
+• Colours: vivid.
+• White Balance: warm.
+
+Strengths
+✓ Excellent sharpness.
+✓ Good contrast.
+
+Problems
+⚠ High image noise detected.
+⚠ Low brightness detected.
+
+Suggestions
+• Use a lower ISO or increase available light.
+• Use a higher aperture or increase available light.
+
+Verdict: Fair
+
+
+========== END OF SIMPLIFIED REPORT ==========
+
+
+============= Values Analysis =============
+Laplacian   : 2633.72
+FFT Ratio   : 0.069099
+Wavelet     : 0.025512
+Sharp Ratio : 0.691
+Brightness     : 0.271
+Shadow Clip    : 3.02%
+Highlight Clip : 3.69%
+Consistency : 0.270
+Noise Rms   : 14.73
+Detail Quality : 0.00469200
+Patch min : 0.00
+Patch mean: 2717.78
+Patch max : 10052.91
+Confidence : 0.97
+Prediction : Sharp
+Probability (Blurry): 3.00%
+Probability (Sharp) : 97.00%
+
+----------------------------------------
+
+===== Quality Scores =====
+Sharpness: Excellent (100/100)
+Noise: Very Poor (20/100)
+Contrast: Good (90/100)
+Exposure: Fair (70/100)
+
+No faces detected.
+
+[Eye Detection]
+No faces detected. Continuing.....
+
+
+===== General Report =====
+• Faces detected: 0.
+• Both eyes open: 0 / 0.
+• Sharpness: Excellent.
+• Contrast: Good.
+• Lighting: Too Dark.
+• Colours: vivid.
+• White Balance: warm.
+
+
+[Saturation]
+Value : 149.92
+Result : Vivid
+Colours are vivid and highly saturated.
+
+[Colour Temperature]
+Value : 30.90
+Result : Warm
+The image has a warmer colour balance with a yellow/orange cast.
+
+[Lighting]
+Result : Too Dark
+Overall brightness is slightly low.
+Recommendation: Consider increasing brightness.
+
+
+======== SUMMARY ===========
+• The image has acceptable technical quality.
+• Details are crisp and well defined.
+• Exposure is usable but could be improved.
+• Noticeable image noise reduces image quality.
+• No people were detected in the scene.
+
+
+================================ END OF COMPREHENSIVE REPORT =====================================
+[DEBUG]FACE INDEX: 0 LANDMARK 0: [ 737.75964 1352.0117 ]
+[DEBUG]RAW BOX: (666, 1199, 124, 149)
+[DEBUG]FACE 0: width=124, height=149
+[DEBUG]FACE 0 DIMENSIONS: dimensions=124
+FACE 0: using EAR fallback
+FINAL EYE RESULT: {'face_index': 0, 'thumbnail': 'group_face_0.jpg', 'decision': 'undecided', 'status': 'Eyes open', 'confidence': 100, 'method': 'EAR', 'probabilities': {}, 'left_ear': 0.5727897064587658, 'right_ear': 0.5886807002520648, 'ear': 0.5807352033554153, 'eye_difference': -0.015890993793298946, 'ratio': 0.97300575033886}
+[DEBUG]FACE INDEX: 1 LANDMARK 0: [3300.1113 1321.183 ]
+[DEBUG]RAW BOX: (3257, 1177, 119, 140)
+[DEBUG]FACE 1: width=119, height=140
+[DEBUG]FACE 1 DIMENSIONS: dimensions=119
+FACE 1: using EAR fallback
+FINAL EYE RESULT: {'face_index': 1, 'thumbnail': 'group_face_1.jpg', 'decision': 'undecided', 'status': 'Eyes open', 'confidence': 100, 'method': 'EAR', 'probabilities': {}, 'left_ear': 0.5673127742641223, 'right_ear': 0.5565303840987484, 'ear': 0.5619215791814354, 'eye_difference': 0.010782390165373856, 'ratio': 0.9809939231857417}
+[DEBUG]FACE INDEX: 2 LANDMARK 0: [2384.2053 1321.7715]
+[DEBUG]RAW BOX: (2329, 1189, 112, 131)
+[DEBUG]FACE 2: width=112, height=131
+[DEBUG]FACE 2 DIMENSIONS: dimensions=112
+FACE 2: using EAR fallback
+FINAL EYE RESULT: {'face_index': 2, 'thumbnail': 'group_face_2.jpg', 'decision': 'undecided', 'status': 'Eyes open', 'confidence': 100, 'method': 'EAR', 'probabilities': {}, 'left_ear': 0.5686837123073194, 'right_ear': 0.5677700213757721, 'ear': 0.5682268668415458, 'eye_difference': 0.0009136909315472508, 'ratio': 0.9983933231921833}
+[DEBUG]FACE INDEX: 3 LANDMARK 0: [2999.46   1360.4851]
+[DEBUG]RAW BOX: (2943, 1211, 115, 148)
+[DEBUG]FACE 3: width=115, height=148
+[DEBUG]FACE 3 DIMENSIONS: dimensions=115
+FACE 3: using EAR fallback
+FINAL EYE RESULT: {'face_index': 3, 'thumbnail': 'group_face_3.jpg', 'decision': 'undecided', 'status': 'Eyes closed', 'confidence': 100, 'method': 'EAR', 'probabilities': {}, 'left_ear': 0.5201683017991767, 'right_ear': 0.5209173156788481, 'ear': 0.5205428087390125, 'eye_difference': -0.0007490138796714119, 'ratio': 0.9985621252027391}
+[DEBUG]FACE INDEX: 4 LANDMARK 0: [1075.4545 1403.1926]
+[DEBUG]RAW BOX: (1013, 1271, 107, 130)
+[DEBUG]FACE 4: width=107, height=130
+[DEBUG]FACE 4 DIMENSIONS: dimensions=107
+FACE 4: using EAR fallback
+FINAL EYE RESULT: {'face_index': 4, 'thumbnail': 'group_face_4.jpg', 'decision': 'undecided', 'status': 'Eyes open', 'confidence': 100, 'method': 'EAR', 'probabilities': {}, 'left_ear': 0.5705901394021261, 'right_ear': 0.5820450923217089, 'ear': 0.5763176158619174, 'eye_difference': -0.011454952919582762, 'ratio': 0.9803194751219526}
+[DEBUG]FACE INDEX: 5 LANDMARK 0: [2131.326  1370.8547]
+[DEBUG]RAW BOX: (2081, 1240, 104, 125)
+[DEBUG]FACE 5: width=104, height=125
+[DEBUG]FACE 5 DIMENSIONS: dimensions=104
+FACE 5: using EAR fallback
+FINAL EYE RESULT: {'face_index': 5, 'thumbnail': 'group_face_5.jpg', 'decision': 'undecided', 'status': 'Eyes open', 'confidence': 100, 'method': 'EAR', 'probabilities': {}, 'left_ear': 0.6052650300070228, 'right_ear': 0.6074869839079081, 'ear': 0.6063760069574655, 'eye_difference': -0.0022219539008853095, 'ratio': 0.9963423843477408}
+[DEBUG]FACE INDEX: 6 LANDMARK 0: [2689.8098 1339.5195]
+[DEBUG]RAW BOX: (2629, 1201, 108, 138)
+[DEBUG]FACE 6: width=108, height=138
+[DEBUG]FACE 6 DIMENSIONS: dimensions=108
+FACE 6: using EAR fallback
+FINAL EYE RESULT: {'face_index': 6, 'thumbnail': 'group_face_6.jpg', 'decision': 'undecided', 'status': 'Eyes open', 'confidence': 100, 'method': 'EAR', 'probabilities': {}, 'left_ear': 0.5950314109227332, 'right_ear': 0.5914287477970881, 'ear': 0.5932300793599106, 'eye_difference': 0.003602663125645056, 'ratio': 0.9939454236204803}
+[DEBUG]FACE INDEX: 7 LANDMARK 0: [1292.7753 1263.1232]
+[DEBUG]RAW BOX: (1228, 1128, 121, 135)
+[DEBUG]FACE 7: width=121, height=135
+[DEBUG]FACE 7 DIMENSIONS: dimensions=121
+FACE 7: using EAR fallback
+FINAL EYE RESULT: {'face_index': 7, 'thumbnail': 'group_face_7.jpg', 'decision': 'undecided', 'status': 'Eyes open', 'confidence': 100, 'method': 'EAR', 'probabilities': {}, 'left_ear': 0.5593989489172558, 'right_ear': 0.5615168579020875, 'ear': 0.5604579034096717, 'eye_difference': -0.0021179089848316623, 'ratio': 0.9962282361517257}
+[DEBUG]FACE INDEX: 8 LANDMARK 0: [1595.0222 1264.0686]
+[DEBUG]RAW BOX: (1527, 1118, 107, 140)
+[DEBUG]FACE 8: width=107, height=140
+[DEBUG]FACE 8 DIMENSIONS: dimensions=107
+FACE 8: using EAR fallback
+FINAL EYE RESULT: {'face_index': 8, 'thumbnail': 'group_face_8.jpg', 'decision': 'undecided', 'status': 'Eyes open', 'confidence': 100, 'method': 'EAR', 'probabilities': {}, 'left_ear': 0.5681118465085149, 'right_ear': 0.5737916881674764, 'ear': 0.5709517673379956, 'eye_difference': -0.005679841658961515, 'ratio': 0.9901012130776915}
+[DEBUG]FACE INDEX: 9 LANDMARK 0: [1897.7676 1369.4355]
+[DEBUG]RAW BOX: (1865, 1248, 90, 118)
+[DEBUG]FACE 9: width=90, height=118
+[DEBUG]FACE 9 DIMENSIONS: dimensions=90
+FACE 9: using EAR fallback
+FINAL EYE RESULT: {'face_index': 9, 'thumbnail': 'group_face_9.jpg', 'decision': 'undecided', 'status': 'Eyes open', 'confidence': 100, 'method': 'EAR', 'probabilities': {}, 'left_ear': 0.583610344643726, 'right_ear': 0.5816193956934347, 'ear': 0.5826148701685803, 'eye_difference': 0.0019909489502912825, 'ratio': 0.9965885646672238}
+
+===== group.jpg =====
+Image dimensions: (2666, 4000)
+
+Overall Score: 92/100
+
+===== Assessment Report =====
+
+General
+• Faces detected: 10.
+• Both eyes open: 9 / 10.
+• Both eyes closed: 1/10.
+• Sharpness: Good.
+• Contrast: Good.
+• Lighting: Balanced.
+• Colours: natural.
+• White Balance: warm.
+
+Strengths
+✓ Good contrast.
+✓ Balanced lighting.
+✓ Natural colours.
+
+Problems
+⚠ 1 subject(s) have both closed eyes.
+
+Suggestions
+• Capture another frame with all subjects' eyes open
+
+Verdict: Excellent
+
+
+========== END OF SIMPLIFIED REPORT ==========
+
+
+============= Values Analysis =============
+Laplacian   : 125.20
+FFT Ratio   : 0.002617
+Wavelet     : 0.000622
+Sharp Ratio : 0.026
+Brightness     : 0.604
+Shadow Clip    : 1.31%
+Highlight Clip : 0.37%
+Consistency : 0.038
+Noise Rms   : 3.65
+Detail Quality : 0.00071624
+Patch min : 0.00
+Patch mean: 137.96
+Patch max : 3670.02
+Confidence : 0.94
+Prediction : Sharp
+Probability (Blurry): 6.00%
+Probability (Sharp) : 94.00%
+
+----------------------------------------
+
+===== Quality Scores =====
+Sharpness: Good (90/100)
+Noise: Good (90/100)
 Contrast: Good (90/100)
 Exposure: Excellent (100/100)
 
-SCRFD detected 9 faces.
+SCRFD detected 10 faces.
 
 [Eye Detection]
 
@@ -1480,7 +500,7 @@ SCRFD detected 9 faces.
 
                             FACE 4
                             Method: EAR
-                            Status: Eyes open
+                            Status: Eyes closed
                             Confidence: 100
 
                             Probabilities:
@@ -1507,7 +527,7 @@ SCRFD detected 9 faces.
 
                             FACE 7
                             Method: EAR
-                            Status: Eyes closed
+                            Status: Eyes open
                             Confidence: 100
 
                             Probabilities:
@@ -1532,12 +552,21 @@ SCRFD detected 9 faces.
                             {}
                             
 
+                            FACE 10
+                            Method: EAR
+                            Status: Eyes open
+                            Confidence: 100
+
+                            Probabilities:
+                            {}
+                            
+
 
 ===== General Report =====
-• Faces detected: 9.
-• Both eyes open: 8 / 9.
-• Both eyes closed: 1/9.
-• Sharpness: Excellent.
+• Faces detected: 10.
+• Both eyes open: 9 / 10.
+• Both eyes closed: 1/10.
+• Sharpness: Good.
 • Contrast: Good.
 • Lighting: Balanced.
 • Colours: natural.
@@ -1545,12 +574,12 @@ SCRFD detected 9 faces.
 
 
 [Saturation]
-Value : 79.42
+Value : 87.31
 Result : Natural
 Colours appear natural.
 
 [Colour Temperature]
-Value : 41.63
+Value : 57.04
 Result : Warm
 The image has a warmer colour balance with a yellow/orange cast.
 
@@ -1561,167 +590,44 @@ Recommendation: No correction needed.
 
 
 ======== SUMMARY ===========
-• The image has good overall technical quality.
-• Details are crisp and well defined.
+• The image is technically strong.
+• The image appears sharp.
 • Exposure is well balanced.
-• Noticeable image noise reduces image quality.
+• Noise is well controlled.
 • 1 subject(s) have closed eyes/eyes that cannot be detected/eye analysis skipped.
 
 
 ================================ END OF COMPREHENSIVE REPORT =====================================
-[DEBUG]FACE INDEX: 0 LANDMARK 0: [1805.25  2368.988]
-[DEBUG]RAW BOX: (1608, 1417, 771, 959)
-[DEBUG]FACE 0: width=771, height=959
-[DEBUG]FACE 0 DIMENSIONS: dimensions=771
-FACE 0: using ML
-FACE 0: Low ML confidence (57.0%), switching to EAR
-FINAL EYE RESULT: {'face_index': 0, 'status': 'Eyes open', 'confidence': 100, 'method': 'EAR', 'probabilities': {}, 'left_ear': 0.5891546921950124, 'right_ear': 0.5799918512848324, 'ear': 0.5845732717399224, 'eye_difference': 0.009162840910179937, 'ratio': 0.9844474786816312}
 
-===== fra-564.jpg =====
-Image dimensions: (6000, 4000)
 
-Overall Score: 90/100
+===== WhatsApp_Image_2026-07-31_at_1.38.43_PM.jpeg =====
+Image dimensions: (1066, 1600)
+
+Overall Score: 89/100
 
 ===== Assessment Report =====
 
 General
-• Faces detected: 1.
-• Both eyes open: 1 / 1.
+• Faces detected: 0.
+• Both eyes open: 0 / 0.
 • Sharpness: Excellent.
-• Contrast: Good.
-• Lighting: Balanced.
-• Colours: natural.
-• White Balance: cool.
-
-Strengths
-✓ Excellent sharpness.
-✓ Good contrast.
-✓ Balanced lighting.
-✓ Natural colours.
-✓ All subjects have eyes open.
-
-Problems
-No major problems detected.
-
-Suggestions
-No recommendations.
-
-Verdict: Excellent
-
-
-========== END OF SIMPLIFIED REPORT ==========
-
-
-============= Values Analysis =============
-Laplacian   : 407.55
-FFT Ratio   : 0.005917
-Wavelet     : 0.002252
-Sharp Ratio : 0.110
-Brightness     : 0.419
-Shadow Clip    : 4.05%
-Highlight Clip : 0.44%
-Consistency : 0.040
-Noise Rms   : 5.72
-Detail Quality : 0.00103511
-Patch min : 0.00
-Patch mean: 428.77
-Patch max : 10706.40
-Confidence : 56.99999999999999
-Prediction : Sharp
-Probability (Blurry): 6.00%
-Probability (Sharp) : 94.00%
-
-----------------------------------------
-
-===== Quality Scores =====
-Sharpness: Excellent (100/100)
-Noise: Fair (75/100)
-Contrast: Good (90/100)
-Exposure: Excellent (100/100)
-
-SCRFD detected 1 faces.
-
-[Eye Detection]
-
-                            FACE 1
-                            Method: EAR
-                            Status: Eyes open
-                            Confidence: 100
-
-                            Probabilities:
-                            {}
-                            
-
-
-===== General Report =====
-• Faces detected: 1.
-• Both eyes open: 1 / 1.
-• Sharpness: Excellent.
-• Contrast: Good.
-• Lighting: Balanced.
-• Colours: natural.
-• White Balance: cool.
-
-
-[Saturation]
-Value : 102.84
-Result : Natural
-Colours appear natural.
-
-[Colour Temperature]
-Value : -24.44
-Result : Cool
-The image has a cool colour balance with a noticeable blue cast.
-
-[Lighting]
-Result : Balanced
-Overall brightness looks natural.
-Recommendation: No correction needed.
-
-
-======== SUMMARY ===========
-• The image has good overall technical quality.
-• Details are crisp and well defined.
-• Exposure is well balanced.
-• Some visible image noise is present.
-• All detected subjects have their eyes open.
-
-
-================================ END OF COMPREHENSIVE REPORT =====================================
-[DEBUG]FACE INDEX: 0 LANDMARK 0: [2062.5923 1748.3676]
-[DEBUG]RAW BOX: (2026, 1657, 73, 86)
-[DEBUG]FACE 0: width=73, height=86
-[DEBUG]FACE 0 DIMENSIONS: dimensions=73
-FACE 0: using EAR fallback
-FINAL EYE RESULT: {'face_index': 0, 'status': 'Eyes open', 'confidence': 100, 'method': 'EAR', 'probabilities': {}, 'left_ear': 0.5639147294104977, 'right_ear': 0.5665542588172754, 'ear': 0.5652344941138865, 'eye_difference': -0.0026395294067776964, 'ratio': 0.9953410827547429}
-
-===== fra-362.jpg =====
-Image dimensions: (2666, 4000)
-
-Overall Score: 88/100
-
-===== Assessment Report =====
-
-General
-• Faces detected: 1.
-• Both eyes open: 1 / 1.
-• Sharpness: Good.
-• Contrast: Excellent.
+• Contrast: Fair.
 • Lighting: Balanced.
 • Colours: natural.
 • White Balance: natural.
 
 Strengths
-✓ Excellent contrast.
+✓ Excellent sharpness.
 ✓ Balanced lighting.
 ✓ Natural colours.
-✓ All subjects have eyes open.
 
 Problems
-No major problems detected.
+⚠ High image noise detected.
+⚠ Low contrast detected.
 
 Suggestions
-No recommendations.
+• Use a lower ISO or increase available light.
+• Increase scene lighting or photograph under better lighting conditions.
 
 Verdict: Good
 
@@ -1730,63 +636,55 @@ Verdict: Good
 
 
 ============= Values Analysis =============
-Laplacian   : 422.99
-FFT Ratio   : 0.009094
-Wavelet     : 0.002514
-Sharp Ratio : 0.159
-Brightness     : 0.549
-Shadow Clip    : 2.58%
-Highlight Clip : 0.11%
-Consistency : 0.054
-Noise Rms   : 6.82
-Detail Quality : 0.00133350
+Laplacian   : 534.24
+FFT Ratio   : 0.015298
+Wavelet     : 0.004813
+Sharp Ratio : 0.215
+Brightness     : 0.412
+Shadow Clip    : 0.01%
+Highlight Clip : 0.44%
+Consistency : 0.138
+Noise Rms   : 7.54
+Detail Quality : 0.00202972
 Patch min : 0.00
-Patch mean: 471.85
-Patch max : 8787.78
-Confidence : 0.94
+Patch mean: 543.61
+Patch max : 3945.59
+Confidence : 1.0
 Prediction : Sharp
-Probability (Blurry): 6.00%
-Probability (Sharp) : 94.00%
+Probability (Blurry): 0.00%
+Probability (Sharp) : 100.00%
 
 ----------------------------------------
 
 ===== Quality Scores =====
-Sharpness: Good (90/100)
+Sharpness: Excellent (100/100)
 Noise: Fair (75/100)
-Contrast: Excellent (100/100)
+Contrast: Fair (75/100)
 Exposure: Excellent (100/100)
 
-SCRFD detected 1 faces.
+No faces detected.
 
 [Eye Detection]
-
-                            FACE 1
-                            Method: EAR
-                            Status: Eyes open
-                            Confidence: 100
-
-                            Probabilities:
-                            {}
-                            
+No faces detected. Continuing.....
 
 
 ===== General Report =====
-• Faces detected: 1.
-• Both eyes open: 1 / 1.
-• Sharpness: Good.
-• Contrast: Excellent.
+• Faces detected: 0.
+• Both eyes open: 0 / 0.
+• Sharpness: Excellent.
+• Contrast: Fair.
 • Lighting: Balanced.
 • Colours: natural.
 • White Balance: natural.
 
 
 [Saturation]
-Value : 100.03
+Value : 55.08
 Result : Natural
 Colours appear natural.
 
 [Colour Temperature]
-Value : -12.13
+Value : 11.51
 Result : Natural
 The colour balance appears natural.
 
@@ -1797,11 +695,11 @@ Recommendation: No correction needed.
 
 
 ======== SUMMARY ===========
-• The image has good overall technical quality.
-• The image appears sharp.
+• The image has acceptable technical quality.
+• Details are crisp and well defined.
 • Exposure is well balanced.
 • Some visible image noise is present.
-• All detected subjects have their eyes open.
+• No people were detected in the scene.
 
 
 ================================ END OF COMPREHENSIVE REPORT =====================================

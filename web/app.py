@@ -2,6 +2,7 @@ from flask import Flask, render_template, send_from_directory, request, redirect
 import json
 import os
 from ml.predict import analyze_image
+from analyzer.report_generator import generate_verdict
 from werkzeug.utils import secure_filename
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -9,6 +10,7 @@ ANNOTATED_DIR = os.path.join(BASE_DIR, "annotated")
 IMAGES_DIR = os.path.join(BASE_DIR, "uploads")
 JSON_DIR = os.path.join(BASE_DIR, "JSON")
 UPLOAD_FOLDER = "uploads"
+EYE_PENALTY = 15.0
 
 
 app = Flask(
@@ -101,7 +103,24 @@ def analyze_batch():
 
     return redirect("/")
 
+@app.route("/reanalyze-all", methods=["POST"])
+def reanalyze_all():
 
+    for file in os.listdir(JSON_DIR):
+
+        if not file.endswith(".json"):
+            continue
+
+        with open(os.path.join(JSON_DIR, file), "r") as f:
+            report = json.load(f)
+
+        filename = report["image_info"]["filename"]
+        image_path = os.path.join(UPLOAD_FOLDER, filename)
+
+        if os.path.exists(image_path):
+            analyze_image(image_path)
+
+    return redirect(url_for("dashboard"))
 
 @app.route("/annotated/<path:filename>")
 def annotated(filename):
@@ -121,7 +140,7 @@ def report(filename):
     with open(report_path, "r") as f:
 
         report = json.load(f)
-
+    print(report["quality"])
     return render_template(
         "index.html",
         report=report
@@ -149,6 +168,125 @@ def clear_dashboard():
                 os.remove(path)
 
     return redirect(url_for("dashboard"))
+
+@app.route("/update-eye-decision", methods=["POST"])
+def update_eye_decision():
+
+    filename = request.form["filename"]
+    stem = os.path.splitext(filename)[0]
+
+    path = os.path.join(
+        JSON_DIR,
+        stem + ".json"
+    )
+
+    # Load report
+    with open(path, "r", encoding="utf-8") as f:
+        report = json.load(f)
+
+    # Store every user's decision
+    for key, value in request.form.items():
+
+        if not key.startswith("face_"):
+            continue
+
+        face_index = int(key.replace("face_", ""))
+
+        report["face_analysis"]["subjects"][face_index]["decision"] = value
+
+    # ----------------------------
+    # Reset report sections
+    # ----------------------------
+
+    report["report"]["general"] = [
+        item for item in report["report"]["general"]
+        if item != "Eye closure marked as intentional."
+    ]
+
+    report["report"]["problems"] = [
+        p for p in report["report"]["problems"]
+        if "closed" not in p.lower()
+    ]
+
+    report["report"]["suggestions"] = [
+        s for s in report["report"]["suggestions"]
+        if "eyes open" not in s.lower()
+    ]
+
+    report["report"]["summary"] = [
+        s for s in report["report"]["summary"]
+        if "closed" not in s.lower()
+    ]
+
+    intentional_count = 0
+    not_intentional_count = 0
+    penalty = 0
+
+    # Count decisions
+    for subject in report["face_analysis"]["subjects"]:
+
+        if subject["status"] == "Eyes open":
+            continue
+
+        decision = subject.get("decision")
+
+        if decision == "intentional":
+            intentional_count += 1
+
+        elif decision == "not_intentional":
+            not_intentional_count += 1
+            penalty += EYE_PENALTY
+
+    # General section
+    if intentional_count > 0:
+        report["report"]["general"].append(
+            f"{intentional_count} eye closure(s) marked as intentional."
+        )
+
+    # Problems
+    if report["face_analysis"]["one_eye_closed"] > 0 and not_intentional_count > 0:
+        report["report"]["problems"].append(
+            f"{report['face_analysis']['one_eye_closed']} subject(s) have one eye closed."
+        )
+
+    if report["face_analysis"]["eyes_closed"] > 0 and not_intentional_count > 0:
+        report["report"]["problems"].append(
+            f"{report['face_analysis']['eyes_closed']} subject(s) have both eyes closed."
+        )
+
+    # Suggestions
+    if not_intentional_count > 0:
+
+        report["report"]["suggestions"].append(
+            "Capture another frame with all subjects' eyes open."
+        )
+
+        report["report"]["summary"].append(
+            f"{not_intentional_count} eye closure(s) may affect the image quality."
+        )
+    report["quality"]["score_breakdown"]["eye_penalty"] = (
+    -15 if report["quality"]["decision"]["eye_penalty_applied"] else 0
+    )
+    report["quality"]["decision"]["eye_penalty_applied"] = (
+    penalty > 0
+    )
+    report["quality"]["score_breakdown"]["eye_penalty"] = -penalty
+    # Update score
+    base = report["quality"]["base_score"]
+    score = max(base - penalty, 0)
+    report["quality"]["score_breakdown"]["overall"] = score
+
+    report["quality"]["overall_score"] = score
+    report["quality"]["verdict"] = generate_verdict(
+        score,
+    )
+
+    # Save
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(report, f, indent=4)
+
+    return redirect(url_for("report", filename=stem))
+
 
 if __name__ == "__main__":
     app.run(debug=True)
