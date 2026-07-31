@@ -11,6 +11,23 @@
         <h1>
             Dashboard
         </h1>
+        <div class="clear_and_reanalyze">
+            <form
+                action="/clear-dashboard"
+                method="POST"
+                onsubmit="return confirm('Clear all reports and uploaded images? This action cannot be undone!');">
+
+                <button class="danger-button">
+                    🗑 Clear Dashboard
+                </button>
+
+            </form>
+            <form action="/reanalyze-all" method="POST">
+                <button class="danger-button" type="submit">
+                    🔄 Reanalyze All Images
+                </button>
+            </form>
+        </div>
         <div class="search-container">
             <input type="text" id="searchBar" placeholder="🔍 Search images...">
         </div>
@@ -44,18 +61,6 @@
         <details><summary>Good</summary>{{ section("Good", good) }}</details>
         <details><summary>Fair</summary>{{ section("Fair", fair) }}</details>
         <details><summary>Poor</summary>{{ section("Poor", poor) }}</details>
-        </div>
-        <div class="clear">
-            <form
-                action="/clear-dashboard"
-                method="POST"
-                onsubmit="return confirm('Clear all reports and uploaded images? This action cannot be undone!');">
-
-                <button class="danger-button">
-                    🗑 Clear Dashboard
-                </button>
-
-            </form>
         </div>
         <div>
             <button id="backToTop" title="back-to-top">↑</button>

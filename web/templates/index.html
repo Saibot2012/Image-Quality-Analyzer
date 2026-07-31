@@ -28,7 +28,7 @@
             <h2>
                 Original
             </h2>
-            <img src="/uploads/{{report.image_info.filename}}" alt="">
+            <img id=originalImage src="/uploads/{{report.image_info.filename}}" alt="">
         </div>
         <div class="image-card">
             <h2>
@@ -60,7 +60,62 @@
             </div>
         </div>
     </div>
+    <h2>Score Breakdown</h2>
 
+    <table class="score-table">
+
+        <tr>
+            <th>Metric</th>
+            <th>Score</th>
+            <th>Weight</th>
+            <th>Contribution</th>
+        </tr>
+
+        <tr>
+            <td>Sharpness</td>
+            <td>{{ report.quality.quality_scores.sharpness }}</td>
+            <td>40%</td>
+            <td>{{ report.quality.score_breakdown.sharpness }}</td>
+        </tr>
+
+        <tr>
+            <td>Noise</td>
+            <td>{{ report.quality.quality_scores.noise }}</td>
+            <td>25%</td>
+            <td>{{ report.quality.score_breakdown.noise }}</td>
+        </tr>
+
+        <tr>
+            <td>Contrast</td>
+            <td>{{ report.quality.quality_scores.contrast }}</td>
+            <td>20%</td>
+            <td>{{ report.quality.score_breakdown.contrast }}</td>
+        </tr>
+
+        <tr>
+            <td>Exposure</td>
+            <td>{{ report.quality.quality_scores.exposure }}</td>
+            <td>15%</td>
+            <td>{{ report.quality.score_breakdown.exposure }}</td>
+        </tr>
+            <td><strong>Eye Penalty</strong></td>
+            <td>—</td>
+            <td>—</td>
+            <td>
+                {% set penalty = report.quality.score_breakdown.eye_penalty %}
+                {% if penalty < 0 %}
+                    <span class="text-danger">{{ penalty }}</span>
+                {% else %}
+                    <span class="text-success">0.0</span>
+                {% endif %}
+            </td>
+        </tr>
+        <tr class="total-row">
+            <td colspan="3"><b>Overall Score</b></td>
+            <td><b>{{ report.quality.overall_score }}</b></td>
+        </tr>
+
+    </table>
     <h2>
         Quality Scores
     </h2>
@@ -125,6 +180,82 @@
             {% endfor %}
         </details>
     </div>
+    <form method="POST" action="/update-eye-decision">
+
+        <div class="face-grid">
+            <form method="POST" action="/update-eye-decision">
+
+                <input
+                    type="hidden"
+                    name="filename"
+                    value="{{ report.image_info.filename }}">
+
+                {% for subject in report.face_analysis.subjects %}
+
+                    {% if subject.status != "Eyes open" %}
+
+                        <div class="face-card">
+
+                            <img
+                                class="face-thumb"
+                                src="{{ url_for('static',
+                                    filename='faces/' + subject.thumbnail) }}">
+
+                            <h3>Face {{ subject.face_index + 1 }}</h3>
+
+                            <p><b>Status:</b> {{ subject.status }}</p>
+                            <p><b>Method:</b> {{ subject.method }}</p>
+                            <p><b>Confidence:</b> {{ subject.confidence }}%</p>
+
+                            <div class="decision-group">
+
+                                <label>
+                                    <input
+                                        type="radio"
+                                        name="face_{{ subject.face_index }}"
+                                        value="intentional"
+                                        {% if subject.decision == "intentional" %}checked{% endif %}
+                                        required>
+                                    Intentional
+                                </label>
+
+                                <label>
+                                    <input
+                                        type="radio"
+                                        name="face_{{ subject.face_index }}"
+                                        value="not_intentional"
+                                        {% if subject.decision == "not_intentional" %}checked{% endif %}>
+                                    Not intentional
+                                </label>
+
+                            </div>
+
+                            {% if subject.decision is defined %}
+                                <p class="current-decision">
+                                    Current:
+                                    {% if subject.decision == "intentional" %}
+                                        ✅ Intentional
+                                    {% else %}
+                                        ❌ Not intentional
+                                    {% endif %}
+                                </p>
+                            {% endif %}
+
+                        </div>
+                    {% endif %}
+
+                {% endfor %}
+        </div>
+        <div class="eye-decisions">
+            <button type="submit" >
+                Apply Eye Decisions
+            </button>
+        </div>
+    </form>
+
+
+
+
     <h2>
         Assessment
     </h2>
@@ -150,6 +281,7 @@
                     ⚠ {{item}}
                 </p>
             {% endfor %}
+
         </div>
             <div class="card">
 
@@ -187,6 +319,10 @@
             </table>
         </details>
     </div>
+    <div id="imageModal">
+        <span id="closeModal">&times;</span>
+        <img id="modalImage">
+    </div>
     <div class="reanalyze">
         <form action="/reanalyze/{{ report.image_info.filename }}" method ="POST">
             <button type="submit">
@@ -219,7 +355,40 @@
             });
 
         });
+        const modal = document.getElementById("imageModal");
+        const modalImage = document.getElementById("modalImage");
 
+        document.getElementById("originalImage").addEventListener("click", () => {
+
+            modal.classList.add("show")
+
+            modalImage.src =
+                document.getElementById("originalImage").src;
+
+        });
+
+        document.getElementById("closeModal").addEventListener("click", () => {
+
+            modal.classList.remove("show");
+
+        });
+
+        modal.addEventListener("click", e => {
+
+            if(e.target === modal){
+                modal.classList.remove("show");
+            }
+
+        });
+        document.addEventListener("keydown", function(event){
+
+        if(event.key === "Escape"){
+
+            modal.classList.remove("show");
+
+        }
+        
+    });
     
     </script>
 </body>

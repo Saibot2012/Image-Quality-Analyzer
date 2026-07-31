@@ -1,4 +1,5 @@
 import cv2
+import os
 from insightface.app import FaceAnalysis
 import matplotlib.pyplot as plt
 import numpy as np
@@ -117,6 +118,7 @@ def detect_faces(img):
                 y2-y1
             )
         )
+
 
 
 

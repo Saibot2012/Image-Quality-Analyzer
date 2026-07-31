@@ -6,7 +6,7 @@ VERDICT_LEVELS = {
     "Fair": 2,
     "Poor": 1,
 }
-
+EYE_PENALTY = 15.0
 
 def generate_report_data(
     filename,
@@ -14,12 +14,14 @@ def generate_report_data(
     image_shape,
     features,
     scores,
+    base_score,
     overall_score,
     face_result,
     eye_results,
     brightness_info,
     saturation,
-    temperature
+    temperature,
+    contributions
 ):
 
     report = {
@@ -31,10 +33,20 @@ def generate_report_data(
         "image_info": {},
 
         "quality":{
+        "base_score": base_score,
         "overall_score": overall_score,
         "verdict": None,
         "quality_grades": {},
         "quality_scores": {},
+        "score_explanation":{},
+
+        "decision": {
+        "eye_closed_intentional": None,
+        "eye_penalty_applied": False
+            }
+        },
+        "score_breakdown": {
+            "eye_penalty": EYE_PENALTY
         },
 
         "technical_details": {},
@@ -49,6 +61,7 @@ def generate_report_data(
             "suggestions": [],
             "summary": []
         },
+
 
         "model_info": {
             "face_detector": "SCRFD",
@@ -69,6 +82,15 @@ def generate_report_data(
         "contrast": scores["Contrast"]["grade"],
         "exposure": scores["Exposure"]["grade"]
     }
+    report["quality"]["score_breakdown"] = contributions
+
+    
+    report["quality"]["score_breakdown"] = {
+        **contributions,
+        "eye_penalty": 0.0,
+        "overall": overall_score
+    }
+
     report["technical_details"] = {
         "laplacian": float(features["laplacian"]),
         "fft_ratio": float(features["fft_ratio"]),
@@ -94,6 +116,7 @@ def generate_report_data(
             "result": temperature
         }
     }
+    
     report["image_info"] = {
         "filename": filename,
         "annotated_filename": f"visual_{filename}",
@@ -115,7 +138,10 @@ def generate_report_data(
     one_closed_count = sum(
         1
         for eye in eye_results
-        if eye["status"] == "One eye closed"
+        if eye["status"] in [
+            "Left eye closed",
+            "Right eye closed"
+        ]
     )
 
     both_closed_count = sum(
@@ -160,7 +186,7 @@ def generate_report_data(
 
 
 # PROBLEMS AND SUGGESTIONS
-    if scores["Noise"]["grade"] in ["Poor", "Very Poor"]:
+    if scores["Noise"]["grade"] in ["Fair","Poor", "Very Poor"]:
 
         report["report"]["problems"].append(
             "High image noise detected."
@@ -174,6 +200,13 @@ def generate_report_data(
         )
         report["report"]["suggestions"].append(
         "Use a higher aperture or increase available light."
+        )
+    if scores["Contrast"]["grade"] in ["Fair", "Poor", "Very Poor"]:
+        report["report"]["problems"].append(
+            "Low contrast detected."
+        )
+        report["report"]["suggestions"].append(
+        "Increase scene lighting or photograph under better lighting conditions."
         )
     if both_closed_count > 0:
 
@@ -198,12 +231,10 @@ def generate_report_data(
         "subjects": eye_results
         }
 
-    verdict = generate_verdict(
-        overall_score,
-        report["report"]["problems"]
-        )
+    report["quality"]["verdict"] = generate_verdict(overall_score)
 
-    report["quality"]["verdict"] = verdict
+    print("DEBUG verdict:", report["quality"]["verdict"])
+    print("DEBUG report verdict:", report["quality"]["verdict"])
         
 
 #STRENGTHS
@@ -221,6 +252,12 @@ def generate_report_data(
     if face_result["face_count"] > 0 and both_closed_count == 0 and one_closed_count == 0:
         report["report"]["strengths"].append("All subjects have eyes open.")
 
+    report["quality"]["score_explanation"] = generate_score_explanation(
+    report["quality"]["quality_scores"],
+    report["quality"]["quality_grades"],
+
+    report["face_analysis"]
+)
     report["report"]["summary"] = generate_summary(
     scores,
     face_result,
@@ -233,44 +270,16 @@ def generate_report_data(
     return report
     
 
-def generate_verdict(score, problems):
+def generate_verdict(score):
+
     if score >= 90:
-        verdict = "Excellent"
-
+        return "Excellent"
     elif score >= 75:
-        verdict = "Good"
-    
+        return "Good"
     elif score >= 60:
-        verdict = "Fair"
+        return "Fair"
     else:
-        verdict = "Poor"
-
-    severity = 0
-
-    for problem in problems:
-
-        if "noise" in problem.lower():
-            severity += 1
-        if "closed eye" in problem.lower():
-            severity += 1
-        if "blur" in problem.lower():
-            severity += 2
-
-    levels = [
-        "Poor",
-        "Fair",
-        "Good",
-        "Excellent"
-    ]
-
-    
-    index = levels.index(verdict)
-
-    index -= severity
-
-    index = max(index, 0)
-
-    return levels[index]
+        return "Poor"
 
 
 def generate_summary(
@@ -440,3 +449,110 @@ def print_report(report):
     text += f"\nVerdict: {report['quality']['verdict']}\n"
 
     return text
+
+
+
+
+def calculate_quality_map(score):
+    if score >= 90:
+        return 0
+    elif score >= 75:
+        return -5
+    elif score >= 60:
+        return -10
+    else:
+        return -20
+def get_severity(impact):
+
+    impact = abs(impact)
+
+    if impact >= 15:
+        return "high"
+
+    elif impact >= 5:
+        return "medium"
+
+    else:
+        return "low"
+    
+def generate_score_explanation(quality_scores, quality_grades, face_analysis):
+    negative = []
+    positive = []
+
+    sharpness_grade = quality_grades["sharpness"]
+
+    if sharpness_grade in ["Poor", "Very Poor", "Fair"]:
+        impact = calculate_quality_map(
+            quality_scores["sharpness"]
+        )
+
+        negative.append({
+            "reason": "Low sharpness",
+            "impact": impact,
+            "severity": get_severity(impact)
+        })
+
+    else:
+        positive.append({
+            "reason": "Good sharpness"
+        })
+    exposure_grade = quality_grades["exposure"]
+
+    if exposure_grade in ["Poor", "Very Poor", "Fair"]:
+        impact = calculate_quality_map(
+        quality_scores["exposure"]
+    )
+        negative.append({
+            "reason": "Exposure issue detected",
+            "impact": impact,
+            "severity": get_severity(impact)
+        })
+    else:
+        positive.append({
+            "reason": "Good Exposure"
+        })
+
+    noise_grade = quality_grades["noise"]
+
+    if noise_grade in ["Poor", "Very Poor", "Fair"]:
+        impact = calculate_quality_map(
+        quality_scores["noise"]
+    )
+        negative.append({
+            "reason": "Noise issue detected",
+            "impact": impact,
+            "severity": get_severity(impact)
+        })
+    else:
+        positive.append({
+            "reason": "Low image noise."
+        })
+
+    closed_faces = 0
+    eye_impact = -15
+
+    for subject in face_analysis["subjects"]:
+        if subject["status"] in [
+            "Eyes closed",
+            "Left eye closed",
+            "Right eye closed"
+        ]:
+            closed_faces += 1
+
+    if closed_faces > 0:
+        negative.append({
+            "reason":f"{closed_faces} subject(s) have closed eyes.",
+            "impact": eye_impact,            
+            "severity": get_severity(eye_impact)
+        })
+    else:
+
+        positive.append({
+            "reason": "All subjects have eyes open"
+        })
+
+
+    return {
+        "negative": negative,
+        "positive": positive
+    }
