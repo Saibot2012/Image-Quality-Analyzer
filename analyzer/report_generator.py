@@ -533,7 +533,7 @@ def generate_score_explanation(quality_scores, quality_grades, face_analysis):
 
     for subject in face_analysis["subjects"]:
         if subject["status"] in [
-            "Eyes closed",
+            "eyes closed",
             "Left eye closed",
             "Right eye closed"
         ]:

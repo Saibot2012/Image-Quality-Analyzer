@@ -6,7 +6,7 @@ import pandas as pd
 
 
 eye_model = joblib.load(
-    "ml/eye_model_6class.pkl"
+    "ml/eye_model_6class_newest.pkl"
 )
 
 print(
@@ -17,27 +17,24 @@ print(
 LEFT_EYE = [35, 36, 37, 39, 41, 42]
 RIGHT_EYE = [89, 90, 91, 93, 95, 96]
 
-def show_eye_points(img, landmarks):  #Only to be used for debugging
+  #Only to be used for debugging
 
-    pts = landmarks
-    for idx in LEFT_EYE + RIGHT_EYE:
-        x, y = pts[idx]
-
-    plt.imshow(
-        cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    )
+def show_eye_points(img, landmarks, filename="debug_eye_points.jpg"):
+    debug = img.copy()
 
     for idx in LEFT_EYE:
-        x,y = pts[idx]
-        plt.scatter(x,y,c="red")
-        plt.text(x,y,str(idx),color="red")
+        x, y = landmarks[idx]
+        cv2.circle(debug, (int(x), int(y)), 3, (0, 0, 255), -1)
+        cv2.putText(debug, str(idx), (int(x), int(y)),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.4, (0,0,255), 1)
 
     for idx in RIGHT_EYE:
-        x,y = pts[idx]
-        plt.scatter(x,y,c="blue")
-        plt.text(x,y,str(idx),color="blue")
+        x, y = landmarks[idx]
+        cv2.circle(debug, (int(x), int(y)), 3, (255, 0, 0), -1)
+        cv2.putText(debug, str(idx), (int(x), int(y)),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.4, (255,0,0), 1)
 
-    plt.show()
+    cv2.imwrite(filename, debug)
 
 
 def calculate_ear(landmarks, eye_points):
@@ -47,9 +44,9 @@ def calculate_ear(landmarks, eye_points):
     for idx in eye_points:
         p.append(np.array(landmarks[idx]))
 
-    vertical1 = np.linalg.norm(p[1] - p[5])
-    vertical2 = np.linalg.norm(p[2] - p[4])
-    horizontal = np.linalg.norm(p[0] - p[3])
+    vertical1 = np.linalg.norm(p[1]-p[4])
+    vertical2 = np.linalg.norm(p[2]-p[5])
+    horizontal = np.linalg.norm(p[0]-p[3])
 
     return (vertical1 + vertical2) / (2 * horizontal)
 
@@ -137,7 +134,7 @@ def detect_eye_state(landmarks):
 
 
     return {
-        "eye_results":[{
+        "eye_results": [{
             "status": status,
             "confidence": confidence,
             "method": "ML",
@@ -147,9 +144,18 @@ def detect_eye_state(landmarks):
                     eye_model.classes_,
                     probabilities
                 )
-            }
+            },
+
+            "left_ear": features["left_ear"],
+            "right_ear": features["right_ear"],
+            "ear": features["avg_ear"],
+            "eye_difference": features["eye_difference"],
+            "ratio": features["ratio"],
+            "eye_difference_sign": features["eye_difference_sign"]
         }]
     }
+        
+    
 
 
 def detect_eye_state_ear_fallback(landmarks):
@@ -166,7 +172,7 @@ def detect_eye_state_ear_fallback(landmarks):
 
     avg_ear = (left_ear + right_ear) / 2
 
-    threshold = 0.56
+    threshold = 0.13
 
     if avg_ear < threshold:
         status = "Eyes closed"
