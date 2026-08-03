@@ -65,11 +65,11 @@ def detect_eye_state(face_crop):
 
     if open_prob > closed_prob:
         return {
-            "eye_status": "Eyes open",
+            "eye_status": "eyes open",
             "confidence": open_prob
         }
 
     return {
-        "eye_status": "Eyes closed",
+        "eye_status": "eyes closed",
         "confidence": closed_prob
     }

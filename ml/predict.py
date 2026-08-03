@@ -13,7 +13,7 @@ from datetime import datetime
 
 from analyzer.feature_extractor import extract_features
 from detection.face_analysis_SCRFD import detect_faces
-from detection.eye_analysis import detect_eye_state, detect_eye_state_ear_fallback
+from detection.eye_analysis import detect_eye_state, detect_eye_state_ear_fallback, show_eye_points
 from visualization.visualization import draw_face_boxes
 from analyzer.report_generator import generate_report_data, generate_verdict, generate_summary, print_report
 from analyzer.json_exporter import save_json_report
@@ -207,7 +207,7 @@ def analyze_image(image_path):
     prediction = model.predict(X)[0]
 
     probabilities = model.predict_proba(X)[0]
-    confidence = max(probabilities)
+    sharpness_confidence  = max(probabilities)
 
 
 
@@ -235,7 +235,7 @@ def analyze_image(image_path):
             if landmarks is None:
                 continue
 
-
+            
             dev_print( "[DEBUG]"
                 "FACE INDEX:",
                 face_idx,
@@ -253,6 +253,7 @@ def analyze_image(image_path):
                         f"FACE {face_idx} DIMENSIONS: dimensions={min_dimension}"
                     )
 
+
             if min_dimension >= 160:
 
                 dev_print(
@@ -263,11 +264,11 @@ def analyze_image(image_path):
                     landmarks
                 )
 
-                confidence = eye_result["eye_results"][0]["confidence"]
+                eye_confidence = eye_result["eye_results"][0]["confidence"]
 
-                if confidence < 70:
+                if eye_confidence < 70:
                     dev_print(
-                        f"FACE {face_idx}: Low ML confidence ({confidence:.1f}%), switching to EAR"
+                        f"FACE {face_idx}: Low ML confidence ({eye_confidence:.1f}%), switching to EAR"
                     )
 
                     eye_result = detect_eye_state_ear_fallback(
@@ -275,7 +276,6 @@ def analyze_image(image_path):
                     )
 
             else:
-
                 dev_print(
                     f"FACE {face_idx}: using EAR fallback"
                 )
@@ -285,6 +285,7 @@ def analyze_image(image_path):
                 )
 
             face_crop = img[y:y+h, x:x+w]
+            os.makedirs("debug", exist_ok=True)
             face_filename = f"{stem}_face_{face_idx}.jpg"
 
             face_path = os.path.join(
@@ -320,7 +321,7 @@ def analyze_image(image_path):
     scores = {
         "Sharpness": score_ml_sharpness(
         prediction,
-        confidence,
+        sharpness_confidence,
         ),
 
 
@@ -475,7 +476,7 @@ def analyze_image(image_path):
     dev_print(f"Patch min : {features['heatmap'].min():.2f}")
     dev_print(f"Patch mean: {features['heatmap'].mean():.2f}")
     dev_print(f"Patch max : {features['heatmap'].max():.2f}")
-    dev_print(f"Confidence : {confidence}")
+    dev_print(f"Confidence : {sharpness_confidence}")
     dev_print(f"Prediction : {'Sharp' if prediction == 1 else 'Blurry'}")
     dev_print(f"Probability (Blurry): {probabilities[0]:.2%}")
     dev_print(f"Probability (Sharp) : {probabilities[1]:.2%}")
@@ -501,26 +502,23 @@ def analyze_image(image_path):
     if not eye_visual_results:
         dev_print("No faces detected. Continuing.....")
     else:
+
         for i, eye in enumerate(eye_visual_results):
-            
+            dev_print(f"""
+        FACE {i+1}
+        Method: {eye['method']}
+        Status: {eye['status']}
+        Confidence: {eye['confidence']}
 
-            if "ear" in eye:
-                dev_print(
-                            f"""
-                            FACE {i+1}
-                            Method: {eye['method']}
-                            Status: {eye['status']}
-                            Confidence: {eye['confidence']}
+        Left EAR : {eye['left_ear']:.4f}
+        Right EAR: {eye['right_ear']:.4f}
+        Average  : {eye['ear']:.4f}
+        Difference: {eye['eye_difference']:.4f}
+        Ratio: {eye['ratio']:.4f}
 
-                            Probabilities:
-                            {eye['probabilities']}
-                            """
-                        )
-    
-            else:
-                dev_print(
-                    f"Face {i+1}: {eye['status']}"
-                )
+        Probabilities:
+        {eye['probabilities']}
+        """)
         
     dev_print()
     dev_print("\n===== General Report =====")

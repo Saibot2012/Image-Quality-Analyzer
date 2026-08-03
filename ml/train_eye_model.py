@@ -121,8 +121,8 @@ for name, importance in zip(
 # Save model
 joblib.dump(
     model,
-    "eye_model_6class.pkl"
+    "eye_model_6class_newest.pkl"
 )
 
 
-print("\nModel saved as eye_model_6class.pkl")
+print("\nModel saved as eye_model_6class_newest.pkl")

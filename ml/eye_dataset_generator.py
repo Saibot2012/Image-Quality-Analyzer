@@ -17,8 +17,8 @@ def calculate_ear(landmarks, eye_points):
         p.append(np.array(landmarks[idx]))
 
 
-    vertical1 = np.linalg.norm(p[1]-p[5])
-    vertical2 = np.linalg.norm(p[2]-p[4])
+    vertical1 = np.linalg.norm(p[1]-p[4])
+    vertical2 = np.linalg.norm(p[2]-p[5])
     horizontal = np.linalg.norm(p[0]-p[3])
 
     return (vertical1 + vertical2)/(2*horizontal)
@@ -76,7 +76,7 @@ folders = {
 }
 
 for folder,label in folders.items():
-    path=f"eyes/{folder}"
+    path=f"dataset/eyes_dataset/{folder}"
 
     for file in os.listdir(path):
 
