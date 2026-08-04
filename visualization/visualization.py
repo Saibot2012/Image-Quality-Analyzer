@@ -201,14 +201,16 @@ def draw_face_boxes(img, face_result, eye_results, overall_score, scores, verdic
             status = "Skipped"
             confidence = 0
 
-        if "eyes open" in status.lower():
-            colour = (0,255,0) #green
-        elif "one eye closed" in status.lower():
-            colour = (0,165,255) #red
-        elif status == "eyes closed":
-            colour = (0,0,255)
+        status_lower = status.lower()
+
+        if status_lower == "eyes open":
+            colour = (0,255,0)   # green
+        elif status_lower in ("left eye closed", "right eye closed"):
+            colour = (0,165,255) # orange
+        elif status_lower == "eyes closed":
+            colour = (0,0,255)   # red
         else:
-            colour = (0,255,255) #yellow
+            colour = (0,255,255) # yellow — unknown/skipped
 
     # Draw rectangle
         draw_corner_box(

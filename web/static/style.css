@@ -156,6 +156,7 @@ h1{
     font-weight:bold;
 }
 .face{
+    display: block;
     border-top:1px solid #ddd;
     padding:10px;
 }
