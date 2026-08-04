@@ -227,7 +227,6 @@ def analyze_image(image_path):
 
             min_dimension = min(w, h)
 
-            padding = 0.50
 
             landmarks = face_result["face_landmarks"][face_idx]
 
@@ -266,7 +265,7 @@ def analyze_image(image_path):
 
                 eye_confidence = eye_result["eye_results"][0]["confidence"]
 
-                if eye_confidence < 70:
+                if eye_confidence < 80:
                     dev_print(
                         f"FACE {face_idx}: Low ML confidence ({eye_confidence:.1f}%), switching to EAR"
                     )

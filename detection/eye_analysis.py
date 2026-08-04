@@ -126,8 +126,8 @@ def detect_eye_state(landmarks):
     labels = {
         0: "Eyes open",
         1: "Eyes closed",
-        2: "Right eye closed",
-        3: "Left eye closed"
+        2: "Left eye closed",
+        3: "Right eye closed"
     }
 
     status = labels[prediction]
@@ -172,10 +172,26 @@ def detect_eye_state_ear_fallback(landmarks):
 
     avg_ear = (left_ear + right_ear) / 2
 
-    threshold = 0.13
+    closed_threshold = 0.16
+    open_threshold = 0.18
 
-    if avg_ear < threshold:
+    left_closed = left_ear < closed_threshold
+    right_closed = right_ear < closed_threshold
+
+    left_open = left_ear > open_threshold
+    right_open = right_ear > open_threshold
+
+    if left_closed and right_closed:
         status = "Eyes closed"
+
+    elif left_closed and right_open:
+        status = "Left eye closed"
+
+    elif right_closed and left_open:
+        status = "Right eye closed"
+
+    elif left_open and right_open:
+        status = "Eyes open"
     else:
         status = "Eyes open"
 

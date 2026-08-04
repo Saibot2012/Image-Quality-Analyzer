@@ -86,8 +86,8 @@ print(
         target_names=[
             "Open",
             "Closed",
-            "Right Closed",
-            "Left Closed"
+            "Left Closed",
+            "Right Closed"
         ]
     )
 )

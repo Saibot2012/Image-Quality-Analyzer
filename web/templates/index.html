@@ -159,6 +159,11 @@
             {% for face in report.face_analysis.subjects %}
 
             <div class="face">
+                <img
+                class="face-thumb"
+                src="{{ url_for('static',
+                    filename='faces/' + face.thumbnail) }}">
+                    <br>
                 <b>
                     Face {{face.face_index + 1}}
                 </b>
