@@ -27,9 +27,9 @@ X = df[
     "avg_ear",
     "eye_difference",
     "ratio",
-    "eye_difference_sign",
     "head_roll",        # new
-
+    "left_lid_bulge", 
+    "right_lid_bulge"
     ]
 ]
 
@@ -54,12 +54,11 @@ print("Testing samples:", len(X_test))
 
 # Train model
 model = RandomForestClassifier(
-    n_estimators=100,
-    random_state=42,
-    max_depth=10,
-    min_samples_leaf=3,
+    n_estimators=200,
+    max_depth=10,          # prevent overfitting
+    min_samples_leaf=3,    # smoother decision boundaries
+    random_state=42
 )
-
 
 model.fit(
     X_train,
@@ -129,4 +128,7 @@ joblib.dump(
 )
 
 
-print("\nModel saved as eye_model_4class_newest.pkl")
+print("\nModel saved as ml/eye_model_4class_newest.pkl")
+
+
+

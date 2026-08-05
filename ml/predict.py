@@ -150,10 +150,19 @@ def update_rankings():
     for verdict in VERDICTS:
         folder = os.path.join(CURRENT_OUTPUT, verdict)
 
-        if os.path.exists(folder):
-            shutil.rmtree(folder)
+        current = os.path.join(CURRENT_OUTPUT, verdict)
+        cache = os.path.join(CACHE_OUTPUT, verdict)
 
-        os.makedirs(folder, exist_ok=True)
+        # Delete old folders
+        if os.path.exists(current):
+            shutil.rmtree(current)
+
+        if os.path.exists(cache):
+            shutil.rmtree(cache)
+
+        # Recreate them
+        os.makedirs(current, exist_ok=True)
+        os.makedirs(cache, exist_ok=True)
         print("ranking_results:", len(ranking_results))
         images = [
             img for img in ranking_results

@@ -22,16 +22,18 @@
                 </button>
 
             </form>
-            <form action="/reanalyze-all" method="POST">
-                <button class="danger-button" type="submit">
+            <form action="/reanalyze-all" method="POST" id=analyzeform>
+                <button class="danger-button" type="submit" id="analyzebutton">
                     🔄 Reanalyze All Images
                 </button>
             </form>
             <div class="export-section">
-                
-                <a href="/export-results" class="btn btn-primary">
-                    ⬇ Export Results
-                </a>
+                <form action="/export-results" method="POST">
+                    <button class="danger-button" type="submit">
+                       ➜] Export All Images
+                    </button>
+                </form>                
+
             </div>
         </div>
         <div class="search-container">
@@ -131,6 +133,15 @@
             });
 
         });
+        const analyzeform = document.getElementById("analyzeform");
+        const analyzebutton = document.getElementById("analyzebutton");
+
+        if (analyzeform) {
+            analyzeform.addEventListener("submit", () => {
+                analyzebutton.disabled = true;
+                analyzebutton.textContent = "⏳ Reanalyzing all images...";
+            });
+        }
 
     });
     </script>
