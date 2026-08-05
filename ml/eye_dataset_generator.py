@@ -64,14 +64,45 @@ def extract_features(img):
     head_roll = np.degrees(np.arctan2(dy, dx))
 
 
+    
+    # eye_points = [outer_corner, bottom1, bottom2, inner_corner, top1, top2]
+    left_outer = np.array(landmarks[LEFT_EYE[0]])
+    left_inner = np.array(landmarks[LEFT_EYE[3]])
+    left_top1  = np.array(landmarks[LEFT_EYE[4]])
+    left_top2  = np.array(landmarks[LEFT_EYE[5]])
+
+    left_chord = left_inner - left_outer
+    left_chord_len = np.linalg.norm(left_chord)
+    left_chord_unit = left_chord / left_chord_len
+    left_perp = np.array([-left_chord_unit[1], left_chord_unit[0]])
+
+    left_top1_height = np.dot(left_top1 - left_outer, left_perp)
+    left_top2_height = np.dot(left_top2 - left_outer, left_perp)
+    left_bulge = (left_top1_height + left_top2_height) / 2 / left_chord_len
+
+    right_outer = np.array(landmarks[RIGHT_EYE[0]])
+    right_inner = np.array(landmarks[RIGHT_EYE[3]])
+    right_top1  = np.array(landmarks[RIGHT_EYE[4]])
+    right_top2  = np.array(landmarks[RIGHT_EYE[5]])
+
+    right_chord = right_inner - right_outer
+    right_chord_len = np.linalg.norm(right_chord)
+    right_chord_unit = right_chord / right_chord_len
+    right_perp = np.array([-right_chord_unit[1], right_chord_unit[0]])
+
+    right_top1_height = np.dot(right_top1 - right_outer, right_perp)
+    right_top2_height = np.dot(right_top2 - right_outer, right_perp)
+    right_bulge = (right_top1_height + right_top2_height) / 2 / right_chord_len
+
     return {
         "left_ear": left,
         "right_ear": right,
         "avg_ear": (left + right) / 2,
         "eye_difference": difference,
         "ratio": ratio,
-        "eye_difference_sign": np.sign(difference),
-        "head_roll": head_roll
+        "head_roll": head_roll,
+        "left_lid_bulge": left_bulge,
+        "right_lid_bulge": right_bulge,
         }
 
 dataset = []

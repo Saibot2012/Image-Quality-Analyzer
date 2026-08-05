@@ -300,7 +300,7 @@ def update_eye_decision():
 
     return redirect(url_for("report", filename=stem))
 
-@app.route("/export-results")
+@app.route("/export-results", methods=["POST"])
 def export_results():
     temp = tempfile.NamedTemporaryFile(
         delete=False,

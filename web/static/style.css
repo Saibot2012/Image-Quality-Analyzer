@@ -358,6 +358,13 @@ h1{
 
 
 }
+
+.export-section{
+    border-radius: 10px solid black;
+}
+.btn a{
+    border-radius:3px solid black;
+}
 .danger-button{
         font-weight:bold;
     font-size:large;
