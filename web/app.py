@@ -1,9 +1,13 @@
 from flask import Flask, render_template, send_from_directory, request, redirect, url_for
 import json
 import os
-from ml.predict import analyze_image
+from ml.predict import analyze_image, ranking_results, update_rankings
 from analyzer.report_generator import generate_verdict
 from werkzeug.utils import secure_filename
+import zipfile
+import tempfile
+from flask import send_file
+
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ANNOTATED_DIR = os.path.join(BASE_DIR, "annotated")
@@ -81,7 +85,7 @@ def analyze():
     )
     file.save(save_path)
     report = analyze_image(save_path)
-    
+    update_rankings()
     filename = os.path.splitext(
         report["image_info"]["filename"]
     )[0]
@@ -101,11 +105,13 @@ def analyze_batch():
 
         report = analyze_image(save_path)
 
+    update_rankings()
+
     return redirect("/")
 
 @app.route("/reanalyze-all", methods=["POST"])
 def reanalyze_all():
-
+    ranking_results.clear()
     for file in os.listdir(JSON_DIR):
 
         if not file.endswith(".json"):
@@ -119,6 +125,7 @@ def reanalyze_all():
 
         if os.path.exists(image_path):
             analyze_image(image_path)
+    update_rankings()
 
     return redirect(url_for("dashboard"))
 
@@ -152,6 +159,9 @@ def reanalyze(filename):
         filename
     )
     analyze_image(image_path)
+    print(len(ranking_results))
+    print(ranking_results[-1])
+    update_rankings()
     stem=os.path.splitext(filename)[0]
     return redirect(url_for("report", filename=stem))
 
@@ -237,6 +247,9 @@ def update_eye_decision():
             not_intentional_count += 1
             penalty += EYE_PENALTY
 
+        elif decision == "Closed":
+            penalty += EYE_PENALTY
+
     # General section
     if intentional_count > 0:
         report["report"]["general"].append(
@@ -286,6 +299,46 @@ def update_eye_decision():
         json.dump(report, f, indent=4)
 
     return redirect(url_for("report", filename=stem))
+
+@app.route("/export-results")
+def export_results():
+    temp = tempfile.NamedTemporaryFile(
+        delete=False,
+        suffix=".zip"
+    )
+
+    with zipfile.ZipFile(temp.name, "w", zipfile.ZIP_DEFLATED) as zipf:
+
+        BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+        folders = [
+            os.path.join(BASE_DIR, "annotated"),
+            os.path.join(BASE_DIR, "sorted_images")
+        ]
+
+        for folder in folders:
+
+            print("Scanning:", folder)
+
+            if not os.path.exists(folder):
+                continue
+
+            for root, dirs, files in os.walk(folder):
+
+                print(root, files)
+
+                for file in files:
+
+                    filepath = os.path.join(root, file)
+                    print("Adding:", filepath)
+
+                    arcname = os.path.relpath(filepath)
+                    zipf.write(filepath, arcname)
+    return send_file(
+    temp.name,
+    as_attachment=True,
+    download_name="Image-Quality-Results.zip"
+)
 
 
 if __name__ == "__main__":

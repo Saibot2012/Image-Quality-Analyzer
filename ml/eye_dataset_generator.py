@@ -56,14 +56,23 @@ def extract_features(img):
 
     ratio = min(left, right) / max(left, right)
 
+    left_center  = np.mean([landmarks[i] for i in LEFT_EYE], axis=0)
+    right_center = np.mean([landmarks[i] for i in RIGHT_EYE], axis=0)
+
+    dx = right_center[0] - left_center[0]
+    dy = right_center[1] - left_center[1]
+    head_roll = np.degrees(np.arctan2(dy, dx))
+
+
     return {
         "left_ear": left,
         "right_ear": right,
         "avg_ear": (left + right) / 2,
         "eye_difference": difference,
         "ratio": ratio,
-        "eye_difference_sign": np.sign(difference)
-    }
+        "eye_difference_sign": np.sign(difference),
+        "head_roll": head_roll
+        }
 
 dataset = []
 
@@ -83,14 +92,14 @@ for folder,label in folders.items():
         img = cv2.imread(
             os.path.join(path,file)
         )
-
+        
         try:
             features = extract_features(img)
 
         except Exception as e:
             print("FAILED:", file, e)
             continue
-
+        
         if features:
             features["filename"] = file
             features["label"] = label

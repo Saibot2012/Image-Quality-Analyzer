@@ -160,6 +160,34 @@ h1{
     border-top:1px solid #ddd;
     padding:10px;
 }
+.report-section {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    background: #fafafa;
+}
+
+
+
+.metric-label {
+    font-weight: 600;
+}
+
+.metric-value {
+    font-size: 1.15rem;
+    margin-bottom: 10px;
+}
+
+.metric-row p {
+    margin: 6px 0;
+    line-height: 1.4;
+}
+
+.metric-label{
+    text-align: center;
+    margin-bottom:30px;
+}
 .technical-card{
     margin-top:40px;
     background:white;

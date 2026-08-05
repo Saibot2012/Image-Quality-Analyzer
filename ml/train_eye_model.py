@@ -27,7 +27,9 @@ X = df[
     "avg_ear",
     "eye_difference",
     "ratio",
-    "eye_difference_sign"
+    "eye_difference_sign",
+    "head_roll",        # new
+
     ]
 ]
 
@@ -53,7 +55,9 @@ print("Testing samples:", len(X_test))
 # Train model
 model = RandomForestClassifier(
     n_estimators=100,
-    random_state=42
+    random_state=42,
+    max_depth=10,
+    min_samples_leaf=3,
 )
 
 
@@ -121,8 +125,8 @@ for name, importance in zip(
 # Save model
 joblib.dump(
     model,
-    "eye_model_6class_newest.pkl"
+    "ml/eye_model_4class_newest.pkl"
 )
 
 
-print("\nModel saved as eye_model_6class_newest.pkl")
+print("\nModel saved as eye_model_4class_newest.pkl")
