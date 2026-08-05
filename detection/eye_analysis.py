@@ -6,7 +6,7 @@ import pandas as pd
 
 
 eye_model = joblib.load(
-    "ml/eye_model_6class_newest.pkl"
+    "ml/eye_model_4class_newest.pkl"
 )
 
 print(
@@ -69,6 +69,12 @@ def extract_eye_features(landmarks):  #ML approach
 
     ratio = min(left_ear, right_ear) / max(left_ear, right_ear)
 
+    left_center  = np.mean([landmarks[i] for i in LEFT_EYE], axis=0)
+    right_center = np.mean([landmarks[i] for i in RIGHT_EYE], axis=0)
+
+    dx = right_center[0] - left_center[0]
+    dy = right_center[1] - left_center[1]
+    head_roll = np.degrees(np.arctan2(dy, dx))
 
     return {
         "left_ear": left_ear,
@@ -76,8 +82,8 @@ def extract_eye_features(landmarks):  #ML approach
         "avg_ear": avg_ear,
         "eye_difference": eye_difference,
         "ratio": ratio,
-        "eye_difference_sign": np.sign(eye_difference)
-
+        "eye_difference_sign": np.sign(eye_difference),
+        "head_roll": head_roll
 
     }
 def detect_eye_state(landmarks):
@@ -102,7 +108,8 @@ def detect_eye_state(landmarks):
             features["avg_ear"],
             features["eye_difference"],
             features["ratio"],
-            features["eye_difference_sign"]
+            features["eye_difference_sign"],
+            features["head_roll"]
 
         ]],
         columns=[
@@ -111,7 +118,8 @@ def detect_eye_state(landmarks):
             "avg_ear",
             "eye_difference",
             "ratio",
-            "eye_difference_sign"
+            "eye_difference_sign",
+            "head_roll"
         ]
     )
 
@@ -151,7 +159,9 @@ def detect_eye_state(landmarks):
             "ear": features["avg_ear"],
             "eye_difference": features["eye_difference"],
             "ratio": features["ratio"],
-            "eye_difference_sign": features["eye_difference_sign"]
+            "eye_difference_sign": features["eye_difference_sign"],
+            "head_roll": features["head_roll"]
+
         }]
     }
         
@@ -193,7 +203,7 @@ def detect_eye_state_ear_fallback(landmarks):
     elif left_open and right_open:
         status = "Eyes open"
     else:
-        status = "Eyes open"
+        status = "Undecided"
 
     return {
         "eye_results":[{

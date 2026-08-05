@@ -129,19 +129,23 @@ def interpret_saturation(saturation):
     if saturation < 40:
         return (
             "Low",
-            "Colours appear muted and less vibrant."
+            "Colours appear muted and less vibrant.",
+            "Increase saturation slightly to restore colour richness."
+
         )
 
     elif saturation < 120:
         return (
             "Natural",
-            "Colours appear natural."
+            "Colours appear natural.",
+            "No major correcion is needed."
         )
 
     else:
         return (
             "Vivid",
-            "Colours are vivid and highly saturated."
+            "Colours are vivid and highly saturated, which may be unrealistic.",
+            "Lower saturation levels for a more naturalised look."
         )
 
 def interpret_temperature(temperature):
@@ -149,17 +153,21 @@ def interpret_temperature(temperature):
     if temperature > 20:
         return (
             "Warm",
-            "The image has a warmer colour balance with a yellow/orange cast."
+            "The image has a warmer colour balance with a yellow/orange cast.",
+            "Reduce colour temperature if neutral colours are preferred."
         )
 
     elif temperature < -20:
         return (
             "Cool",
-            "The image has a cool colour balance with a noticeable blue cast."
+            "The image has a cool colour balance with a noticeable blue cast.",
+            "Increase colour temperature to produce more natural tones."
+
         )
 
     else:
         return (
             "Natural",
-            "The colour balance appears natural."
+            "The colour balance appears natural.",
+            "No adjustment required."
         )

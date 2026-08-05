@@ -159,11 +159,13 @@
             {% for face in report.face_analysis.subjects %}
 
             <div class="face">
+                {% if face.thumbnail %}
                 <img
                 class="face-thumb"
                 src="{{ url_for('static',
                     filename='faces/' + face.thumbnail) }}">
                     <br>
+                {% endif %}
                 <b>
                     Face {{face.face_index + 1}}
                 </b>
@@ -188,8 +190,6 @@
     <form method="POST" action="/update-eye-decision">
 
         <div class="face-grid">
-            <form method="POST" action="/update-eye-decision">
-
                 <input
                     type="hidden"
                     name="filename"
@@ -200,12 +200,13 @@
                     {% if subject.status != "Eyes open" %}
 
                         <div class="face-card">
+                            {% if subject.thumbnail %}
 
                             <img
                                 class="face-thumb"
                                 src="{{ url_for('static',
                                     filename='faces/' + subject.thumbnail) }}">
-
+                            {% endif %}
                             <h3>Face {{ subject.face_index + 1 }}</h3>
 
                             <p><b>Status:</b> {{ subject.status }}</p>
@@ -213,33 +214,70 @@
                             <p><b>Confidence:</b> {{ subject.confidence }}%</p>
 
                             <div class="decision-group">
+                                {% if subject.status == "Undecided" %}
+                                    <label>
+                                        <input
+                                            type="radio"
+                                            name="face_{{ subject.face_index }}"
+                                            value="intentional"
+                                            {% if subject.decision == "intentional" %}checked{% endif %}
+                                            required>
+                                        Open/ Intentional
+                                    </label>
 
-                                <label>
-                                    <input
-                                        type="radio"
-                                        name="face_{{ subject.face_index }}"
-                                        value="intentional"
-                                        {% if subject.decision == "intentional" %}checked{% endif %}
-                                        required>
-                                    Intentional
-                                </label>
+                                    <label>
+                                        <input
+                                            type="radio"
+                                            name="face_{{ subject.face_index }}"
+                                            value="not_intentional"
+                                            {% if subject.decision == "not_intentional" %}checked{% endif %}
+                                            required>
+                                        Open/ Not intentional
+                                    </label>
 
-                                <label>
-                                    <input
-                                        type="radio"
-                                        name="face_{{ subject.face_index }}"
-                                        value="not_intentional"
-                                        {% if subject.decision == "not_intentional" %}checked{% endif %}>
-                                    Not intentional
-                                </label>
+                                    <label>
+                                        <input
+                                            type="radio"
+                                            name="face_{{ subject.face_index }}"
+                                            value="intentional"
+                                            {% if subject.decision == "intentional" %}checked{% endif %}>
+                                        Closed/ Intentional
+                                    </label>
+                                    <label>
+                                        <input
+                                            type="radio"
+                                            name="face_{{ subject.face_index }}"
+                                            value="not_intentional"
+                                            {% if subject.decision == "not_intentional" %}checked{% endif %}>
+                                        Closed/ Not intentional
+                                    </label>
+                                {% else %}
+                                    <label>
+                                        <input
+                                            type="radio"
+                                            name="face_{{ subject.face_index }}"
+                                            value="intentional"
+                                            {% if subject.decision == "intentional" %}checked{% endif %}
+                                            required>
+                                        Intentional
+                                    </label>
 
+                                    <label>
+                                        <input
+                                            type="radio"
+                                            name="face_{{ subject.face_index }}"
+                                            value="not_intentional"
+                                            {% if subject.decision == "not_intentional" %}checked{% endif %}>
+                                        Not intentional
+                                    </label>
+                                {% endif %}
                             </div>
 
                             {% if subject.decision is defined %}
                                 <p class="current-decision">
                                     Current:
                                     {% if subject.decision == "intentional" %}
-                                        ✅ Intentional
+                                        ✅ Intentional                                 
                                     {% else %}
                                         ❌ Not intentional
                                     {% endif %}
@@ -301,6 +339,60 @@
             {% endfor %}
         </div>
     </div>
+    <h2>Colour & Lighting Analysis</h2>
+    <div class="report-sections">
+        <div class="grid">
+
+            <div class="metric-row card">
+                <h3 class="metric-label">Saturation</h3>
+
+                <div class="metric-value">
+                    <strong>{{ report.colour_analysis.saturation.result }}</strong>
+                </div>
+                <br><br>
+                <p><strong>Analysis</strong></p>
+                <p>{{ report.colour_analysis.saturation.description }}</p>
+                <br><br>
+
+                <p><strong>Recommendation</strong></p>
+                <p>{{ report.colour_analysis.saturation.recommendation }}</p>
+            </div>
+
+            <div class="metric-row card">
+                <h3 class="metric-label">White Balance</h3>
+
+                <div class="metric-value">
+                    <strong>{{ report.colour_analysis.white_balance.result }}</strong>
+                </div>
+                <br><br>
+
+                <p><strong>Analysis</strong></p>
+                <p>{{ report.colour_analysis.white_balance.description }}</p>
+                <br>
+
+                <p><strong>Recommendation</strong></p>
+                <p>{{ report.colour_analysis.white_balance.recommendation }}</p>
+            </div>
+
+            <div class="metric-row card">
+                <h3 class="metric-label">Lighting</h3>
+
+                <div class="metric-value">
+                    <strong>{{ report.lighting_analysis.result }}</strong>
+                </div>
+                <br><br>
+
+                <p><strong>Analysis</strong></p>
+                <p>{{ report.lighting_analysis.description }}</p>
+                <br><br>
+
+                <p><strong>Recommendation</strong></p>
+                <p>{{ report.lighting_analysis.recommendation }}</p>
+            </div>
+
+        </div>
+    </div>
+
     <div>
         <details class="technical-card">
             <summary>

@@ -19,8 +19,12 @@ def generate_report_data(
     face_result,
     eye_results,
     brightness_info,
-    saturation,
-    temperature,
+    sat_title,
+    sat_msg,
+    sat_tip,
+    temp_title,
+    temp_msg,
+    temp_tip,
     contributions
 ):
 
@@ -65,7 +69,7 @@ def generate_report_data(
 
         "model_info": {
             "face_detector": "SCRFD",
-            "eye_model": "RandomForest 5-class",
+            "eye_model": "RandomForest 4-class",
             "eye_method": "ML + EAR fallback"
         }
     }
@@ -109,11 +113,14 @@ def generate_report_data(
     }
     report["colour_analysis"] = {
         "saturation": {
-            "result": saturation
+            "result": sat_title,
+            "description": sat_msg,
+            "recommendation": sat_tip
         },
-
         "white_balance": {
-            "result": temperature
+            "result": temp_title,
+            "description": temp_msg,
+            "recommendation": temp_tip
         }
     }
     
@@ -150,6 +157,8 @@ def generate_report_data(
         if eye["status"] == "Eyes closed"
     )
 
+    undecided_count = sum(1 for eye in eye_results if eye["status"] == "Undecided")
+
     report["report"]["general"].append(
         f"Both eyes open: {both_open_count} / {len(eye_results)}."
     )
@@ -161,6 +170,10 @@ def generate_report_data(
     if both_closed_count > 0:
         report["report"]["general"].append(
             f"Both eyes closed: {both_closed_count}/{len(eye_results)}."
+        )
+    if undecided_count > 0:
+        report["report"]["general"].append(
+            f"Eye state undecided (needs review): {undecided_count}/{len(eye_results)}."
         )
 
     report["report"]["general"].append(
@@ -176,11 +189,11 @@ def generate_report_data(
     )
 
     report["report"]["general"].append(
-        f"Colours: {saturation.lower()}."
+        f"Colours: {sat_title.lower()}."
     )
 
     report["report"]["general"].append(
-        f"White Balance: {temperature.lower()}."
+        f"White Balance: {temp_title.lower()}."
         
     )
 
@@ -223,11 +236,19 @@ def generate_report_data(
         report["report"]["suggestions"].append(
         "Capture another frame with all subjects' eyes open"
         )
+    if undecided_count > 0:
+        report["report"]["problems"].append(
+            f"{undecided_count}/{len(eye_results)} eyes not able to be detected."
+        )
+        report["report"]["suggestions"].append(
+        "Capture another frame with all subjects' eyes visible and clear."
+        )
     report["face_analysis"] = {
         "total_faces": face_result["face_count"],
         "eyes_open": both_open_count,
         "one_eye_closed": one_closed_count,
         "eyes_closed": both_closed_count,
+        "undecided_count": undecided_count,
         "subjects": eye_results
         }
 
@@ -247,9 +268,11 @@ def generate_report_data(
         report["report"]["strengths"].append("Good contrast.")
     if brightness_info["status"] == "Balanced":
         report["report"]["strengths"].append("Balanced lighting.")
-    if saturation == "Natural":
+    if sat_title == "Natural":
         report["report"]["strengths"].append("Natural colours.")
-    if face_result["face_count"] > 0 and both_closed_count == 0 and one_closed_count == 0:
+    if temp_title == "Natural":
+        report["report"]["strengths"].append("Balanced temperature.")
+    if face_result["face_count"] > 0 and both_closed_count == 0 and one_closed_count == 0 and undecided_count == 0:
         report["report"]["strengths"].append("All subjects have eyes open.")
 
     report["quality"]["score_explanation"] = generate_score_explanation(
@@ -263,8 +286,8 @@ def generate_report_data(
     face_result,
     eye_results,
     brightness_info,
-    saturation,
-    temperature
+    sat_title,
+    temp_title
 )
 
     return report
@@ -305,7 +328,10 @@ def generate_summary(
         if "open" in eye["status"].lower()
     )
 
-    closed_count = face_count - open_count
+    undecided_count = sum(1 for eye in eye_results if eye["status"] == "Undecided")
+
+
+    closed_count = face_count - open_count - undecided_count
 
     good_metrics = 0
 
@@ -396,7 +422,7 @@ def generate_summary(
             "No people were detected in the scene."
         )
 
-    elif closed_count == 0:
+    elif closed_count == 0 and undecided_count == 0:
 
         summary.append(
             "All detected subjects have their eyes open."
@@ -529,15 +555,19 @@ def generate_score_explanation(quality_scores, quality_grades, face_analysis):
         })
 
     closed_faces = 0
+    undecided_faces = 0
     eye_impact = -15
 
     for subject in face_analysis["subjects"]:
         if subject["status"] in [
-            "eyes closed",
+            "Eyes closed",
             "Left eye closed",
             "Right eye closed"
         ]:
             closed_faces += 1
+
+        elif subject["status"] == "Undecided":
+            undecided_faces += 1
 
     if closed_faces > 0:
         negative.append({
@@ -545,11 +575,15 @@ def generate_score_explanation(quality_scores, quality_grades, face_analysis):
             "impact": eye_impact,            
             "severity": get_severity(eye_impact)
         })
-    else:
-
-        positive.append({
-            "reason": "All subjects have eyes open"
+    if undecided_faces > 0:
+        negative.append({
+            "reason": f"{undecided_faces} subject(s) have an unclear eye state and need manual review.",
+            "impact": 0,
+            "severity": get_severity(0)
         })
+
+    if closed_faces == 0 and undecided_faces == 0:
+        positive.append({"reason": "All subjects have eyes open"})
 
 
     return {

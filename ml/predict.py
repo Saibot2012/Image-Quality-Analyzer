@@ -134,7 +134,64 @@ eye_writer.writerow([
     "ratio",
     "predicted_status"
 ])
+def update_rankings():
 
+    # Clear old ranking folders first
+    for verdict in VERDICTS:
+
+        current = os.path.join(CURRENT_OUTPUT, verdict)
+        cache = os.path.join(CACHE_OUTPUT, verdict)
+
+        for folder in [current, cache]:
+            for file in os.listdir(folder):
+                os.remove(os.path.join(folder, file))
+
+    # Sort and copy
+    for verdict in VERDICTS:
+        folder = os.path.join(CURRENT_OUTPUT, verdict)
+
+        if os.path.exists(folder):
+            shutil.rmtree(folder)
+
+        os.makedirs(folder, exist_ok=True)
+        print("ranking_results:", len(ranking_results))
+        images = [
+            img for img in ranking_results
+            if img["verdict"] == verdict
+        ]
+
+        images.sort(
+            key=lambda x: x["score"],
+            reverse=True
+        )
+
+        for rank, img_info in enumerate(images, start=1):
+
+            source = img_info["image_path"]
+
+            if not os.path.exists(source):
+                print(f"[WARNING] Missing file: {source}")
+                continue
+
+            filename = f"{rank:03d}_{img_info['score']}_{img_info['filename']}"
+
+            shutil.copy2(
+                img_info["image_path"],
+                os.path.join(
+                    CURRENT_OUTPUT,
+                    verdict,
+                    filename
+                )
+            )
+
+            shutil.copy2(
+                img_info["image_path"],
+                os.path.join(
+                    CACHE_OUTPUT,
+                    verdict,
+                    filename
+                )
+            )
 def analyze_image(image_path):
     """
     Analyze a single image.
@@ -283,7 +340,25 @@ def analyze_image(image_path):
                     landmarks
                 )
 
-            face_crop = img[y:y+h, x:x+w]
+
+            img_h, img_w = img.shape[:2]
+ 
+            crop_x1 = max(0, x)
+            crop_y1 = max(0, y)
+            crop_x2 = min(img_w, x + w)
+            crop_y2 = min(img_h, y + h)
+ 
+            if crop_x2 <= crop_x1 or crop_y2 <= crop_y1:
+                dev_print(
+                    f"FACE {face_idx}: box ({x},{y},{w},{h}) is off-frame "
+                    f"for image {img_w}x{img_h}, skipping thumbnail crop"
+                )
+                face_crop = None
+            else:
+                face_crop = img[crop_y1:crop_y2, crop_x1:crop_x2]
+
+
+
             os.makedirs("debug", exist_ok=True)
             face_filename = f"{stem}_face_{face_idx}.jpg"
 
@@ -373,11 +448,11 @@ def analyze_image(image_path):
     features["shadow_clip"],
     features["highlight_clip"]
     )
-    sat_title, sat_msg = interpret_saturation(
+    sat_title, sat_msg, sat_tip = interpret_saturation(
     features["saturation"]
     )
 
-    temp_title, temp_msg = interpret_temperature(
+    temp_title, temp_msg, temp_tip = interpret_temperature(
     features["temperature"]
     )
     report = generate_report_data(
@@ -392,7 +467,11 @@ def analyze_image(image_path):
     eye_visual_results,
     brightness_info,
     sat_title,
+    sat_msg,
+    sat_tip,
     temp_title,
+    temp_msg,
+    temp_tip,
     contributions
     )
 
@@ -559,6 +638,8 @@ def analyze_image(image_path):
 
 if __name__ == "__main__":
 
+    ranking_results.clear()
+
     for filename in os.listdir(IMAGE_FOLDER):
 
         if not filename.lower().endswith(
@@ -572,42 +653,13 @@ if __name__ == "__main__":
         )
 
         analyze_image(image_path)
-        report_log.close()
-        analysis_log.close()
-        eye_dataset.close()
-        for verdict in VERDICTS:
-        
-                images = [
-                    img for img in ranking_results
-                    if img["verdict"] == verdict
-                ]
-        
-                images.sort(
-                    key=lambda x: x["score"],
-                    reverse=True
-                )
-        
-                for rank, img_info in enumerate(images, start=1):
-        
-                    filename = f"{rank:03d}_{img_info['score']}_{img_info['filename']}"
-        
-                    shutil.copy2(
-                        img_info["image_path"],
-                        os.path.join(
-                            CURRENT_OUTPUT,
-                            verdict,
-                            filename
-                        )
-                    )
-        
-                    shutil.copy2(
-                        img_info["image_path"],
-                        os.path.join(
-                            CACHE_OUTPUT,
-                            verdict,
-                            filename
-                        )
-                )
+
+    update_rankings()
+
+    report_log.close()
+    analysis_log.close()
+    eye_dataset.close()
+
 
 
 
