@@ -296,7 +296,9 @@
                                     {% elif subject.decision == "closed/not_intentional" %}
                                         ❌ Closed and Not Intentional.  
                                     {% elif subject.decision == "open" %}
-                                        ✅ Eyes should be open.                  
+                                        ✅ Eyes should be open.    
+                                    {% elif subject.decision == "not_intentional" %}
+                                        ❌ Not intentional.              
                                     {% else %}
                                         ❓ Please select an option.
                                     {% endif %}
@@ -444,7 +446,7 @@
                 Reanalyze
             </button>
         </form>
-        <form method="POST" action="/clear-image/{{ report.image_info.filename }}">
+        <form method="POST" action="/clear-image/{{ report.image_info.filename }}" onsubmit="return confirm('Delete this image and its report? This cannot be undone.');">
             <button type="submit">
                 Delete
             </button>

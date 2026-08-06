@@ -290,7 +290,7 @@ def draw_dashboard(output, face_result, eye_results, overall_score, scores, verd
         elif "eyes closed" in status:
             both_closed_count += 1
 
-        elif "one eye closed" in status:
+        elif "left eye closed" in status or "right eye closed" in status:
             one_closed_count += 1
         elif "undecided" in status:
             undecided_count += 1
