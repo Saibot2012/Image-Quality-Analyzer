@@ -195,7 +195,7 @@ def clear_image(filename):
     if os.path.isfile(json_path):
         os.remove(json_path)
         print(f"Deleted: {json_path}")
-        
+
     annotated_path = os.path.join(ANNOTATED_DIR, "visual_" + filename)
     if os.path.isfile(annotated_path):
         os.remove(annotated_path)
@@ -261,26 +261,14 @@ def update_eye_decision():
     for subject in report["face_analysis"]["subjects"]:
         decision = subject.get("decision")
 
-
-        if subject["status"] == "Eyes open" or decision == "open":
+        if subject["status"] == "Eyes open" or decision in ("open", "open/intentional", "open/not_intentional"):
             continue
 
-
-        if decision == "intentional":
+        if decision in ("intentional", "closed/intentional"):
             intentional_count += 1
 
-        elif decision == "not_intentional":
+        elif decision in ("not_intentional", "closed/not_intentional"):
             not_intentional_count += 1
-            penalty += EYE_PENALTY
-
-        elif decision == "open/intentional" or decision == "closed/intentional":
-            intentional_count += 1
-
-        elif decision == "open/not_intentional" or decision == "closed/not_intentional":
-            not_intentional_count += 1
-            penalty += EYE_PENALTY
-
-        elif decision == "Closed":
             penalty += EYE_PENALTY
 
 

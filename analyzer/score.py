@@ -1,11 +1,4 @@
 
-SHARPNESS_THRESHOLDS = {
-    "excellent": 300,
-    "good": 200,
-    "fair": 120,
-    "poor": 60,
-}
-
 NOISE_THRESHOLDS = {
     "excellent": 3,
     "good": 7,
@@ -14,7 +7,7 @@ NOISE_THRESHOLDS = {
 }
 
 CONTRAST_THRESHOLDS = {
-    "excellent": 70,
+    "excellent": 65,
     "good": 60,
     "fair": 45,
     "poor": 30,
@@ -23,7 +16,7 @@ CONTRAST_THRESHOLDS = {
 EXPOSURE_THRESHOLDS = {
     "brightness_min": 0.25,
     "brightness_max": 0.75,
-    
+
     "shadow_warning": 0.05,
     "highlight_warning": 0.05,
 }

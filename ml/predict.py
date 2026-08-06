@@ -21,7 +21,6 @@ from analyzer.json_exporter import save_json_report
 from analyzer.score import (
     score_higher_better,
     score_lower_better,
-    SHARPNESS_THRESHOLDS,
     NOISE_THRESHOLDS,
     CONTRAST_THRESHOLDS,
     score_exposure,
