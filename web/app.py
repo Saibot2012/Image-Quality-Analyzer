@@ -179,6 +179,31 @@ def clear_dashboard():
 
     return redirect(url_for("dashboard"))
 
+
+@app.route("/clear-image/<path:filename>", methods=["POST"])
+def clear_image(filename):
+    stem = os.path.splitext(filename)[0]
+
+    folders_exact = [IMAGES_DIR, ANNOTATED_DIR]
+    for folder in folders_exact:
+        path = os.path.join(folder, filename)
+        if os.path.isfile(path):
+            os.remove(path)
+            print(f"Deleted: {path}")
+
+    json_path = os.path.join(JSON_DIR, stem + ".json")
+    if os.path.isfile(json_path):
+        os.remove(json_path)
+        print(f"Deleted: {json_path}")
+        
+    annotated_path = os.path.join(ANNOTATED_DIR, "visual_" + filename)
+    if os.path.isfile(annotated_path):
+        os.remove(annotated_path)
+
+    return redirect(url_for("dashboard"))
+
+
+
 @app.route("/update-eye-decision", methods=["POST"])
 def update_eye_decision():
 
@@ -234,11 +259,12 @@ def update_eye_decision():
 
     # Count decisions
     for subject in report["face_analysis"]["subjects"]:
+        decision = subject.get("decision")
 
-        if subject["status"] == "Eyes open":
+
+        if subject["status"] == "Eyes open" or decision == "open":
             continue
 
-        decision = subject.get("decision")
 
         if decision == "intentional":
             intentional_count += 1
@@ -247,8 +273,17 @@ def update_eye_decision():
             not_intentional_count += 1
             penalty += EYE_PENALTY
 
+        elif decision == "open/intentional" or decision == "closed/intentional":
+            intentional_count += 1
+
+        elif decision == "open/not_intentional" or decision == "closed/not_intentional":
+            not_intentional_count += 1
+            penalty += EYE_PENALTY
+
         elif decision == "Closed":
             penalty += EYE_PENALTY
+
+
 
     # General section
     if intentional_count > 0:

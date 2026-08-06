@@ -277,6 +277,7 @@ def draw_dashboard(output, face_result, eye_results, overall_score, scores, verd
     both_closed_count = 0
     one_closed_count = 0
     unknown_count = 0
+    undecided_count = 0
 
     _, w = output.shape[:2]
 
@@ -291,7 +292,8 @@ def draw_dashboard(output, face_result, eye_results, overall_score, scores, verd
 
         elif "one eye closed" in status:
             one_closed_count += 1
-
+        elif "undecided" in status:
+            undecided_count += 1
         else:
             unknown_count += 1
 
@@ -325,7 +327,7 @@ def draw_dashboard(output, face_result, eye_results, overall_score, scores, verd
     line_height = int(32 * font_scale)
     rows = 16
     ui["height"] = int(
-        title_offset_height + (rows + 7)* line_height
+        title_offset_height + (rows + 8)* line_height
     )
 
     thickness = max(1, int(font_scale * 2))
@@ -463,10 +465,24 @@ def draw_dashboard(output, face_result, eye_results, overall_score, scores, verd
         ui
     )
     current_y += int(line_height * 1.2) 
+
     draw_info_row(
         output,
         "Both eyes closed",
         f"{both_closed_count}/{face_result['face_count']}",
+        label_x,
+        value_x,
+        current_y,
+        font_scale,
+        thickness,
+        ui
+    )
+    current_y += int(line_height * 1.2) 
+
+    draw_info_row(
+        output,
+        "Undecided",
+        f"{undecided_count}/{face_result['face_count']}",
         label_x,
         value_x,
         current_y,

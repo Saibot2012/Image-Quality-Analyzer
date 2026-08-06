@@ -177,7 +177,7 @@
                 <br>
 
                 Confidence:
-                {{face.confidence}}%
+                {{ "%.2f"|format(face.confidence) }}%
 
                 <br>
 
@@ -211,7 +211,7 @@
 
                             <p><b>Status:</b> {{ subject.status }}</p>
                             <p><b>Method:</b> {{ subject.method }}</p>
-                            <p><b>Confidence:</b> {{ subject.confidence }}%</p>
+                            <p><b>Confidence:</b> {{ "%.2f"|format(subject.confidence) }}%</p>
 
                             <div class="decision-group">
                                 {% if subject.status == "Undecided" %}
@@ -219,8 +219,8 @@
                                         <input
                                             type="radio"
                                             name="face_{{ subject.face_index }}"
-                                            value="intentional"
-                                            {% if subject.decision == "intentional" %}checked{% endif %}
+                                            value="open/intentional"
+                                            {% if subject.decision == "open/intentional" %}checked{% endif %}
                                             required>
                                         Open/ Intentional
                                     </label>
@@ -229,8 +229,8 @@
                                         <input
                                             type="radio"
                                             name="face_{{ subject.face_index }}"
-                                            value="not_intentional"
-                                            {% if subject.decision == "not_intentional" %}checked{% endif %}
+                                            value="open/not_intentional"
+                                            {% if subject.decision == "open/not_intentional" %}checked{% endif %}
                                             required>
                                         Open/ Not intentional
                                     </label>
@@ -239,16 +239,16 @@
                                         <input
                                             type="radio"
                                             name="face_{{ subject.face_index }}"
-                                            value="intentional"
-                                            {% if subject.decision == "intentional" %}checked{% endif %}>
+                                            value="closed/intentional"
+                                            {% if subject.decision == "closed/intentional" %}checked{% endif %}>
                                         Closed/ Intentional
                                     </label>
                                     <label>
                                         <input
                                             type="radio"
                                             name="face_{{ subject.face_index }}"
-                                            value="not_intentional"
-                                            {% if subject.decision == "not_intentional" %}checked{% endif %}>
+                                            value="closed/not_intentional"
+                                            {% if subject.decision == "closed/not_intentional" %}checked{% endif %}>
                                         Closed/ Not intentional
                                     </label>
                                 {% else %}
@@ -270,16 +270,35 @@
                                             {% if subject.decision == "not_intentional" %}checked{% endif %}>
                                         Not intentional
                                     </label>
+
+                                    <label>
+                                        <input
+                                            type="radio"
+                                            name="face_{{ subject.face_index }}"
+                                            value="open"
+                                            {% if subject.decision == "open" %}checked{% endif %}>
+                                        Eyes should be open
+                                    </label>
                                 {% endif %}
                             </div>
 
                             {% if subject.decision is defined %}
                                 <p class="current-decision">
-                                    Current:
+                                    Eyes Verdict:
                                     {% if subject.decision == "intentional" %}
-                                        ✅ Intentional                                 
+                                        ✅ Intentional.
+                                    {% elif subject.decision == "open/intentional" %}
+                                        ✅ Open and Intentional.
+                                    {% elif subject.decision == "open/not_intentional" %}
+                                        ❌ Open and Not Intentional.    
+                                    {% elif subject.decision == "closed/intentional" %}
+                                        ✅ Closed and Intentional.      
+                                    {% elif subject.decision == "closed/not_intentional" %}
+                                        ❌ Closed and Not Intentional.  
+                                    {% elif subject.decision == "open" %}
+                                        ✅ Eyes should be open.                  
                                     {% else %}
-                                        ❌ Not intentional
+                                        ❓ Please select an option.
                                     {% endif %}
                                 </p>
                             {% endif %}
@@ -407,18 +426,17 @@
                     <td>
                         {% if value is number %}
                             {{ "%.4f"|format(value) }}
-                    {% else %}
-                        {{ value }}
-                    {% endif %}
+                        {% else %}
+                            {{ value }}
+                        {% endif %}
+                        {% if key in report.technical_reference %}
+                            <br><span class="muted">{{ report.technical_reference[key] }}</span>
+                        {% endif %}
                     </td>
                 </tr>
                 {% endfor %}
             </table>
         </details>
-    </div>
-    <div id="imageModal">
-        <span id="closeModal">&times;</span>
-        <img id="modalImage">
     </div>
     <div class="reanalyze">
         <form action="/reanalyze/{{ report.image_info.filename }}" method ="POST">
@@ -426,7 +444,19 @@
                 Reanalyze
             </button>
         </form>
+        <form method="POST" action="/clear-image/{{ report.image_info.filename }}">
+            <button type="submit">
+                Delete
+            </button>
+        </form>
     </div>
+    <div id="imageModal">
+        <span id="closeModal">&times;</span>
+        <img id="modalImage">
+    </div>
+
+
+
     <div>
         <button id="backToTop" title="back-to-top">↑</button>
     </div>

@@ -76,14 +76,44 @@ def extract_eye_features(landmarks):  #ML approach
     dy = right_center[1] - left_center[1]
     head_roll = np.degrees(np.arctan2(dy, dx))
 
+        # eye_points = [outer_corner, bottom1, bottom2, inner_corner, top1, top2]
+    left_outer = np.array(landmarks[LEFT_EYE[0]])
+    left_inner = np.array(landmarks[LEFT_EYE[3]])
+    left_top1  = np.array(landmarks[LEFT_EYE[4]])
+    left_top2  = np.array(landmarks[LEFT_EYE[5]])
+
+    left_chord = left_inner - left_outer
+    left_chord_len = np.linalg.norm(left_chord)
+    left_chord_unit = left_chord / left_chord_len
+    left_perp = np.array([-left_chord_unit[1], left_chord_unit[0]])
+
+    left_top1_height = np.dot(left_top1 - left_outer, left_perp)
+    left_top2_height = np.dot(left_top2 - left_outer, left_perp)
+    left_bulge = (left_top1_height + left_top2_height) / 2 / left_chord_len
+
+    right_outer = np.array(landmarks[RIGHT_EYE[0]])
+    right_inner = np.array(landmarks[RIGHT_EYE[3]])
+    right_top1  = np.array(landmarks[RIGHT_EYE[4]])
+    right_top2  = np.array(landmarks[RIGHT_EYE[5]])
+
+    right_chord = right_inner - right_outer
+    right_chord_len = np.linalg.norm(right_chord)
+    right_chord_unit = right_chord / right_chord_len
+    right_perp = np.array([-right_chord_unit[1], right_chord_unit[0]])
+
+    right_top1_height = np.dot(right_top1 - right_outer, right_perp)
+    right_top2_height = np.dot(right_top2 - right_outer, right_perp)
+    right_bulge = (right_top1_height + right_top2_height) / 2 / right_chord_len
+
     return {
         "left_ear": left_ear,
         "right_ear": right_ear,
         "avg_ear": avg_ear,
         "eye_difference": eye_difference,
         "ratio": ratio,
-        "eye_difference_sign": np.sign(eye_difference),
-        "head_roll": head_roll
+        "head_roll": head_roll,
+        "left_lid_bulge": left_bulge,
+        "right_lid_bulge": right_bulge,
 
     }
 def detect_eye_state(landmarks):
@@ -108,9 +138,9 @@ def detect_eye_state(landmarks):
             features["avg_ear"],
             features["eye_difference"],
             features["ratio"],
-            features["eye_difference_sign"],
-            features["head_roll"]
-
+            features["head_roll"],
+            features["left_lid_bulge"],
+            features["right_lid_bulge"]
         ]],
         columns=[
             "left_ear",
@@ -118,8 +148,9 @@ def detect_eye_state(landmarks):
             "avg_ear",
             "eye_difference",
             "ratio",
-            "eye_difference_sign",
-            "head_roll"
+            "head_roll",
+            "left_lid_bulge",
+            "right_lid_bulge"
         ]
     )
 
@@ -159,8 +190,9 @@ def detect_eye_state(landmarks):
             "ear": features["avg_ear"],
             "eye_difference": features["eye_difference"],
             "ratio": features["ratio"],
-            "eye_difference_sign": features["eye_difference_sign"],
-            "head_roll": features["head_roll"]
+            "head_roll": features["head_roll"],
+            "left_lid_bulge": features["left_lid_bulge"],
+            "right_lid_bulge": features["right_lid_bulge"]
 
         }]
     }
@@ -193,22 +225,29 @@ def detect_eye_state_ear_fallback(landmarks):
 
     if left_closed and right_closed:
         status = "Eyes closed"
+        confidence = 100
+
 
     elif left_closed and right_open:
         status = "Left eye closed"
+        confidence = 100
+
 
     elif right_closed and left_open:
         status = "Right eye closed"
+        confidence = 100
 
     elif left_open and right_open:
         status = "Eyes open"
+        confidence = 100
     else:
         status = "Undecided"
+        confidence = 0
 
     return {
         "eye_results":[{
             "status": status,
-            "confidence": 100,
+            "confidence": confidence,
             "method": "EAR",
             "probabilities": {},
             "left_ear": left_ear,

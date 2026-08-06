@@ -1,4 +1,5 @@
 from datetime import datetime
+from analyzer.score import NOISE_THRESHOLDS, EXPOSURE_THRESHOLDS, CONTRAST_THRESHOLDS
 
 VERDICT_LEVELS = {
     "Excellent": 4,
@@ -104,7 +105,17 @@ def generate_report_data(
         "shadow_clip": float(features["shadow_clip"]),
         "highlight_clip": float(features["highlight_clip"]),
         "consistency": float(features["consistency"]),
-        "detail_quality": float(features["detail_quality"])
+        "detail_quality": float(features["detail_quality"]),
+        "contrast": float(features["contrast"]),
+        "saturation": float(features["saturation"]),
+        "temperature": float(features["temperature"])
+    }
+    report["technical_reference"] = {
+    "noise_rms": f"Excellent ≤{NOISE_THRESHOLDS['excellent']}, Good ≤{NOISE_THRESHOLDS['good']}, Fair ≤{NOISE_THRESHOLDS['fair']}, Poor ≤{NOISE_THRESHOLDS['poor']}",
+    "brightness": f"Balanced range: {EXPOSURE_THRESHOLDS['brightness_min']}–{EXPOSURE_THRESHOLDS['brightness_max']}",
+    "shadow_clip": f"Flagged above {EXPOSURE_THRESHOLDS['shadow_warning']*100:.0f}%",
+    "highlight_clip": f"Flagged above {EXPOSURE_THRESHOLDS['highlight_warning']*100:.0f}%",
+    "contrast": f"Excellent ≥{CONTRAST_THRESHOLDS['excellent']}, Good ≥{CONTRAST_THRESHOLDS['good']}, Fair ≥{CONTRAST_THRESHOLDS['fair']}, Poor ≥{CONTRAST_THRESHOLDS['poor']}",
     }
     report["lighting_analysis"] = {
         "result": brightness_info["status"],

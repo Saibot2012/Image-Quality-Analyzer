@@ -138,7 +138,7 @@ def interpret_saturation(saturation):
         return (
             "Natural",
             "Colours appear natural.",
-            "No major correcion is needed."
+            "No major correction is needed."
         )
 
     else:
