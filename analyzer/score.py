@@ -7,10 +7,10 @@ SHARPNESS_THRESHOLDS = {
 }
 
 NOISE_THRESHOLDS = {
-    "excellent": 2,
-    "good": 5,
-    "fair": 8,
-    "poor": 12,
+    "excellent": 3,
+    "good": 7,
+    "fair": 12,
+    "poor": 20,
 }
 
 CONTRAST_THRESHOLDS = {
@@ -21,12 +21,11 @@ CONTRAST_THRESHOLDS = {
 }
 
 EXPOSURE_THRESHOLDS = {
-     "brightness_min": 0.25,
-     "brightness_max": 0.75,
-
-     "shadow_warning": 0.10,
-     "highlight_warning": 0.10,
-
+    "brightness_min": 0.25,
+    "brightness_max": 0.75,
+    
+    "shadow_warning": 0.05,
+    "highlight_warning": 0.05,
 }
 
 GRADE_INFO = {
