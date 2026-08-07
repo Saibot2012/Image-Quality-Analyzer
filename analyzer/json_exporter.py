@@ -19,7 +19,7 @@ def save_json_report(
         filename,
 ):
     os.makedirs(
-        "results",
+        "JSON",
         exist_ok=True
     )
     name = os.path.splitext(filename)[0]
