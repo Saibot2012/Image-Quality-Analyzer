@@ -1,0 +1,125 @@
+[DEBUG]FACE INDEX: 0 LANDMARK 0: [342.34604 540.7839 ]
+[DEBUG]RAW BOX: (230, 216, 211, 321)
+[DEBUG]FACE 0: width=211, height=321
+[DEBUG]FACE 0 DIMENSIONS: dimensions=211
+FACE 0: using ML
+FINAL EYE RESULT: {'face_index': 0, 'thumbnail': 'left_wink171_face_0.jpg', 'decision': 'undecided', 'status': 'Right eye closed', 'confidence': 94.5720238095238, 'method': 'ML', 'probabilities': {'Eyes open': 0.05377976190476191, 'Eyes closed': 0.0, 'Left eye closed': 0.0005, 'Right eye closed': 0.945720238095238}, 'left_ear': 0.22716292329342752, 'right_ear': 0.1604673855989137, 'ear': 0.1938151544461706, 'eye_difference': 0.06669553769451383, 'ratio': 0.70639778390084, 'head_roll': -7.553872, 'left_lid_bulge': -0.17416768563956947, 'right_lid_bulge': -0.11829083290067124}
+
+===== left_wink171.jpg =====
+Image dimensions: (1300, 867)
+
+Overall Score: 94/100
+
+===== Assessment Report =====
+
+General
+• Faces detected: 1.
+• Both eyes open: 0 / 1.
+• One eye closed: 1/1.
+• Sharpness: Good.
+• Contrast: Excellent.
+• Lighting: Balanced.
+• Colours: natural.
+• White Balance: natural.
+
+Strengths
+✓ Excellent contrast.
+✓ Balanced lighting.
+✓ Natural colours.
+✓ Balanced temperature.
+
+Problems
+⚠ 1/1 subjects have 1 eye closed.
+
+Suggestions
+• Capture another frame with all subjects' eyes open
+
+Verdict: Excellent
+
+
+========== END OF SIMPLIFIED REPORT ==========
+
+
+============= Values Analysis =============
+Laplacian   : 498.78
+FFT Ratio   : 0.004645
+Wavelet     : 0.001624
+Sharp Ratio : 0.163
+Brightness     : 0.490
+Shadow Clip    : 5.27%
+Highlight Clip : 0.17%
+Consistency : 0.041
+Noise Rms   : 5.17
+Detail Quality : 0.00089896
+Patch min : 0.10
+Patch mean: 530.29
+Patch max : 12924.44
+Confidence : 0.93
+Prediction : Sharp
+Probability (Blurry): 7.00%
+Probability (Sharp) : 93.00%
+
+----------------------------------------
+
+===== Quality Scores =====
+Sharpness: Good (90/100)
+Noise: Good (90/100)
+Contrast: Excellent (100/100)
+Exposure: Excellent (100/100)
+
+SCRFD detected 1 faces.
+
+[Eye Detection]
+
+        FACE 1
+        Method: ML
+        Status: Right eye closed
+        Confidence: 94.5720238095238
+
+        Left EAR : 0.2272
+        Right EAR: 0.1605
+        Average  : 0.1938
+        Difference: 0.0667
+        Ratio: 0.7064
+
+        Probabilities:
+        {'Eyes open': 0.05377976190476191, 'Eyes closed': 0.0, 'Left eye closed': 0.0005, 'Right eye closed': 0.945720238095238}
+        
+
+
+===== General Report =====
+• Faces detected: 1.
+• Both eyes open: 0 / 1.
+• One eye closed: 1/1.
+• Sharpness: Good.
+• Contrast: Excellent.
+• Lighting: Balanced.
+• Colours: natural.
+• White Balance: natural.
+
+
+[Saturation]
+Value : 60.11
+Result : Natural
+Colours appear natural.
+
+[Colour Temperature]
+Value : -11.16
+Result : Natural
+The colour balance appears natural.
+
+[Lighting]
+Result : Balanced
+Overall brightness looks natural.
+Recommendation: No correction needed.
+
+
+======== SUMMARY ===========
+• The image is technically strong.
+• The image appears sharp.
+• Exposure is well balanced.
+• Noise is well controlled.
+• 1 subject(s) have closed eyes/eyes that cannot be detected/eye analysis skipped.
+
+
+================================ END OF COMPREHENSIVE REPORT =====================================

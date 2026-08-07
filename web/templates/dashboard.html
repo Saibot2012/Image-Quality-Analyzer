@@ -17,19 +17,19 @@
                 method="POST"
                 onsubmit="return confirm('Clear all reports and uploaded images? This action cannot be undone!');">
 
-                <button class="danger-button">
+                <button class="danger-button red">
                     🗑 Clear Dashboard
                 </button>
 
             </form>
             <form action="/reanalyze-all" method="POST" id=analyzeform>
-                <button class="danger-button" type="submit" id="analyzebutton">
+                <button class="danger-button green" type="submit" id="analyzebutton">
                     🔄 Reanalyze All Images
                 </button>
             </form>
             <div class="export-section">
                 <form action="/export-results" method="POST">
-                    <button class="danger-button" type="submit">
+                    <button class="danger-button gray" type="submit">
                        ➜] Export All Images
                     </button>
                 </form>                

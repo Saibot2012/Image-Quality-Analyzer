@@ -1,7 +1,12 @@
 body{
     font-family: Arial, Helvetica, sans-serif;
-    background: #f2f2f2
+    background-color: #e7e7e7;
 }
+.uploade{
+    background-image:url("images/fra-54.jpg");
+    background-size: cover;
+}
+
 .container{
     width: 80%;
     margin-left: auto;
@@ -279,15 +284,15 @@ h1{
 
 /* DASHBOARD.HTML */
 
+/* DASHBOARD.HTML */
+
 .gallery{
     display:grid;
-    grid-template-columns:repeat(autofill-minmax(220px,1fr));
+    grid-template-columns:repeat(auto-fill,minmax(440px,1fr));
     gap:25px;
 }
 
 .gallery-card{
-    width:50%;
-    margin:auto;
     text-decoration: none;
     color:black;
     background:white;
@@ -299,6 +304,7 @@ h1{
 
 .gallery-card:hover{
     transform:translateY(-4px);
+    box-shadow:0 8px 20px rgba(0,0,0,.14);
 }
 .gallery-card img{
     width:100%;
@@ -362,17 +368,42 @@ h1{
 }
 
 .export-section{
-    border-radius: 10px solid black;
+    display:flex;
 }
-.btn a{
-    border-radius:3px solid black;
-}
+
 .danger-button{
-        font-weight:bold;
-    font-size:large;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:12px 22px;
+    color:white;
+    border:none;
+    border-radius:10px;
+    font-weight:bold;
+    font-size:1rem;
+    cursor:pointer;
+    transition:0.2s;
+}
+.gray{
+    background-color: gray;
+}
+.red{
+    background-color: red;
+}
+.green{
+    background-color: green;
+}
+.danger-button:hover{
+    background:#c0392b;
+}
+
+.danger-button:disabled{
+    background:#f1a9a1;
+    cursor:not-allowed;
 }
 
 #backToTop{
+    display:none;
     position:fixed;
     bottom:30px;
     right:30px;
@@ -386,6 +417,7 @@ h1{
     font-weight:bold;
     box-shadow: 0 4px 10px rgba(0,0,0,0.25);
     transition:0.3s;
+    cursor:pointer;
 }
 #backToTop:hover{
     transform:scale(1.08);
@@ -427,6 +459,7 @@ h1{
     padding:20px 40px;
     background:white;
     border-bottom:1px solid #ddd;
+    border-radius:10px;
 }
 .logo{
     font-size:30px;
@@ -450,4 +483,155 @@ h1{
 
 .nav-links a:hover{
     color:#0b5cff;
+}
+
+
+
+
+/* UPLOAD.HTML */
+.upload{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:30px;
+    margin:40px 0;
+    max-width:1000px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.upload-section{
+    text-align:center;
+}
+
+.upload-section h2{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    margin-top:0;
+}
+
+.upload-section > p{
+    color:#777;
+    margin-bottom:20px;
+}
+
+.dropzone{
+    border:2px dashed #ccc;
+    border-radius:12px;
+    padding:36px 16px;
+    background:#fafafa;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+.dropzone:hover{
+    border-color:#0b5cff;
+    background:#f3f7ff;
+}
+
+.dropzone.dragover{
+    border-color:#0b5cff;
+    background:#eaf1ff;
+    transform:scale(1.01);
+}
+
+.dropzone-icon{
+    display:block;
+    font-size:2.4em;
+    margin-bottom:8px;
+}
+
+.dropzone p{
+    margin:4px 0;
+    color:#666;
+}
+
+.dropzone .browse{
+    color:#0b5cff;
+    font-weight:600;
+}
+
+.dropzone .filetypes{
+    font-size:0.8em;
+    color:#aaa;
+    margin-top:8px;
+}
+
+.file-list{
+    list-style:none;
+    padding:0;
+    margin:16px 0 0 0;
+    text-align:left;
+    max-height:120px;
+    overflow-y:auto;
+}
+
+.file-list li{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:6px 10px;
+    background:#f5f7fa;
+    border-radius:8px;
+    margin-bottom:6px;
+    font-size:0.85em;
+    color:#333;
+}
+
+.upload-button{
+    display:block;
+    width:100%;
+    padding:13px 20px;
+    margin-top:18px;
+    background:#0b5cff;
+    color:white;
+    border:none;
+    border-radius:10px;
+    font-size:1rem;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+.upload-button:hover{
+    background:#0947cc;
+}
+
+.upload-button:disabled{
+    background:#a9c4f5;
+    cursor:not-allowed;
+}
+.upload-actions{
+    display:flex;
+    gap:12px;
+    margin-top:18px;
+}
+
+.upload-actions .upload-button{
+    margin-top:0;
+}
+
+.cancel-button{
+    flex:0 0 auto;
+    padding:13px 20px;
+    background:white;
+    color:#555;
+    border:1px solid #ccc;
+    border-radius:10px;
+    font-size:1rem;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+.cancel-button:hover:not(:disabled){
+    border-color:#e74c3c;
+    color:#e74c3c;
+}
+
+.cancel-button:disabled{
+    color:#ccc;
+    border-color:#eee;
+    cursor:not-allowed;
 }
