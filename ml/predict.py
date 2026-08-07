@@ -15,7 +15,7 @@ from analyzer.feature_extractor import extract_features
 from detection.face_analysis_SCRFD import detect_faces
 from detection.eye_analysis import detect_eye_state, detect_eye_state_ear_fallback, show_eye_points
 from visualization.visualization import draw_face_boxes
-from analyzer.report_generator import generate_report_data, generate_verdict, generate_summary, print_report
+from report.report_generator import generate_report_data, generate_verdict, generate_summary, print_report
 from analyzer.json_exporter import save_json_report
 
 from analyzer.score import (
@@ -27,7 +27,7 @@ from analyzer.score import (
     overall_score,
 )
 
-from analyzer.quality_report import (
+from report.quality_report import (
     brightness_report,
     interpret_saturation,
     interpret_temperature,

@@ -2,7 +2,7 @@ from flask import Flask, render_template, send_from_directory, request, redirect
 import json
 import os
 from ml.predict import analyze_image, ranking_results, update_rankings
-from analyzer.report_generator import generate_verdict
+from report.report_generator import generate_verdict
 from werkzeug.utils import secure_filename
 import zipfile
 import tempfile
