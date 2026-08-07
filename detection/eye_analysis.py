@@ -214,8 +214,8 @@ def detect_eye_state_ear_fallback(landmarks):
 
     avg_ear = (left_ear + right_ear) / 2
 
-    closed_threshold = 0.16
-    open_threshold = 0.18
+    closed_threshold = 0.176
+    open_threshold = 0.196
 
     left_closed = left_ear < closed_threshold
     right_closed = right_ear < closed_threshold

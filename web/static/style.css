@@ -387,15 +387,22 @@ h1{
 .gray{
     background-color: gray;
 }
+.gray:hover{
+    background-color: darkgray;
+}
 .red{
     background-color: red;
+}
+.red:hover{
+    background-color: darkred;
 }
 .green{
     background-color: green;
 }
-.danger-button:hover{
-    background:#c0392b;
+.green:hover{
+    background-color: darkgreen;
 }
+
 
 .danger-button:disabled{
     background:#f1a9a1;
