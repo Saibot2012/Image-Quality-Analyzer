@@ -110,18 +110,18 @@
 -> These 8 features feed into a Random Forest Classifier trained on 100 hand-labeled sharp/blurry images, which outputs a sharp/blurry prediction with a confidence score:
 
 ```text
-Confidence	Grade
+Confidence	    Grade
 
-≥95% Sharp	Excellent
-≥85% Sharp	Good
-≥70% Sharp	Fair
-<70% Sharp	Poor
-<85% Blurry	Poor
-≥85% Blurry	Very Poor
+≥95% Sharp	   Excellent
+≥85% Sharp	   Good
+≥70% Sharp	   Fair
+<70% Sharp	   Poor
+<85% Blurry	   Poor
+≥85% Blurry	   Very Poor
 
 ```
 
--> Noise, Contrast and Exposure are graded differently, scored against fixed thresholds in `analyzer/score.py`. The thresholds were adjusted after checking them against real processed images using the code found in `check_threshold.py`.
+-> **Noise**, **Contrast** and **Exposure** are graded differently, scored against fixed thresholds in `analyzer/score.py`. The thresholds were adjusted after checking them against real processed images using the code found in `check_threshold.py`.
 
 -> All 4 grades are then combined into one weighted score which is used as the main score for the image:
 
@@ -130,7 +130,7 @@ Confidence	Grade
 
 ### Face Detection
 
-For face detection, the decision was made to use SCRFD (via InsightFace's buffalo_l model, which runs on CPU), replacing an earlier MediaPipe-based detectoer used in previous versions.
+For face detection, the decision was made to use **SCRFD** (via InsightFace's buffalo_l model, which runs on CPU), replacing an earlier MediaPipe-based detectoer used in previous versions.
 
 SCRFD returns, per face, in a single pass:
 - A bounding box
@@ -143,6 +143,7 @@ SCRFD returns, per face, in a single pass:
 
 #### A little on SCRFD's landmarks
 - SCRFD's 106-point scheme numbers: LEFT_EYE = [35,36,37,39,41,42] and RIGHT_EYE = [89,90,91,93,95,96] by image position (left side of the photo vs. right side), not by which eye anatomically belongs to the subject. 
+![Picture of SCRFD eye landmarks](/images-for-git/scrfd.png)
 
 ### Eye Detection
 For eye detection, each detected face gets classified into 1 of 4 states: Open, Closed, Left Closed, Right Closed, with a fifth non-model outcome, Undecided, for genuinely ambiguous cases.
