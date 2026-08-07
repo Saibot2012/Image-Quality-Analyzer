@@ -155,7 +155,7 @@ Two independent methods can produce this classification, chosen per face:
 -   -> avg_ear, eye_difference, ratio: derived comparisons between 2 eyes.
 -   -> head_roll: head title angle, added to account for pose.
 -   -> left_lid_bulge/right_lid_bulge: how far the top eyelid sits above the eye's own corner-to-corner line, measured relative to the eye's own geometry rather than the image's vertical axis. These two are the model's strongest features by a clear margin (importance 0.184 and 0.207 vs. 0.126–0.167 for everything else), and were the single biggest driver of the model's accuracy improvement over the session.
---- Add picture---
+
 
 - EAR Fallback (used for small faces, or when the ML model's confidence is below 60%): A simpler, threshold-based method using only left_ear/right_ear against two cutoffs (a "closed" zone below 0.16, an "open" zone above 0.18). Genuinely ambiguous readings that fall in neither zone are reported as Undecided rather than guessed.
 
@@ -189,4 +189,43 @@ The finished report is written to disk twice, in two different forms:
 
 `JSON/<filename>.json`: The full structured report, which is what actually gets re-read every time the web app displays or updates a report (nothing is recomputed on page load)
 
-An annotated copy of the image `(annotated/visual_<filename>)`: Face boxes color-coded by eye state, plus an on-image dashboard overlay summarizing face/eye counts
+An annotated copy of the image `(annotated/visual_<filename>)`: Face boxes color-coded by eye state, plus an on-image dashboard overlay summarizing face/eye counts.
+
+### SETUP AND RUNNING
+
+`pip install -r requirements.txt`
+
+If the `.pkl` files doesn't work, see the **Training Section** below to generate them from your own labelled data.
+
+#### Running the web app(Primary way to use this):
+
+`python web/app.py`
+
+Starts a local Flask server at `http://127.0.0.1:5000`. Upload a photo or use the batch-upload option, and it'll walk through the full pipeline and display the report.
+
+#### Running in batch/CLI mode (no web interface — processes a whole folder at once):
+
+`python ml/predict.py`
+
+Reads every image from the testimages4/ folder (hardcoded, update IMAGE_FOLDER in ml/predict.py to point elsewhere), analyzes each one, and writes reports to JSON/ and annotated images to annotated/.
+
+#### Training the models(only needed if rebuilding the dataset rather than the pre-trained .pkl files)
+
+
+`python ml/generate_dataset.py`    # builds ml/dataset.csv from 
+`labeled sharp/blurry images`
+`python ml/train_model.py`         # trains and saves ml/model.pkl
+
+`python ml/eye_dataset_generator.py`    # builds eye_dataset.csv from labeled eye-state photos
+`python ml/train_eye_model.py`          # trains and saves the eye-state model
+
+### Known Limitations
+
+- **Dataset size is still modest.** The sharp/blurry classifier is trained on ~100 examples and its cross-validated accuracy has plateaued at that size — more labeled data isn't expected to improve it further without new features. The eye-state classifier (570 examples, ~92.5% cross-validated accuracy) is doing better, though its weakest class (Open) still shows some confusion with naturally hooded/relaxed eyelids that geometrically resemble a partial closure.
+
+
+- **No automated tests.** Everything found and fixed during development was caught through manual code review and data analysis — nothing currently guards against a regression being reintroduced silently.
+
+- **Local use only.** This runs as a local Flask development server; there's no hosted/public deployment.
+
+- **Both trained models rely on handcrafted geometric features, not raw pixel data**: a deliberate choice given the current dataset size (see How It Works), but one that would need revisiting if the dataset grows substantially.

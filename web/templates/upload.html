@@ -6,48 +6,129 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
     <title>Upload</title>
 </head>
-<body>
+<body class="uploade">
     {% include "navbar.html" %}
-    <h1>
-        Upload Image
-    </h1>
-    <div class="upload-section">
-        <h2>Single Image</h2>
-        <form
-        method = "POST"
-        id="singleForm"
-        action="/analyze-single"
-        enctype="multipart/form-data">
-            <input
-            type="file"
-            name="image"
-            accept=".jpg, .jpeg, .png, .webp">
-            <br><br>
-            <button type="submit" id="singleButton">
-                Analyze
-            </button>
-        </form>
-    </div>
-    <hr>
-    <div class="upload-section">
-        <h2>Batch Images</h2>
-        <form action="/analyze-batch" method="POST" enctype="multipart/form-data" id="batchForm">
 
-            <input
-                type="file"
-                name="images"
-                multiple
-                accept=".jpg, .jpeg, .png, .webp"
-                required
-            >
-            <br><br>
-            <button type="submit" id="batchButton">
-                Analyze All Images
-            </button>
-
-        </form>
+    <div class="upload">
+        <div class="upload-section card">
+            <h2>🖼️ Single Image</h2>
+            <p>Use this if only a single image needs to be analyzed.</p>
+            <form
+            method="POST"
+            id="singleForm"
+            action="/analyze-single"
+            enctype="multipart/form-data">
+                <div class="dropzone" id="singleDropzone">
+                    <span class="dropzone-icon">📤</span>
+                    <p><span class="browse">Click to browse</span> or drag an image here</p>
+                    <p class="filetypes">JPG, JPEG, PNG or WEBP</p>
+                    <input
+                    type="file"
+                    name="image"
+                    id="singleInput"
+                    accept=".jpg, .jpeg, .png, .webp"
+                    hidden>
+                </div>
+                <ul class="file-list" id="singleFileList"></ul>
+                <div class="upload-actions">
+                    <button type="button" id="singleCancel" class="cancel-button" disabled>
+                        Cancel
+                    </button>
+                    <button type="submit" id="singleButton" class="upload-button" disabled>
+                        Analyze
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="upload-section card">
+            <h2>🗂️ Batch Images</h2>
+            <p>Use this if multiple images need to be analyzed.</p>
+            <form action="/analyze-batch" method="POST" enctype="multipart/form-data" id="batchForm">
+                <div class="dropzone" id="batchDropzone">
+                    <span class="dropzone-icon">📤</span>
+                    <p><span class="browse">Click to browse</span> or drag images here</p>
+                    <p class="filetypes">JPG, JPEG, PNG or WEBP · multiple allowed</p>
+                    <input
+                        type="file"
+                        name="images"
+                        id="batchInput"
+                        multiple
+                        accept=".jpg, .jpeg, .png, .webp"
+                        required
+                        hidden
+                    >
+                </div>
+                <ul class="file-list" id="batchFileList"></ul>
+                <div class="upload-actions">
+                    <button type="button" id="batchCancel" class="cancel-button" disabled>
+                        Cancel
+                    </button>
+                    <button type="submit" id="batchButton" class="upload-button" disabled>
+                        Analyze All Images
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
     <script>
+        // Prevent the browser's default "open the file" behavior for drops
+        // anywhere on the page. Without this, a drop that lands even slightly
+        // outside a dropzone's exact bounds navigates the tab to the file
+        // instead of reaching our handlers.
+        window.addEventListener("dragover", (e) => e.preventDefault());
+        window.addEventListener("drop", (e) => e.preventDefault());
+
+        function setupDropzone(dropzoneId, inputId, fileListId, buttonId, cancelId, multiple) {
+            const dropzone = document.getElementById(dropzoneId);
+            const input = document.getElementById(inputId);
+            const fileList = document.getElementById(fileListId);
+            const button = document.getElementById(buttonId);
+            const cancelButton = document.getElementById(cancelId);
+
+            function renderFiles(files) {
+                fileList.innerHTML = "";
+                const hasFiles = files.length > 0;
+                button.disabled = !hasFiles;
+                cancelButton.disabled = !hasFiles;
+                Array.from(files).forEach(file => {
+                    const li = document.createElement("li");
+                    li.textContent = `📄 ${file.name}`;
+                    fileList.appendChild(li);
+                });
+            }
+
+            cancelButton.addEventListener("click", () => {
+                input.value = "";
+                renderFiles(input.files);
+            });
+
+            dropzone.addEventListener("click", () => input.click());
+
+            input.addEventListener("change", () => renderFiles(input.files));
+
+            dropzone.addEventListener("dragover", (e) => {
+                e.preventDefault();
+                dropzone.classList.add("dragover");
+            });
+
+            dropzone.addEventListener("dragleave", () => {
+                dropzone.classList.remove("dragover");
+            });
+
+            dropzone.addEventListener("drop", (e) => {
+                e.preventDefault();
+                dropzone.classList.remove("dragover");
+                const dropped = multiple ? Array.from(e.dataTransfer.files) : [e.dataTransfer.files[0]];
+                const dt = new DataTransfer();
+                dropped.forEach(f => f && dt.items.add(f));
+                input.files = dt.files;
+                renderFiles(input.files);
+            });
+        }
+
+        setupDropzone("singleDropzone", "singleInput", "singleFileList", "singleButton", "singleCancel", false);
+        setupDropzone("batchDropzone", "batchInput", "batchFileList", "batchButton", "batchCancel", true);
+
         const singleForm = document.getElementById("singleForm");
         const singleButton = document.getElementById("singleButton");
 

@@ -330,7 +330,7 @@ def analyze_image(image_path):
 
                 eye_confidence = eye_result["eye_results"][0]["confidence"]
 
-                if eye_confidence < 60:
+                if eye_confidence < 70:
                     dev_print(
                         f"FACE {face_idx}: Low ML confidence ({eye_confidence:.1f}%), switching to EAR"
                     )
