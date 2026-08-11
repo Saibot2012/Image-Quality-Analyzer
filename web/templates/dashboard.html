@@ -59,7 +59,18 @@
                 <p>
                     ⭐ Rating: {{ report.quality.overall_score }}/100
                 </p>
-
+                <div class="reanalyze">
+                    <form action="/reanalyze/{{ report.image_info.filename }}" method ="POST">
+                        <button type="submit" class="danger-button green">
+                            Reanalyze
+                        </button>
+                    </form>
+                    <form method="POST" action="/clear-image/{{ report.image_info.filename }}" onsubmit="return confirm('Delete this image and its report? This cannot be undone.');">
+                        <button type="submit" class="danger-button red">
+                            Delete
+                        </button>
+                    </form>
+                </div>
             </a>
             {% endfor %}
             </div>
