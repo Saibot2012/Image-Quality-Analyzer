@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 from detection.face_analysis_SCRFD import detect_faces
-img_path = r"dataset/eyes_dataset/closed/closed9.webp"
+img_path = r"image_cache/Excellent/001_98_fra-728.jpg"
 img = cv2.imread(img_path)
 img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
